@@ -7,6 +7,9 @@ import Game_convidado_P from "./paginas/gameconvidadoP";
 import Game_logado_P from "./paginas/gamelogadoP";
 import { useState } from "react";
 import Game_teste_P from "./paginas/GameTeste";
+
+//testando git :)
+
 //levar ao endereço
 // <Link to="/">Início</Link>
 //criar endereço
