@@ -14,7 +14,7 @@ import Gametype from "../components/config convidado/Gametypes";
 import Gamemodes from "../components/config convidado/Gamemodes";
 import Rank from "../components/config login/rank";
 function Game_logado_P() {
-  return <div>jogo logado</div>;
+  return <div>Em desenvolvimento...</div>;
 }
 
 export default Game_logado_P;

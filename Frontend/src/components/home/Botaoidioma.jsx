@@ -15,7 +15,7 @@ function BotaoIdioma(props) {
     <div className="font-serif  flex">
       <button
         onClick={changeLang}
-        className=" h-11 shadow shadow-[3px_5px_1px_rgba(0,0,0,0.2)] !border !border-black !bg-white flex p-4 ml-auto mb-10 space-x-3"
+        className=" h-11 shadow shadow-[3px_3px_1px_rgba(0,0,0,0.1)] !border !border-black !bg-white flex p-4 ml-auto mb-10 space-x-3"
       >
         {props.langprops == 0 && (
           <div className="flex gap-2">
