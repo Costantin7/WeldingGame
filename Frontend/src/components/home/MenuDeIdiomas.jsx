@@ -1,9 +1,10 @@
 function MenuDeIdiomas(props) {
   return (
     <div>
-      <div className="rounded-lg h=screen align-top p-4 bg-white shadow shadow-[3px_3px_1px_rgba(0,0,0,0.1)] border flex flex-col ">
+      <div className="fixed inset-0 backdrop-blur-sm z-40 "></div>
+      <div className="fixed top-20 right-40 z-50 rounded-lg h=screen align-top p-4 bg-white shadow shadow-[3px_3px_1px_rgba(0,0,0,0.1)] border flex flex-col ">
         <button
-          className="h-11 shadow shadow-[3px_3px_1px_rgba(0,0,0,0.1)] !border !border-black !bg-white flex p-4  mb-3 space-x-3"
+          className="mt-1 h-11 shadow shadow-[3px_3px_1px_rgba(0,0,0,0.1)] !border !border-black !bg-white flex p-4  mb-3 space-x-3"
           onClick={() => {
             props.setIdioma(0);
             props.setAtivo(0);
@@ -19,7 +20,7 @@ function MenuDeIdiomas(props) {
         </button>
 
         <button
-          className="h-11 shadow shadow-[3px_3px_1px_rgba(0,0,0,0.1)] !border !border-black !bg-white flex p-4 mb-3 space-x-3"
+          className="h-11 shadow shadow-[3px_3px_1px_rgba(0,0,0,0.1)] !border !border-black !bg-white flex p-4 mb-2 space-x-3"
           onClick={() => {
             props.setIdioma(1);
             props.setAtivo(0);
