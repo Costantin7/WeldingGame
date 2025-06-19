@@ -40,6 +40,7 @@ function Convidado_P(props) {
           langprops={props.idiomaprop}
           setlangUpprops={props.setIdiomaUpprop}
           setlangDownprops={props.setIdiomaDownprop}
+          setIdioma={props.setIdioma}
         />
         <Botaomenu />
       </div>

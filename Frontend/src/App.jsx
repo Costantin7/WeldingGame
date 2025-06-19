@@ -118,6 +118,7 @@ function App() {
                 idiomaprop={idioma}
                 setIdiomaDownprop={setIdiomaDown}
                 setIdiomaUpprop={setIdiomaUp}
+                setIdioma={setIdioma}
                 startgameprop={startgame}
 
                 //resetmoduleprop={resetmodule}
@@ -139,6 +140,7 @@ function App() {
                 funcao4={() => setModulo4(!modulo4)}
                 resetmoduleprop={resetmodule}
                 startgameprop={startgame}
+                setIdioma={setIdioma}
               />
             }
           />
@@ -173,6 +175,7 @@ function App() {
                 funcao4={() => setModulo4(!modulo4)}
                 resetmoduleprop={resetmodule}
                 startgameprop={startgame}
+                setIdioma={setIdioma}
               />
             }
           />
