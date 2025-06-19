@@ -23,7 +23,7 @@ function BotaoIdioma(props) {
               className="w-10"
               src="https://upload.wikimedia.org/wikipedia/commons/thumb/0/05/Flag_of_Brazil.svg/500px-Flag_of_Brazil.svg.png"
             />
-            <p>Portugues </p>
+            <p>Português </p>
             <p> ▼</p>
           </div>
         )}
@@ -34,7 +34,7 @@ function BotaoIdioma(props) {
               className="w-10"
               src="https://upload.wikimedia.org/wikipedia/commons/thumb/a/a4/Flag_of_the_United_States.svg/960px-Flag_of_the_United_States.svg.png"
             />
-            <p>English </p>
+            <p>English</p>
             <p> ▼ </p>
           </div>
         )}

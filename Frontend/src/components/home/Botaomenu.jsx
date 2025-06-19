@@ -16,7 +16,7 @@ function Botaomenu() {
         </div>
       ) : (
         <div>
-          <div className="fixed inset-0 backdrop-blur-sm z-40 !bg-white"></div>
+          <div className="fixed inset-0 backdrop-blur-sm z-40 "></div>
 
           <div className="fixed top-20 right-10 z-50 bg-white border border-black rounded-xl shadow-lg p-6 space-y-3 w-64 font-serif">
             <button

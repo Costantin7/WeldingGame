@@ -7,7 +7,7 @@ import BotaoLogin from "../components/home/BotaoLogin";
 import BotaoIdioma from "../components/home/Botaoidioma";
 import Linha from "../components/home/LinhaHorizontal";
 import Configjogo from "../components/config convidado/Configjogo";
-import Botaomenu from "../components/home/BotaoMenu";
+import Botaomenu from "../components/home/Botaomenu";
 import { useEffect } from "react";
 
 function Home_P(props) {
@@ -50,8 +50,9 @@ function Home_P(props) {
       </div>
 
       <Linha />
+      <p className="text-left font-serif ml-2 mt-2">Idealizadores</p>
 
-      <footer className="flex gap-45 !mt-10">
+      <footer className="flex gap-45 !mt-5">
         <Empresas
           site="https://laprosolda.com"
           imagem="./src/img/lapro.png"
