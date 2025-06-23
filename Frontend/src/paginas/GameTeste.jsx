@@ -7,7 +7,7 @@ function Game_teste_P(props) {
 
   const idioma = props.idiomaprop;
 
-  // Memoriza o array para não ser recriado a cada render
+  // Memoriza o array de temas excluídos
   const temasExcluidos = useMemo(() => {
     const temas = [];
     if (!props.modulo1) temas.push(1); // Processos
@@ -17,6 +17,9 @@ function Game_teste_P(props) {
     return temas;
   }, [props.modulo1, props.modulo2, props.modulo3, props.modulo4]);
 
+  // Função auxiliar para saber se um tema está excluído
+  const isExcluido = (tema) => (temasExcluidos.includes(tema) ? "1" : "0");
+
   useEffect(() => {
     async function fetchPergunta() {
       try {
@@ -24,10 +27,10 @@ function Game_teste_P(props) {
           params: {
             idioma: idioma.toString(),
             nivel: nivel.toString(),
-            tema1: temasExcluidos[0]?.toString(),
-            tema2: temasExcluidos[1]?.toString(),
-            tema3: temasExcluidos[2]?.toString(),
-            tema4: temasExcluidos[3]?.toString(),
+            tema1: isExcluido(1),
+            tema2: isExcluido(2),
+            tema3: isExcluido(3),
+            tema4: isExcluido(4),
           },
         });
 
@@ -39,15 +42,7 @@ function Game_teste_P(props) {
     }
 
     fetchPergunta();
-  }, [
-    nivel,
-    idioma,
-    temasExcluidos,
-    props.modulo1,
-    props.modulo2,
-    props.modulo3,
-    props.modulo4,
-  ]);
+  }, [nivel, idioma, temasExcluidos]);
 
   return (
     <div>

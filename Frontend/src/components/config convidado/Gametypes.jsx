@@ -10,12 +10,12 @@ function Gametype(props) {
     <button
       className={
         ativo
-          ? "w-[180px] h-[40px] border !bg-gray-300 rounded-md shadow-lg line-through"
-          : "w-[180px] h-[40px] border !bg-white rounded-md shadow-lg "
+          ? "!border w-[180px] h-[40px] border !bg-gray-300 rounded-md shadow-lg line-through"
+          : "!border w-[180px] h-[40px] border !bg-white rounded-md shadow-lg "
       }
       onClick={() => {
         butt();
-        props.define();
+        props.define(1);
       }}
     >
       <p className="font-serif">{props.texto}</p>

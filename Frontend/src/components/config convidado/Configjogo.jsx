@@ -2,8 +2,12 @@ import React from "react";
 import { BrowserRouter, Routes, Route, Link } from "react-router-dom";
 import Gametype from "./Gametypes";
 import Gamemodes from "./Gamemodes";
+import BotaoDeslizante from "./botão deslizante";
+import { useState } from "react";
 
 function Configjogo(props) {
+  const [timer, setTimer] = useState(true);
+
   return (
     <div className="w-[900px] h-[350px] bg-white-500 rounded-xl shadow-lg border space-y-3 !">
       <div className=" gap-4 margin-3">
@@ -30,18 +34,31 @@ function Configjogo(props) {
           <Gametype texto={" 4 - Fabricação 📐"} define={props.func4} />
         </div>
         <div className="flex gap-5 mx-auto my-5 ">
-          <div className="flex flex-col">
-            <div className="w-[250px] h-[90px] flex gap-3">
-              <p className="text-2xl"> ⌛ </p>
-              <p>Temporizador</p>
+          <div className="flex items-center flex-col justify-center">
+            <div className="flex flex-col items-center">
+              <div className="w-[250px] h-[90px] flex gap-3 ">
+                <p className="text-2xl"> ⌛ </p>
+                <p>Temporizador</p>
+              </div>
+              <BotaoDeslizante
+                timer={timer}
+                setTimer={setTimer}
+                parameter={timer}
+              />
             </div>
           </div>
           <Gamemodes
+            timer={timer}
+            setTimer={setTimer}
+            parameter={timer}
             texto={" Modo cronometrado"}
             legenda={"Responda cada pergunta em até 60 segundos"}
           />
 
           <Gamemodes
+            timer={timer}
+            setTimer={setTimer}
+            parameter={!timer}
             texto={" Modo livre"}
             legenda={"Sem tempo limite para jogar"}
           />

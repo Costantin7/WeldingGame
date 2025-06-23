@@ -30,16 +30,20 @@ class EscolherPergunta(APIView):
         elif idioma == "0":
             perguntas = perguntas.filter(idioma="pt")
 
-        # Excluir temas, convertendo somente se existir e for número válido
-        for tema in [tema1, tema2, tema3, tema4]:
-            if tema:
-                try:
-                    tema_int = int(tema)
-                    perguntas = perguntas.exclude(tema=tema_int)
-                except ValueError:
-                    pass  # Ignora se não for um inteiro válido
 
-        # Filtrar por nível só se nível for válido
+
+        if tema1 == "1":
+          perguntas = perguntas.exclude(tema=1)
+
+        if tema2 == "1":
+            perguntas = perguntas.exclude(tema=2)
+
+        if tema3 == "1":
+            perguntas = perguntas.exclude(tema=3)
+
+        if tema4 == "1":
+            perguntas = perguntas.exclude(tema=4)
+
         if nivel:
             try:
                 nivel_int = int(nivel)

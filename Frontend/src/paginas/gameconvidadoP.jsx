@@ -8,7 +8,7 @@ import BotaoIdioma from "../components/home/Botaoidioma";
 import Linha from "../components/home/LinhaHorizontal";
 import Botaojogarconvidado from "../components/config login/Botaojogarlogado";
 import Configjogo from "../components/config convidado/Configjogo";
-import Botaomenu from "../components/home/BotaoMenu";
+import Botaomenu from "../components/home/Botaomenu";
 import Voltarhome from "../components/config convidado/Voltarhome";
 import Gametype from "../components/config convidado/Gametypes";
 import Gamemodes from "../components/config convidado/Gamemodes";

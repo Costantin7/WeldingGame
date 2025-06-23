@@ -41,10 +41,10 @@ import Game_teste_P from "./paginas/GameTeste";
 
 function App() {
   //states globais para comunicação com backend
-  const [modulo1, setModulo1] = useState(false); // Processos
-  const [modulo2, setModulo2] = useState(false); // Materiais
-  const [modulo3, setModulo3] = useState(false); // Projeto
-  const [modulo4, setModulo4] = useState(false); // Fabricação
+  const [modulo1, setModulo1] = useState(0); // Processos
+  const [modulo2, setModulo2] = useState(0); // Materiais
+  const [modulo3, setModulo3] = useState(0); // Projeto
+  const [modulo4, setModulo4] = useState(0); // Fabricação
   const [idioma, setIdioma] = useState(0);
   const [nivel, setNivel] = useState(1); //nivel do jogo
 
@@ -71,8 +71,8 @@ function App() {
 
   return (
     <div>
-      {/*Visualizar states*/}
-      <div
+      {/*Visualizar states ==============================================================================*/}
+      {/* <div
         style={{
           width: "150px",
           height: "150px",
@@ -94,6 +94,7 @@ function App() {
           color: modulo1 || modulo2 || modulo3 || modulo4 ? "#000" : "#666",
         }}
       >
+
         <div className="flex flex-col">
           <p>DEBUG</p>
           <p>
@@ -106,8 +107,8 @@ function App() {
           <p> Nivel: {nivel} </p>
           <p> Idioma: {idioma} </p>
         </div>
-      </div>{" "}
-      {/*Visualizar states*/}
+      </div>{" "} */}
+      {/*Visualizar states ==============================================================================*/}
       <BrowserRouter>
         <Routes>
           <Route
@@ -120,8 +121,6 @@ function App() {
                 setIdiomaUpprop={setIdiomaUp}
                 setIdioma={setIdioma}
                 startgameprop={startgame}
-
-                //resetmoduleprop={resetmodule}
               />
             }
           />
@@ -134,10 +133,10 @@ function App() {
                 idiomaprop={idioma}
                 setIdiomaDownprop={setIdiomaDown}
                 setIdiomaUpprop={setIdiomaUp}
-                funcao1={() => setModulo1(!modulo1)}
-                funcao2={() => setModulo2(!modulo2)}
-                funcao3={() => setModulo3(!modulo3)}
-                funcao4={() => setModulo4(!modulo4)}
+                funcao1={() => setModulo1(1)}
+                funcao2={() => setModulo2(1)}
+                funcao3={() => setModulo3(1)}
+                funcao4={() => setModulo4(1)}
                 resetmoduleprop={resetmodule}
                 startgameprop={startgame}
                 setIdioma={setIdioma}
