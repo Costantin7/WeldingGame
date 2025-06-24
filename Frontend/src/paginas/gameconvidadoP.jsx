@@ -122,18 +122,21 @@ function Game_convidado_P(props) {
 
   return (
     <div>
-      <p>
+      {/* DEBUG ================================================================================ */}
+
+      {/* <p>
         {pergunta
           ? "DEBUG: Foi possível carregar as perguntas"
           : "DEBUG: Não foi possível carregar as perguntas"}
       </p>
+      {pergunta && <p>gabarito: {Number(pergunta.gabarito) + 1} </p>} */}
 
-      {pergunta && <p>gabarito: {Number(pergunta.gabarito) + 1} </p>}
+      {/* DEBUG ================================================================================ */}
 
-      <div className="flex mx-auto gap-7">
-        <div className="pl-10">
+      <div className="flex justify-center w-full">
+        <div className="w-full max-w-xl flex flex-col items-center">
           {pergunta && (
-            <div className="flex flex-col my-4 space-y-4">
+            <div className="flex flex-col my-4 space-y-4 center ">
               <Perguntas pergunta={pergunta.pergunta} nivel={nivel} />
               <Respostas
                 texto={pergunta.resposta_0}
@@ -169,6 +172,10 @@ function Game_convidado_P(props) {
           valor={Addlevel}
           gabarito={pergunta && Number(pergunta.gabarito) + 1}
           selecionado={VerAtivo}
+          deselectA={() => setAtivoB(false)}
+          deselectB={() => setAtivoB(false)}
+          deselectC={() => setAtivoB(false)}
+          deselectD={() => setAtivoB(false)}
         />
         <BotaoDesistir valor={Zerolevel} />
       </div>

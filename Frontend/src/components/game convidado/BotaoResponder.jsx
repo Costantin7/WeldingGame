@@ -4,6 +4,10 @@ function BotaoResponder(props) {
   function TestarAcerto() {
     if (marcador === props.gabarito) {
       props.valor((level) => level + 1);
+      props.deselectA();
+      props.deselectB();
+      props.deselectC();
+      props.deselectD();
     }
   }
 

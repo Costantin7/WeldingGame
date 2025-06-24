@@ -1,5 +1,3 @@
-import React, { useState } from "react";
-
 function Respostas(props) {
   const butt = () => {
     props.ativar();
@@ -9,8 +7,8 @@ function Respostas(props) {
     <button
       className={
         props.ativo
-          ? "my-2 w-auto h-auto border !bg-blue-300 rounded-md shadow-lg"
-          : "my-2 w-auto h-auto border !bg-white rounded-md shadow-lg"
+          ? "w-full min-h-[55px] max-w-xl text-center border border-gray-400 rounded-lg p-3 bg-white hover:bg-gray-100 cursor-pointer transition-all duration-200 my-2 w-auto h-auto border !bg-blue-300 rounded-md shadow-lg"
+          : "w-full min-h-[40px] max-w-xl text-center border border-gray-400 rounded-lg p-3 bg-white hover:bg-gray-100 cursor-pointer transition-all duration-200 my-2 w-auto h-auto border !bg-white rounded-md shadow-lg"
       }
       onClick={butt}
     >

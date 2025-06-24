@@ -45,8 +45,9 @@ function App() {
   const [modulo2, setModulo2] = useState(0); // Materiais
   const [modulo3, setModulo3] = useState(0); // Projeto
   const [modulo4, setModulo4] = useState(0); // Fabricação
-  const [idioma, setIdioma] = useState(0);
+  const [idioma, setIdioma] = useState(0); //idioma 0==pt/br 1==en
   const [nivel, setNivel] = useState(1); //nivel do jogo
+  //const [cronometro, setCronometro] = useState(0)
 
   function startgame() {
     //prop:startgameprop={startgame}  invocador:useEffect(() => {props.startgameprop();}, []);
