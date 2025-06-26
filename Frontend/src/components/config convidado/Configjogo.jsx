@@ -1,12 +1,15 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { BrowserRouter, Routes, Route, Link } from "react-router-dom";
 import Gametype from "./Gametypes";
 import Gamemodes from "./Gamemodes";
 import BotaoDeslizante from "./botão deslizante";
-import { useState } from "react";
 
 function Configjogo(props) {
   const [timer, setTimer] = useState(true);
+
+  useEffect(() => {
+    props.setTimer(timer);
+  }, [timer]);
 
   return (
     <div className="w-[900px] h-[350px] bg-white-500 rounded-xl shadow-lg border space-y-3 !">

@@ -6,7 +6,6 @@ import Logado_P from "./paginas/configlogadoP";
 import Game_convidado_P from "./paginas/gameconvidadoP";
 import Game_logado_P from "./paginas/gamelogadoP";
 import { useState } from "react";
-import Game_teste_P from "./paginas/GameTeste";
 
 //testando git :)
 
@@ -47,7 +46,7 @@ function App() {
   const [modulo4, setModulo4] = useState(0); // Fabricação
   const [idioma, setIdioma] = useState(0); //idioma 0==pt/br 1==en
   const [nivel, setNivel] = useState(1); //nivel do jogo
-  //const [cronometro, setCronometro] = useState(0)
+  const [timer, setTimer] = useState(false);
 
   function startgame() {
     //prop:startgameprop={startgame}  invocador:useEffect(() => {props.startgameprop();}, []);
@@ -73,7 +72,7 @@ function App() {
   return (
     <div>
       {/*Visualizar states ==============================================================================*/}
-      {/* <div
+      <div
         style={{
           width: "150px",
           height: "150px",
@@ -95,7 +94,6 @@ function App() {
           color: modulo1 || modulo2 || modulo3 || modulo4 ? "#000" : "#666",
         }}
       >
-
         <div className="flex flex-col">
           <p>DEBUG</p>
           <p>
@@ -107,8 +105,12 @@ function App() {
           </p>
           <p> Nivel: {nivel} </p>
           <p> Idioma: {idioma} </p>
+          <p>
+            {" "}
+            Timer : {timer && "ON"} {!timer && "OFF"}
+          </p>
         </div>
-      </div>{" "} */}
+      </div>{" "}
       {/*Visualizar states ==============================================================================*/}
       <BrowserRouter>
         <Routes>
@@ -141,6 +143,7 @@ function App() {
                 resetmoduleprop={resetmodule}
                 startgameprop={startgame}
                 setIdioma={setIdioma}
+                setTimer={setTimer}
               />
             }
           />
@@ -176,6 +179,7 @@ function App() {
                 resetmoduleprop={resetmodule}
                 startgameprop={startgame}
                 setIdioma={setIdioma}
+                setTimer={setTimer}
               />
             }
           />
@@ -194,6 +198,7 @@ function App() {
                 modulo2={modulo2}
                 modulo3={modulo3}
                 modulo4={modulo4}
+                timer={timer}
               />
             }
           />

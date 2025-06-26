@@ -31,7 +31,7 @@ function Ajuda(props) {
         </div>
 
         <p className="underline">Ajuda</p>
-        <p className="underline justify-start">Menu</p>
+        <p className="underline">Menu</p>
         <p>
           Ao selecionar o menu, você conta com as opções de: Ajuda, Feedback e
           Sobre nós.{" "}

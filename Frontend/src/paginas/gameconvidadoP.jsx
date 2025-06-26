@@ -1,21 +1,5 @@
-import React from "react";
-import Tittle from "../components/home/Tittle";
-import Subtitulo from "../components/home/Subtitulo";
-import ImagemCentral from "../components/home/ImagemCentral";
-import Empresas from "../components/home/Empresas";
-import BotaoLogin from "../components/home/BotaoLogin";
-import BotaoIdioma from "../components/home/Botaoidioma";
-import Linha from "../components/home/LinhaHorizontal";
-import Botaojogarconvidado from "../components/config login/Botaojogarlogado";
-import Configjogo from "../components/config convidado/Configjogo";
-import Botaomenu from "../components/home/Botaomenu";
-import Voltarhome from "../components/config convidado/Voltarhome";
-import Gametype from "../components/config convidado/Gametypes";
-import Gamemodes from "../components/config convidado/Gamemodes";
-import Rank from "../components/config login/rank";
 import Perguntas from "../components/game convidado/Perguntas";
 import Respostas from "../components/game convidado/Respostas";
-import ImagemEnunciado from "../components/game convidado/ImagemEnunciado";
 import LinhaProgresso from "../components/game convidado/Linha progresso";
 import BotaoResponder from "../components/game convidado/BotaoResponder";
 import BotaoDesistir from "../components/game convidado/BotaoDesistir";
@@ -123,13 +107,19 @@ function Game_convidado_P(props) {
   return (
     <div>
       {/* DEBUG ================================================================================ */}
-
-      {/* <p>
+      {/* 
+      <p>
         {pergunta
           ? "DEBUG: Foi possível carregar as perguntas"
           : "DEBUG: Não foi possível carregar as perguntas"}
       </p>
-      {pergunta && <p>gabarito: {Number(pergunta.gabarito) + 1} </p>} */}
+      {pergunta && <p>gabarito: {Number(pergunta.gabarito) + 1} </p>}
+      {pergunta && (
+        <p>
+          Timer: {props.timer && "ON"} {!props.timer && "OFF"}
+        </p>
+      )}
+      {pergunta && <p>Remaining time: {props.timer && "ON"}</p>} */}
 
       {/* DEBUG ================================================================================ */}
 
@@ -166,7 +156,14 @@ function Game_convidado_P(props) {
       </div>
 
       <LinhaProgresso nivel={nivel} />
-
+      {props.timer && (
+        <div className="my-10 center center-items">
+          <video className="w-64 h-40" width autoPlay muted playsInline loop>
+            <source src="/videos/clock.mp4" type="video/mp4" />
+            Clock_Timer_View ERROR
+          </video>
+        </div>
+      )}
       <div className="flex justify-end gap-4">
         <BotaoResponder
           valor={Addlevel}

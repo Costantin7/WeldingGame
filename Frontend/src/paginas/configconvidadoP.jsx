@@ -1,18 +1,12 @@
-import React from "react";
 import Tittle from "../components/home/Tittle";
 import Subtitulo from "../components/home/Subtitulo";
-import ImagemCentral from "../components/home/ImagemCentral";
 import Empresas from "../components/home/Empresas";
-import BotaoLogin from "../components/home/BotaoLogin";
 import BotaoIdioma from "../components/home/Botaoidioma";
 import Linha from "../components/home/LinhaHorizontal";
 import BotaoJogar from "../components/config login/Botaojogarlogado";
 import Configjogo from "../components/config convidado/Configjogo";
 import Botaomenu from "../components/home/Botaomenu";
 import Voltarhome from "../components/config convidado/Voltarhome";
-import Gametype from "../components/config convidado/Gametypes";
-import Gamemodes from "../components/config convidado/Gamemodes";
-import Rank from "../components/config login/rank";
 import { useEffect } from "react";
 
 function Convidado_P(props) {
@@ -51,6 +45,7 @@ function Convidado_P(props) {
           func2={props.funcao2}
           func3={props.funcao3}
           func4={props.funcao4}
+          setTimer={props.setTimer}
         />
       </div>
 
