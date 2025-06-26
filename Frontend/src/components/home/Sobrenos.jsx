@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 
-function Feedback(props) {
+function Sobrenos(props) {
   const [close, setClose] = useState(false);
 
   useEffect(() => {
@@ -21,10 +21,10 @@ function Feedback(props) {
       ></div>
 
       <div className="fixed top-20 right-80 z-50 bg-white border border-black rounded-xl shadow-lg p-6 space-y-3 w-150 h-120 font-serif">
-        <p>Feedback</p>
+        <p>Sobre nós</p>
       </div>
     </div>
   );
 }
 
-export default Feedback;
+export default Sobrenos;
