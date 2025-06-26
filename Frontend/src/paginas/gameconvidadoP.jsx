@@ -15,6 +15,7 @@ function Game_convidado_P(props) {
   const [ativoB, setAtivoB] = useState(false);
   const [ativoC, setAtivoC] = useState(false);
   const [ativoD, setAtivoD] = useState(false);
+  const [actualTime, setActualTime] = useState(0);
 
   useEffect(() => {
     if (ativoA === true) {
@@ -90,7 +91,7 @@ function Game_convidado_P(props) {
 
   useEffect(() => {
     props.startgameprop();
-  }, []);
+  }, [props]);
 
   function VerAtivo() {
     if (ativoA === true) {
@@ -104,10 +105,26 @@ function Game_convidado_P(props) {
     }
   }
 
+  useEffect(() => {
+    const timer = setInterval(() => {
+      if (props.timer) {
+        setActualTime((oldtime) => oldtime + 1);
+      }
+    }, 1000);
+
+    return () => clearInterval(timer);
+  }, [nivel]);
+
+  useEffect(() => {
+    if (props.timer) {
+      setActualTime(0);
+    }
+  }, [nivel, props]);
+
   return (
     <div>
       {/* DEBUG ================================================================================ */}
-      {/* 
+
       <p>
         {pergunta
           ? "DEBUG: Foi possível carregar as perguntas"
@@ -119,7 +136,7 @@ function Game_convidado_P(props) {
           Timer: {props.timer && "ON"} {!props.timer && "OFF"}
         </p>
       )}
-      {pergunta && <p>Remaining time: {props.timer && "ON"}</p>} */}
+      {pergunta && <p>Remaining time: {60 - actualTime}</p>}
 
       {/* DEBUG ================================================================================ */}
 
