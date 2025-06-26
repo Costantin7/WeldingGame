@@ -172,10 +172,10 @@ function Game_convidado_P(props) {
           valor={Addlevel}
           gabarito={pergunta && Number(pergunta.gabarito) + 1}
           selecionado={VerAtivo}
-          deselectA={() => setAtivoB(false)}
+          deselectA={() => setAtivoA(false)}
           deselectB={() => setAtivoB(false)}
-          deselectC={() => setAtivoB(false)}
-          deselectD={() => setAtivoB(false)}
+          deselectC={() => setAtivoC(false)}
+          deselectD={() => setAtivoD(false)}
         />
         <BotaoDesistir valor={Zerolevel} />
       </div>
