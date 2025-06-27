@@ -1,25 +1,36 @@
-import React from "react";
-import { BrowserRouter, Routes, Route, Link } from 'react-router-dom';
+import { BrowserRouter, Routes, Route, Link } from "react-router-dom";
+import { useState } from "react";
+import LoginUsuario from "./LoginUsuario";
+import RecuperarLogin from "./RecuperarLogin";
+import Resgistrar from "./Registrar";
+function BotaoLogin() {
+  const [ativo, setAtivo] = useState(0);
 
+  return (
+    <div className="text-right">
+      <div className=" mx-auto ">
+        <button
+          onClick={() => setAtivo(1)}
+          className="!bg-blue-600 !text-white !px-12 !py-2 !rounded-md"
+        >
+          <p className="font-bold font-serif">Login</p>
+        </button>
 
-function BotaoLogin(){
-    return(
-        <div className="text-right">
-            <div className=" mx-auto ">
+        {ativo == 1 && <LoginUsuario desativar={setAtivo} />}
+        {ativo == 2 && <RecuperarLogin desativar={setAtivo} />}
+        {ativo == 3 && <Resgistrar desativar={setAtivo} />}
+        <Link to="/config_logado"></Link>
+        {/*========================================================= URL  */}
 
-                <Link to="/config_logado">
-                        <button className="!bg-blue-600 !text-white !px-12 !py-2 !rounded-md">
-                            <p className="font-bold font-serif">Login</p>
-                        </button>
-                </Link>
-
-                <Link to="/config_convidado">
-                    <p className=" font-serif underline text-black underline-offset-4"> Jogar como convidado   </p>
-                </Link>
-
-            </div>
-        </div>
-    )
+        <Link to="/config_convidado">
+          <p className=" font-serif underline text-black underline-offset-4">
+            {" "}
+            Jogar como convidado{" "}
+          </p>
+        </Link>
+      </div>
+    </div>
+  );
 }
 
 export default BotaoLogin;
