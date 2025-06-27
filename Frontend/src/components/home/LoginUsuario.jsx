@@ -24,7 +24,7 @@ function LoginUsuario(props) {
 
       <div className="flex flex-col justify-center items-center fixed top-20 right-80 z-50 bg-white border border-black rounded-xl shadow-lg p-6 space-y-3 w-150 h-120 font-serif">
         <p className="font-bold my-10">Tela de login</p>
-        <p>Usuário: "Textbox"</p>
+        <p>Usuário: </p>
         <input
           className="border"
           type="text"
@@ -33,7 +33,7 @@ function LoginUsuario(props) {
             setText1(e);
           }}
         />
-        <p>Senha: "Textbox" </p>
+        <p>Senha: </p>
         <input
           className="border"
           type="text"
