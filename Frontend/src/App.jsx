@@ -144,6 +144,8 @@ function App() {
                 startgameprop={startgame}
                 setIdioma={setIdioma}
                 setTimer={setTimer}
+                nivel={nivel}
+                setNivel={setNivel}
               />
             }
           />

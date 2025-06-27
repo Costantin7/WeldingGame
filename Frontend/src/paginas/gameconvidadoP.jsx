@@ -89,10 +89,6 @@ function Game_convidado_P(props) {
     props.modulo4,
   ]);
 
-  useEffect(() => {
-    props.startgameprop();
-  }, [props]);
-
   function VerAtivo() {
     if (ativoA === true) {
       return 1;
@@ -119,7 +115,7 @@ function Game_convidado_P(props) {
     if (props.timer) {
       setActualTime(0);
     }
-  }, [nivel, props]);
+  }, [nivel]);
 
   return (
     <div>
@@ -174,11 +170,12 @@ function Game_convidado_P(props) {
 
       <LinhaProgresso nivel={nivel} />
       {props.timer && (
-        <div className="my-10 center center-items">
+        <div className="my-10 center justify-center center-items">
           <video className="w-64 h-40" width autoPlay muted playsInline loop>
             <source src="/videos/clock.mp4" type="video/mp4" />
             Clock_Timer_View ERROR
           </video>
+          <p>Remaining time: {60 - actualTime}</p>
         </div>
       )}
       <div className="flex justify-end gap-4">
