@@ -22,7 +22,7 @@ function LoginUsuario(props) {
         className="fixed inset-0 backdrop-blur-sm z-40 "
       ></div>
 
-      <div className="items-start justify-start flex flex-col fixed top-20 right-80 z-50 bg-white border border-black rounded-xl shadow-lg p-5  w-120 h-110 font-serif">
+      <div className="items-start justify-start flex flex-col fixed top-20 right-80 z-50 bg-white border border-black rounded-xl shadow-lg p-5  w-120 h-95 font-serif">
         <p className="font-semibold !self-center text-xl	">Login</p>
         <div className="bg-gray-300 w-full h-1 mb-6 "></div>
 
@@ -50,28 +50,34 @@ function LoginUsuario(props) {
             Fazer Login
           </button>
         </Link>
-        <p className="self-center mt-7">Não tem cadastro? </p>
-        <p
-          onClick={() => {
-            if (close) {
-              props.desativar(3);
-            }
-          }}
-          className="text-blue-800 underline cursor-pointer self-center"
-        >
-          Fazer Registro
-        </p>
-        <p className="self-center mt-5">Esqueceu a senha? </p>
-        <p
-          onClick={() => {
-            if (close) {
-              props.desativar(2);
-            }
-          }}
-          className="text-blue-800 underline cursor-pointer self-center "
-        >
-          Recuperar senha
-        </p>
+        <div className="flex flex-row mx-auto allign-start space-x-15">
+          <div className="flex flex-col items-center">
+            <p className="mt-5">Não tem cadastro? </p>
+            <p
+              onClick={() => {
+                if (close) {
+                  props.desativar(3);
+                }
+              }}
+              className="text-blue-800 underline cursor-pointer "
+            >
+              Fazer Registro
+            </p>
+          </div>
+          <div className="flex flex-col items-center">
+            <p className="self-center mt-5">Esqueceu a senha? </p>
+            <p
+              onClick={() => {
+                if (close) {
+                  props.desativar(2);
+                }
+              }}
+              className="text-blue-800 underline cursor-pointer self-center "
+            >
+              Recuperar senha
+            </p>
+          </div>
+        </div>
       </div>
     </div>
   );
