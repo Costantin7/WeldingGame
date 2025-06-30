@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 
-function RecuperarLogin(props) {
-  const [emailText, setEmailText] = useState("insira seu email");
+function RecuperarSenha(props) {
+  const [emailText, setEmailText] = useState("  Insira seu email");
   const [senha1, setSenha1] = useState("*****1");
   const [senha2, setSenha2] = useState("*****2");
   const [close, setClose] = useState(false);
@@ -23,11 +23,12 @@ function RecuperarLogin(props) {
         className="fixed inset-0 backdrop-blur-sm z-40 "
       ></div>
       {tela == 0 && (
-        <div className="flex flex-col justify-center items-center fixed top-20 right-80 z-50 bg-white border border-black rounded-xl shadow-lg p-6 space-y-3 w-100 h-80 font-serif">
-          <p className="font-bold my-10">Recuperar senha</p>
-          <p>insira seu e-mail cadastrado</p>
+        <div className="flex flex-col justify-center items-center fixed top-20 right-80 z-50 bg-white border border-black rounded-xl shadow-lg p-5 w-100 h-60 font-serif">
+          <p className="font-bold mb-2">Recuperar senha</p>
+          <div className="bg-gray-300 w-full h-1 mb-3 "></div>
+          <p className="mb-3"> Insira seu e-mail cadastrado</p>
           <input
-            className="!border w-full"
+            className="!border w-full mb-5"
             type="text"
             value={emailText}
             onChange={(e) => setEmailText(e)}
@@ -36,16 +37,17 @@ function RecuperarLogin(props) {
             onClick={() => setTela(1)}
             className="!bg-blue-600 text-white"
           >
-            enviar
+            Obter código
           </button>
         </div>
       )}
 
       {tela == 1 && (
-        <div className="flex flex-col justify-center items-center fixed top-20 right-80 z-50 bg-white border border-black rounded-xl shadow-lg p-6 space-y-3 w-100 h-80 font-serif">
-          <p className="font-bold my-10">Recuperar senha</p>
+        <div className="flex flex-col justify-center items-center fixed top-20 right-80 z-50 bg-white border border-black rounded-xl shadow-lg p-6 w-100 h-70 font-serif">
+          <p className="font-bold my-3">Recuperar senha</p>
+          <div className="bg-gray-300 w-full h-1 mb-5 "></div>
           <p>Insira o código recebido em seu email</p>
-          <div className="flex flex-row mx-1">
+          <div className="flex flex-row mx-1 my-5">
             <input
               className="!border w-10 mx-1"
               type="number"
@@ -87,25 +89,26 @@ function RecuperarLogin(props) {
       )}
 
       {tela == 2 && (
-        <div className="flex flex-col justify-center items-center fixed top-20 right-80 z-50 bg-white border border-black rounded-xl shadow-lg p-6 space-y-3 w-100 h-80 font-serif">
-          <p className="font-bold my-10">Recuperar senha</p>
-          <p>insira a nova senha</p>
+        <div className="flex flex-col justify-center items-center fixed top-20 right-80 z-50 bg-white border border-black rounded-xl shadow-lg p-6  w-100 h-80 font-serif">
+          <p className="font-bold my-3">Recuperar senha</p>
+          <div className="bg-gray-300 w-full h-1 mb-5 "></div>
+          <p>Insira a nova senha</p>
           <input
-            className="!border w-full"
+            className="!border w-full mb-3"
             type="text"
             value={senha1}
             onChange={(e) => setSenha1(e)}
           ></input>
           <p>Confirme a nova senha</p>
           <input
-            className="!border w-full"
+            className="!border w-full mb-5"
             type="text"
             value={senha2}
             onChange={(e) => setSenha2(e)}
           ></input>
           <button
             onClick={() => props.desativar(0)}
-            className="!bg-blue-600 text-white"
+            className="!bg-blue-600 text-white "
           >
             enviar
           </button>
@@ -115,4 +118,4 @@ function RecuperarLogin(props) {
   );
 }
 
-export default RecuperarLogin;
+export default RecuperarSenha;

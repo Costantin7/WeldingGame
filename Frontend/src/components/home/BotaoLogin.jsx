@@ -1,7 +1,7 @@
 import { BrowserRouter, Routes, Route, Link } from "react-router-dom";
 import { useState } from "react";
 import LoginUsuario from "./LoginUsuario";
-import RecuperarLogin from "./RecuperarLogin";
+import RecuperarSenha from "./RecuperarSenha";
 import Resgistrar from "./Registrar";
 function BotaoLogin() {
   const [ativo, setAtivo] = useState(0);
@@ -17,7 +17,7 @@ function BotaoLogin() {
         </button>
 
         {ativo == 1 && <LoginUsuario desativar={setAtivo} />}
-        {ativo == 2 && <RecuperarLogin desativar={setAtivo} />}
+        {ativo == 2 && <RecuperarSenha desativar={setAtivo} />}
         {ativo == 3 && <Resgistrar desativar={setAtivo} />}
         <Link to="/config_logado"></Link>
         {/*========================================================= URL  */}
