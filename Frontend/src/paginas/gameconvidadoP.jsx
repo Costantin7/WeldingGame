@@ -6,6 +6,7 @@ import BotaoDesistir from "../components/game convidado/BotaoDesistir";
 import EscadaJogo from "../components/game convidado/Escada Jogo";
 import { useEffect, useState, useMemo } from "react";
 import axios from "axios";
+import NivelSoldador from "../components/game convidado/NivelSoldador";
 function Game_convidado_P(props) {
   const [pergunta, setPergunta] = useState(null);
   const { nivel, Addlevel, Zerolevel } = props;
@@ -190,6 +191,7 @@ function Game_convidado_P(props) {
         />
         <BotaoDesistir valor={Zerolevel} />
       </div>
+      <NivelSoldador nivel={props.nivel} />
 
       <EscadaJogo
         link="./src/img/Escada Jogo.png"
