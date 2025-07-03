@@ -72,7 +72,7 @@ function App() {
   return (
     <div>
       {/*Visualizar states ==============================================================================*/}
-      <div
+      {/* <div
         style={{
           width: "150px",
           height: "150px",
@@ -110,7 +110,7 @@ function App() {
             Timer : {timer && "ON"} {!timer && "OFF"}
           </p>
         </div>
-      </div>{" "}
+      </div>{" "} */}
       {/*Visualizar states ==============================================================================*/}
       <BrowserRouter>
         <Routes>
