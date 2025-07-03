@@ -11,7 +11,7 @@ function Game_convidado_P(props) {
   const [pergunta, setPergunta] = useState(null);
   const { nivel, Addlevel, Zerolevel } = props;
   const idioma = props.idiomaprop;
-
+  const { resposta, setResposta } = useState(0); // -1=errado 0=nãorespondido 1=correto
   const [ativoA, setAtivoA] = useState(false);
   const [ativoB, setAtivoB] = useState(false);
   const [ativoC, setAtivoC] = useState(false);
@@ -99,6 +99,8 @@ function Game_convidado_P(props) {
       return 3;
     } else if (ativoD === true) {
       return 4;
+    } else {
+      return 0;
     }
   }
 
@@ -188,6 +190,8 @@ function Game_convidado_P(props) {
           deselectB={() => setAtivoB(false)}
           deselectC={() => setAtivoC(false)}
           deselectD={() => setAtivoD(false)}
+          resposta={resposta}
+          setResposta={setResposta}
         />
         <BotaoDesistir valor={Zerolevel} />
       </div>
