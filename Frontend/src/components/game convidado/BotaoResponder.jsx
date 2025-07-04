@@ -35,7 +35,7 @@ function BotaoResponder(props) {
         className={
           ativo !== 0
             ? "my-2 w-[150px] h-[40px] border !bg-green-400 rounded-md shadow-lg"
-            : "my-2 w-[150px] h-[40px] border !bg-gray-400 rounded-md shadow-lg"
+            : "my-2 w-[150px] h-[40px] !bg-gray-400 rounded-md shadow-lg !cursor-default text-gray-500"
         }
       >
         <p className="font-serif">Responder</p>

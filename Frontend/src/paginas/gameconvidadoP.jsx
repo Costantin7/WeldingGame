@@ -181,10 +181,12 @@ function Game_convidado_P(props) {
       <LinhaProgresso nivel={nivel} />
       {props.timer && (
         <div className="my-10 center justify-center center-items">
-          <video className="w-64 h-40" width autoPlay muted playsInline loop>
-            <source src="/videos/clock.mp4" type="video/mp4" />
-            Clock_Timer_View ERROR
-          </video>
+          {actualTime && (
+            <video className="w-64 h-40" width autoPlay muted playsInline loop>
+              <source src="/videos/clock.mp4" type="video/mp4" />
+              Clock_Timer_View ERROR
+            </video>
+          )}
           <p>Remaining time: {60 - actualTime}</p>
         </div>
       )}
