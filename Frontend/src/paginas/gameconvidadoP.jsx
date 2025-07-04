@@ -150,21 +150,25 @@ function Game_convidado_P(props) {
               <Respostas
                 texto={pergunta.resposta_0}
                 ativar={() => setAtivoA(true)}
+                desativar={() => setAtivoA(false)}
                 ativo={ativoA}
               />
               <Respostas
                 texto={pergunta.resposta_1}
                 ativar={() => setAtivoB(true)}
+                desativar={() => setAtivoB(false)}
                 ativo={ativoB}
               />
               <Respostas
                 texto={pergunta.resposta_2}
                 ativar={() => setAtivoC(true)}
+                desativar={() => setAtivoC(false)}
                 ativo={ativoC}
               />
               <Respostas
                 texto={pergunta.resposta_3}
                 ativar={() => setAtivoD(true)}
+                desativar={() => setAtivoD(false)}
                 ativo={ativoD}
               />
             </div>

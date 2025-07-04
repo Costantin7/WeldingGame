@@ -1,6 +1,10 @@
 function Respostas(props) {
   const butt = () => {
-    props.ativar();
+    if (props.ativo == false) {
+      props.ativar();
+    } else if (props.ativo == true) {
+      props.desativar();
+    }
   };
 
   return (
