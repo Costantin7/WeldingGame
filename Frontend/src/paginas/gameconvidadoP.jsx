@@ -152,24 +152,36 @@ function Game_convidado_P(props) {
                 ativar={() => setAtivoA(true)}
                 desativar={() => setAtivoA(false)}
                 ativo={ativoA}
+                gabarito={pergunta && Number(pergunta.gabarito) + 1}
+                modo={checkResposta}
+                gabaritoDesse={1}
               />
               <Respostas
                 texto={pergunta.resposta_1}
                 ativar={() => setAtivoB(true)}
                 desativar={() => setAtivoB(false)}
                 ativo={ativoB}
+                gabarito={pergunta && Number(pergunta.gabarito) + 1}
+                modo={checkResposta}
+                gabaritoDesse={2}
               />
               <Respostas
                 texto={pergunta.resposta_2}
                 ativar={() => setAtivoC(true)}
                 desativar={() => setAtivoC(false)}
                 ativo={ativoC}
+                gabarito={pergunta && Number(pergunta.gabarito) + 1}
+                modo={checkResposta}
+                gabaritoDesse={3}
               />
               <Respostas
                 texto={pergunta.resposta_3}
                 ativar={() => setAtivoD(true)}
                 desativar={() => setAtivoD(false)}
                 ativo={ativoD}
+                gabarito={pergunta && Number(pergunta.gabarito) + 1}
+                modo={checkResposta}
+                gabaritoDesse={4}
               />
             </div>
           )}
