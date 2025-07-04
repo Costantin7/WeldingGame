@@ -201,6 +201,7 @@ function App() {
                 modulo3={modulo3}
                 modulo4={modulo4}
                 timer={timer}
+                setNivel={setNivel}
               />
             }
           />

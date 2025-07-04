@@ -7,6 +7,8 @@ import EscadaJogo from "../components/game convidado/Escada Jogo";
 import { useEffect, useState, useMemo } from "react";
 import axios from "axios";
 import NivelSoldador from "../components/game convidado/NivelSoldador";
+import BotaoProsseguir from "../components/game convidado/BotaoProsseguir";
+import BotaoReiniciar from "../components/game convidado/BotaoReiniciar";
 function Game_convidado_P(props) {
   const [pergunta, setPergunta] = useState(null);
   const { nivel, Addlevel, Zerolevel } = props;
@@ -17,7 +19,7 @@ function Game_convidado_P(props) {
   const [ativoC, setAtivoC] = useState(false);
   const [ativoD, setAtivoD] = useState(false);
   const [actualTime, setActualTime] = useState(0);
-
+  const [checkResposta, setCheckResposta] = useState(0);
   useEffect(() => {
     if (ativoA === true) {
       setAtivoB(false);
@@ -135,6 +137,7 @@ function Game_convidado_P(props) {
           Timer: {props.timer && "ON"} {!props.timer && "OFF"}
         </p>
       )}
+      {pergunta && <p>RespostaState: {checkResposta}</p>}
       {pergunta && <p>Remaining time: {60 - actualTime}</p>}
 
       {/* DEBUG ================================================================================ */}
@@ -182,17 +185,36 @@ function Game_convidado_P(props) {
         </div>
       )}
       <div className="flex justify-end gap-4">
-        <BotaoResponder
-          valor={Addlevel}
-          gabarito={pergunta && Number(pergunta.gabarito) + 1}
-          selecionado={VerAtivo}
-          deselectA={() => setAtivoA(false)}
-          deselectB={() => setAtivoB(false)}
-          deselectC={() => setAtivoC(false)}
-          deselectD={() => setAtivoD(false)}
-          resposta={resposta}
-          setResposta={setResposta}
-        />
+        {checkResposta === 0 && (
+          <BotaoResponder
+            valor={Addlevel}
+            gabarito={pergunta && Number(pergunta.gabarito) + 1}
+            selecionado={VerAtivo}
+            deselectA={() => setAtivoA(false)}
+            deselectB={() => setAtivoB(false)}
+            deselectC={() => setAtivoC(false)}
+            deselectD={() => setAtivoD(false)}
+            resposta={resposta}
+            setResposta={setResposta}
+            checkResposta={checkResposta}
+            setCheckResposta={setCheckResposta}
+          />
+        )}
+
+        {checkResposta === 1 && (
+          <BotaoProsseguir
+            valor={Addlevel}
+            setCheckResposta={setCheckResposta}
+          />
+        )}
+
+        {checkResposta === -1 && (
+          <BotaoReiniciar
+            valor={Zerolevel}
+            setCheckResposta={setCheckResposta}
+          />
+        )}
+
         <BotaoDesistir valor={Zerolevel} />
       </div>
       <NivelSoldador nivel={props.nivel} />

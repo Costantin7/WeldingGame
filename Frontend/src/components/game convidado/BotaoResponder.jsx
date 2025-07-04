@@ -4,22 +4,24 @@ function BotaoResponder(props) {
   const [ativo, setAtivo] = useState(0);
 
   useEffect(() => {
-    const marcadorAtual = props.selecionado(); // chama a função dinamicamente
+    const marcadorAtual = props.selecionado();
 
     if (marcadorAtual !== 0) {
       setAtivo(1);
     } else {
       setAtivo(0);
     }
-  }, [props.selecionado]); // depende da função, ou pode deixar [] se ela for estável
+  }, [props.selecionado]);
 
   function TestarAcerto() {
     const marcadorAtual = props.selecionado();
-
-    if (marcadorAtual === props.gabarito) {
-      props.valor((level) => level + 1);
+    if (ativo === 1) {
+      if (marcadorAtual === props.gabarito) {
+        props.setCheckResposta(1);
+      } else if (marcadorAtual != props.gabarito) {
+        props.setCheckResposta(-1);
+      }
     }
-
     props.deselectA();
     props.deselectB();
     props.deselectC();
