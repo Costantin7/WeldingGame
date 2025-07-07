@@ -21,6 +21,14 @@ function Sobrenos(props) {
       ></div>
 
       <div className="fixed top-20 right-90 z-50 bg-white border border-black rounded-xl shadow-lg p-6 space-y-3 w-150 h-120 font-serif">
+        <div
+          className="place-self-end w-8 flex justify-center px-4 py-1 cursor-pointer center-items"
+          onClick={() => {
+            props.desativar(0);
+          }}
+        >
+          <p>❌</p>
+        </div>
         <p>Sobre nós</p>
       </div>
     </div>

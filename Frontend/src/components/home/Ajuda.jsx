@@ -20,14 +20,14 @@ function Ajuda(props) {
         className="fixed inset-0 backdrop-blur-sm z-40 "
       ></div>
 
-      <div className="fixed top-20 right-80 z-50 bg-white border border-black rounded-xl shadow-lg p-6 space-y-3 w-150 h-120 font-serif">
+      <div className="fixed flex flex-col top-20 right-80 z-50 bg-white border border-black rounded-xl shadow-lg p-6 space-y-3 w-150 h-120 font-serif ">
         <div
-          className="flex justify-end px-4 py-4 cursor-pointer "
+          className="place-self-end w-8 flex justify-center px-4 py-1 cursor-pointer center-items"
           onClick={() => {
             props.desativar(0);
           }}
         >
-          <p>x</p>
+          <p>❌</p>
         </div>
 
         <p className="underline">Ajuda</p>
