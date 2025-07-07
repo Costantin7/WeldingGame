@@ -1,10 +1,17 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Feedback from "./Feedback";
 import Sobrenos from "./Sobrenos";
 import Ajuda from "./Ajuda";
 
 function Botaomenu() {
   const [ativo, setAtivo] = useState(0);
+  const [close, setClose] = useState(false);
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setClose(true);
+    }, 300);
+    return () => clearTimeout(timer);
+  }, []);
 
   return (
     <div>
@@ -20,7 +27,14 @@ function Botaomenu() {
       )}
       {ativo == 1 && (
         <div>
-          <div className="fixed inset-0 backdrop-blur-sm z-40 "></div>
+          <div
+            className="fixed inset-0 backdrop-blur-sm z-40 "
+            onClick={() => {
+              if (close == true) {
+                setAtivo(0);
+              }
+            }}
+          ></div>
 
           <div className="fixed top-20 right-10 z-50 bg-white border border-black rounded-xl shadow-lg p-6 space-y-3 w-64 font-serif">
             <button
