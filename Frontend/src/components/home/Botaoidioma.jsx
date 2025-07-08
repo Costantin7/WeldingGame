@@ -14,7 +14,7 @@ function BotaoIdioma(props) {
 
   return (
     <div>
-      <div className="font-serif  flex">
+      <div className="flex font-serif">
         {ativo == 1 && (
           <div>
             <MenuDeIdiomas

@@ -20,6 +20,7 @@ function BotaoResponder(props) {
         props.setCheckResposta(1);
       } else if (marcadorAtual != props.gabarito) {
         props.setCheckResposta(-1);
+        props.setTelainfo(true);
       }
     }
     props.deselectA();

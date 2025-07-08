@@ -9,6 +9,8 @@ import axios from "axios";
 import NivelSoldador from "../components/game convidado/NivelSoldador";
 import BotaoProsseguir from "../components/game convidado/BotaoProsseguir";
 import BotaoReiniciar from "../components/game convidado/BotaoReiniciar";
+import TelaErro from "../components/game convidado/Tela_Erro";
+import TelaVitoria from "../components/game convidado/Tela_Vitoria";
 function Game_convidado_P(props) {
   const [pergunta, setPergunta] = useState(null);
   const { nivel, Addlevel, Zerolevel } = props;
@@ -20,6 +22,7 @@ function Game_convidado_P(props) {
   const [ativoD, setAtivoD] = useState(false);
   const [actualTime, setActualTime] = useState(0);
   const [checkResposta, setCheckResposta] = useState(0);
+  const [telainfo, setTelainfo] = useState(false);
   useEffect(() => {
     if (ativoA === true) {
       setAtivoB(false);
@@ -139,6 +142,7 @@ function Game_convidado_P(props) {
       )}
       {pergunta && <p>RespostaState: {checkResposta}</p>}
       {pergunta && <p>Remaining time: {60 - actualTime}</p>}
+      {pergunta && <p>Tela informativa: {telainfo}</p>}
 
       {/* DEBUG ================================================================================ */}
 
@@ -216,6 +220,7 @@ function Game_convidado_P(props) {
             setResposta={setResposta}
             checkResposta={checkResposta}
             setCheckResposta={setCheckResposta}
+            setTelainfo={setTelainfo}
           />
         )}
 
@@ -233,6 +238,11 @@ function Game_convidado_P(props) {
           />
         )}
 
+        {telainfo === true && <TelaErro desativar={setTelainfo} />}
+
+        {checkResposta === 1 && nivel === 20 && (
+          <TelaVitoria desativar={setCheckResposta} />
+        )}
         <BotaoDesistir valor={Zerolevel} />
       </div>
       <NivelSoldador nivel={props.nivel} />
