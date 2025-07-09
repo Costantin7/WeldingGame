@@ -28,7 +28,7 @@ function Resgistrar(props) {
             props.desativar(0);
           }
         }}
-        className="fixed inset-0 backdrop-blur-sm z-40 "
+        className="fixed inset-0 backdrop-blur-sm z-40 bg-black/40"
       ></div>
 
       <div className="relative fixed z-50 left-60 bottom-70">

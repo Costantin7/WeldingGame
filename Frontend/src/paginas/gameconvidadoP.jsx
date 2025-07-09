@@ -143,6 +143,16 @@ function Game_convidado_P(props) {
       {pergunta && <p>RespostaState: {checkResposta}</p>}
       {pergunta && <p>Remaining time: {60 - actualTime}</p>}
       {pergunta && <p>Tela informativa: {telainfo}</p>}
+      {pergunta && (
+        <button
+          className="!bg-blue-300"
+          onClick={() => {
+            props.Addlevel();
+          }}
+        >
+          +1
+        </button>
+      )}
 
       {/* DEBUG ================================================================================ */}
 

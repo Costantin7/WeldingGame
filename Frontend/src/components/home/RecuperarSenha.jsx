@@ -20,7 +20,7 @@ function RecuperarSenha(props) {
             props.desativar(0);
           }
         }}
-        className="fixed inset-0 backdrop-blur-sm z-40 "
+        className="fixed inset-0 backdrop-blur-sm z-40 bg-black/40"
       ></div>
       {tela == 0 && (
         <div className="flex flex-col justify-center items-center fixed top-20 right-80 z-50 bg-white border border-black rounded-xl shadow-lg p-5 w-100 h-60 font-serif">

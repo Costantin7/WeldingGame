@@ -28,7 +28,7 @@ function Botaomenu() {
       {ativo == 1 && (
         <div>
           <div
-            className="fixed inset-0 backdrop-blur-sm z-40 "
+            className="fixed inset-0 backdrop-blur-sm bg-black/40 z-40 "
             onClick={() => {
               if (close == true) {
                 setAtivo(0);

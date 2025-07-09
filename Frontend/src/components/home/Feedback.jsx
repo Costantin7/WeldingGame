@@ -17,7 +17,7 @@ function Feedback(props) {
             props.desativar(0);
           }
         }}
-        className="fixed inset-0 backdrop-blur-sm z-40 "
+        className="fixed inset-0 backdrop-blur-sm z-40 bg-black/40"
       ></div>
 
       <div className="fixed top-20 right-80 z-50 bg-white border border-black rounded-xl shadow-lg p-6 space-y-3 w-150 h-120 font-serif">

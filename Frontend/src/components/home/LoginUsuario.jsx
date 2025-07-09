@@ -19,7 +19,7 @@ function LoginUsuario(props) {
             props.desativar(0);
           }
         }}
-        className="fixed inset-0 backdrop-blur-sm z-40 "
+        className="fixed inset-0 backdrop-blur-sm z-40 bg-black/40"
       ></div>
 
       <div className="items-start justify-start flex flex-col fixed top-20 right-80 z-50 bg-white border border-black rounded-xl shadow-lg p-5  w-120 h-95 font-serif">
