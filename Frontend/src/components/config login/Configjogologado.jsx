@@ -3,8 +3,27 @@ import { BrowserRouter, Routes, Route, Link } from "react-router-dom";
 import Gametype from "../config convidado/Gametypes";
 import Gamemodes from "../config convidado/Gamemodes";
 import BotaoDeslizante from "../config convidado/botão deslizante";
+import AparecerNoRanking from "./AparecerNoRanking";
 function MenuConfigJogoLogado(props) {
   const [timer, setTimer] = useState(true);
+
+  function ModoCompetitivo() {
+    if (props.modulo1 == false) {
+      props.func1();
+    }
+    if (props.modulo2 == false) {
+      props.func2();
+    }
+    if (props.modulo3 == false) {
+      props.func3();
+    }
+    if (props.modulo4 == false) {
+      props.func4();
+    }
+    if (timer == false) {
+      setTimer(!timer);
+    }
+  }
 
   useEffect(() => {
     props.setTimer(timer);
@@ -28,18 +47,18 @@ function MenuConfigJogoLogado(props) {
                 (Responda perguntas sobre diferentes aspectos de soldagem)
               </p>
             </div>
-            <button
-              onClick={() => {
-                props.func1();
-                props.func2();
-                props.func3();
-                props.func4();
-                setTimer(!timer);
-              }}
-              className=" bottom-1 left-30 !bg-white mx-20 shadow-lg "
-            >
-              ◎ Aparecer no Ranking
-            </button>
+            <div>
+              {/* ============================================================ APARECER NO RANKING */}
+              <button
+                onClick={() => {
+                  ModoCompetitivo();
+                }}
+                className=" bottom-1 left-30 !bg-white mx-20 shadow-lg "
+              >
+                ◎ Aparecer no Ranking
+              </button>
+              {/* ============================================================ APARECER NO RANKING */}
+            </div>
           </div>
         </div>
       </div>
