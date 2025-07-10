@@ -47,7 +47,7 @@ function App() {
   const [idioma, setIdioma] = useState(0); //idioma 0==pt/br 1==en
   const [nivel, setNivel] = useState(1); //nivel do jogo
   const [timer, setTimer] = useState(false);
-
+  const [competitive, setCompetitive] = useState(false);
   function startgame() {
     //prop:startgameprop={startgame}  invocador:useEffect(() => {props.startgameprop();}, []);
     setNivel(1);
@@ -97,8 +97,7 @@ function App() {
         <div className="flex flex-col">
           <p>DEBUG</p>
           <p>
-            {[modulo1, modulo2, modulo3, modulo4].filter(Boolean).length}{" "}
-            inativo
+            {[modulo1, modulo2, modulo3, modulo4].filter(Boolean).length} ativo
             {[modulo1, modulo2, modulo3, modulo4].filter(Boolean).length !== 1
               ? "s"
               : ""}

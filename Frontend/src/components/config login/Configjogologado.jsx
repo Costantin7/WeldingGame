@@ -53,7 +53,15 @@ function MenuConfigJogoLogado(props) {
                 onClick={() => {
                   ModoCompetitivo();
                 }}
-                className=" bottom-1 left-30 !bg-white mx-20 shadow-lg "
+                className={
+                  props.modulo1 &&
+                  props.modulo2 &&
+                  props.modulo3 &&
+                  props.modulo4 &&
+                  timer
+                    ? " bottom-1 left-30 !bg-white mx-20 shadow-lg "
+                    : " bottom-1 left-30 !bg-gray-300 mx-20 shadow-lg line-through "
+                }
               >
                 ◎ Aparecer no Ranking
               </button>
