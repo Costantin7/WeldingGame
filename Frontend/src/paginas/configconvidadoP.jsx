@@ -12,9 +12,6 @@ import { useEffect } from "react";
 function Convidado_P(props) {
   useEffect(() => {
     props.resetmoduleprop();
-  }, []);
-
-  useEffect(() => {
     props.startgameprop();
   }, []);
 

@@ -72,7 +72,7 @@ function App() {
   return (
     <div>
       {/*Visualizar states ==============================================================================*/}
-      {/* <div
+      <div
         style={{
           width: "150px",
           height: "150px",
@@ -110,7 +110,7 @@ function App() {
             Timer : {timer && "ON"} {!timer && "OFF"}
           </p>
         </div>
-      </div>{" "} */}
+      </div>{" "}
       {/*Visualizar states ==============================================================================*/}
       <BrowserRouter>
         <Routes>
@@ -136,10 +136,10 @@ function App() {
                 idiomaprop={idioma}
                 setIdiomaDownprop={setIdiomaDown}
                 setIdiomaUpprop={setIdiomaUp}
-                funcao1={() => setModulo1(1)}
-                funcao2={() => setModulo2(1)}
-                funcao3={() => setModulo3(1)}
-                funcao4={() => setModulo4(1)}
+                funcao1={() => setModulo1(!modulo1)}
+                funcao2={() => setModulo2(!modulo2)}
+                funcao3={() => setModulo3(!modulo3)}
+                funcao4={() => setModulo4(!modulo4)}
                 resetmoduleprop={resetmodule}
                 startgameprop={startgame}
                 setIdioma={setIdioma}
