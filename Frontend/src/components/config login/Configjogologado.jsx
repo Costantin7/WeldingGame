@@ -28,7 +28,15 @@ function MenuConfigJogoLogado(props) {
                 (Responda perguntas sobre diferentes aspectos de soldagem)
               </p>
             </div>
-            <button className=" bottom-1 left-30 !bg-white mx-20 shadow-lg ">
+            <button
+              onClick={() => {
+                props.func1();
+                props.func2();
+                props.func3();
+                props.func4();
+              }}
+              className=" bottom-1 left-30 !bg-white mx-20 shadow-lg "
+            >
               ◎ Aparecer no Ranking
             </button>
           </div>
@@ -37,10 +45,26 @@ function MenuConfigJogoLogado(props) {
 
       <div className="flex items-center flex-col space-y-3">
         <div className="flex gap-4 mx-auto my-3">
-          <Gametype texto={" 1 - Processos ⚙️"} define={props.func1} />
-          <Gametype texto={" 2 - Materiais 🧱"} define={props.func2} />
-          <Gametype texto={" 3 - Projeto ‍🏭"} define={props.func3} />
-          <Gametype texto={" 4 - Fabricação 📐"} define={props.func4} />
+          <Gametype
+            texto={" 1 - Processos ⚙️"}
+            define={props.func1}
+            ativo={props.modulo1}
+          />
+          <Gametype
+            texto={" 2 - Materiais 🧱"}
+            define={props.func2}
+            ativo={props.modulo2}
+          />
+          <Gametype
+            texto={" 3 - Projeto ‍🏭"}
+            define={props.func3}
+            ativo={props.modulo3}
+          />
+          <Gametype
+            texto={" 4 - Fabricação 📐"}
+            define={props.func4}
+            ativo={props.modulo4}
+          />
         </div>
         <div className="flex gap-5 mx-auto my-5 ">
           <div className="flex items-center flex-col justify-center">

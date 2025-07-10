@@ -43,6 +43,10 @@ function Convidado_P(props) {
           func3={props.funcao3}
           func4={props.funcao4}
           setTimer={props.setTimer}
+          modulo1={props.modulo1}
+          modulo2={props.modulo2}
+          modulo3={props.modulo3}
+          modulo4={props.modulo4}
         />
       </div>
 

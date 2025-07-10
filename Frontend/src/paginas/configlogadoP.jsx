@@ -56,6 +56,10 @@ function Logado_P(props) {
           func2={props.funcao2}
           func3={props.funcao3}
           func4={props.funcao4}
+          modulo1={props.modulo1}
+          modulo2={props.modulo2}
+          modulo3={props.modulo3}
+          modulo4={props.modulo4}
         />
       </div>
 

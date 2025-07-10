@@ -40,10 +40,10 @@ import { useState } from "react";
 
 function App() {
   //states globais para comunicação com backend
-  const [modulo1, setModulo1] = useState(0); // Processos
-  const [modulo2, setModulo2] = useState(0); // Materiais
-  const [modulo3, setModulo3] = useState(0); // Projeto
-  const [modulo4, setModulo4] = useState(0); // Fabricação
+  const [modulo1, setModulo1] = useState(false); // Processos
+  const [modulo2, setModulo2] = useState(false); // Materiais
+  const [modulo3, setModulo3] = useState(false); // Projeto
+  const [modulo4, setModulo4] = useState(false); // Fabricação
   const [idioma, setIdioma] = useState(0); //idioma 0==pt/br 1==en
   const [nivel, setNivel] = useState(1); //nivel do jogo
   const [timer, setTimer] = useState(false);
@@ -140,6 +140,10 @@ function App() {
                 funcao2={() => setModulo2(!modulo2)}
                 funcao3={() => setModulo3(!modulo3)}
                 funcao4={() => setModulo4(!modulo4)}
+                modulo1={modulo1}
+                modulo2={modulo2}
+                modulo3={modulo3}
+                modulo4={modulo4}
                 resetmoduleprop={resetmodule}
                 startgameprop={startgame}
                 setIdioma={setIdioma}
@@ -178,6 +182,10 @@ function App() {
                 funcao2={() => setModulo2(!modulo2)}
                 funcao3={() => setModulo3(!modulo3)}
                 funcao4={() => setModulo4(!modulo4)}
+                modulo1={modulo1}
+                modulo2={modulo2}
+                modulo3={modulo3}
+                modulo4={modulo4}
                 resetmoduleprop={resetmodule}
                 startgameprop={startgame}
                 setIdioma={setIdioma}
