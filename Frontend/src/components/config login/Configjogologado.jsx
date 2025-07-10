@@ -34,6 +34,7 @@ function MenuConfigJogoLogado(props) {
                 props.func2();
                 props.func3();
                 props.func4();
+                setTimer(!timer);
               }}
               className=" bottom-1 left-30 !bg-white mx-20 shadow-lg "
             >
