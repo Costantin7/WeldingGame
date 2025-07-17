@@ -1,5 +1,6 @@
 import React from "react";
 import Soldadores from "./Soldadores";
+import NivelSoldador from "./NivelSoldador";
 
 function Lugarnaescada(props) {
   var valy0 = -props.level * 20 + 275;
@@ -38,9 +39,30 @@ function Lugarnaescada(props) {
 function EscadaJogo(props) {
   return (
     <div>
-      <div className="w-[1200px]">
+      <div className="w-screen relative">
         <img className="absolute " src={props.link} alt={props.nome} />
         <Lugarnaescada level={props.nivel} />
+        <div className="flex absolute top-10 left-280 z-50">
+          <NivelSoldador nivel={props.nivel} />
+        </div>
+        {props.timer && (
+          <div className="my-10 center justify-center center-items">
+            {props.actualTime && (
+              <video
+                className="w-64 h-40 right-10 top-260 absolute"
+                width
+                autoPlay
+                muted
+                playsInline
+                loop
+              >
+                <source src="/videos/clock.mp4" type="video/mp4" />
+                Clock_Timer_View ERROR
+              </video>
+            )}
+            <p>Remaining time: {60 - props.actualTime}</p>
+          </div>
+        )}
       </div>
     </div>
   );

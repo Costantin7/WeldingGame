@@ -205,7 +205,7 @@ function Game_convidado_P(props) {
       </div>
 
       <LinhaProgresso nivel={nivel} />
-      {props.timer && (
+      {/* {props.timer && (
         <div className="my-10 center justify-center center-items">
           {actualTime && (
             <video className="w-64 h-40" width autoPlay muted playsInline loop>
@@ -215,7 +215,7 @@ function Game_convidado_P(props) {
           )}
           <p>Remaining time: {60 - actualTime}</p>
         </div>
-      )}
+      )} */}
       <div className="flex justify-end gap-4">
         {checkResposta === 0 && (
           <BotaoResponder
@@ -255,12 +255,13 @@ function Game_convidado_P(props) {
         )}
         <BotaoDesistir valor={Zerolevel} />
       </div>
-      <NivelSoldador nivel={props.nivel} />
 
       <EscadaJogo
         link="./src/img/Escada Jogo.png"
         nome="Imagem Escada"
         nivel={nivel}
+        timer={props.timer}
+        actualTime={actualTime}
       />
     </div>
   );

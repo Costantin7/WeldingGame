@@ -23,7 +23,7 @@ function NivelSoldador(props) {
   ];
   return (
     <div>
-      <div className="border w-25 bg-white rounded-xl">
+      <div className="border w-25 bg-white rounded-xl bg-white p-2">
         <p className="!bold text-xl underline">Nível {props.nivel}</p>
         <p> {cargos[props.nivel - 1]}</p>
       </div>
