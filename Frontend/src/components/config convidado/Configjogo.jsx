@@ -57,7 +57,7 @@ function Configjogo(props) {
             <div className="flex flex-col items-center">
               <div className="w-[250px] h-[90px] flex gap-3 ">
                 <p className="text-2xl"> ⌛ </p>
-                <p>Temporizador</p>
+                <p>Temporizador (60 s)</p>
               </div>
               <BotaoDeslizante
                 timer={timer}

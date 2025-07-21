@@ -51,7 +51,7 @@ function Home_P(props) {
       </div>
 
       <Linha />
-      <p className="text-left font-serif ml-2 mt-2">Idealizadores</p>
+      {/* <p className="text-left font-serif ml-2 mt-2">Idealizadores</p> */}
 
       <footer className="flex gap-45 !mt-5">
         <Empresas

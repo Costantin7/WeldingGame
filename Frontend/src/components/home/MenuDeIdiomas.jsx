@@ -46,7 +46,7 @@ function MenuDeIdiomas(props) {
           <div className="flex gap-2">
             <img
               className="w-10"
-              src="https://upload.wikimedia.org/wikipedia/commons/thumb/a/a4/Flag_of_the_United_States.svg/960px-Flag_of_the_United_States.svg.png"
+              src="https://upload.wikimedia.org/wikipedia/commons/thumb/8/83/Flag_of_the_United_Kingdom_%283-5%29.svg/1280px-Flag_of_the_United_Kingdom_%283-5%29.svg.png"
             />
             <p>English</p>
           </div>
