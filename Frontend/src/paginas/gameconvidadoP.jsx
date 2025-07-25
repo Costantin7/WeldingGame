@@ -129,7 +129,7 @@ function Game_convidado_P(props) {
     <div>
       {/* DEBUG ================================================================================ */}
 
-      <p>
+      {/* <p>
         {pergunta
           ? "DEBUG: Foi possível carregar as perguntas"
           : "DEBUG: Não foi possível carregar as perguntas"}
@@ -152,14 +152,14 @@ function Game_convidado_P(props) {
         >
           +1
         </button>
-      )}
+      )} */}
 
       {/* DEBUG ================================================================================ */}
 
       <div className="flex justify-center w-full">
         <div className="w-full max-w-xl flex flex-col items-center">
           {pergunta && (
-            <div className="flex flex-col my-4 space-y-4 center ">
+            <div className="flex flex-col my-2 space-y-2 center ">
               <Perguntas pergunta={pergunta.pergunta} nivel={nivel} />
               <Respostas
                 texto={pergunta.resposta_0}

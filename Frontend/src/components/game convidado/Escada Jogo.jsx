@@ -42,11 +42,11 @@ function EscadaJogo(props) {
       <div className="w-screen relative">
         <img className="absolute " src={props.link} alt={props.nome} />
         <Lugarnaescada level={props.nivel} />
-        <div className="flex absolute top-10 left-280 z-50">
+        <div className="flex absolute top-10 left-280 z-49">
           <NivelSoldador nivel={props.nivel} />
         </div>
         {props.timer && (
-          <div className="my-10 center justify-center center-items">
+          <div className=" z-50 my-10 center justify-center center-items">
             {props.actualTime && (
               <video
                 className="w-64 h-40 right-10 top-260 absolute"

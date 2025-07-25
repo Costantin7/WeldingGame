@@ -32,12 +32,12 @@ function Configjogo(props) {
       <div className="flex items-center flex-col space-y-3">
         <div className="flex gap-4 mx-auto my-3">
           <Gametype
-            texto={" 1 - Processos ⚙️"}
+            texto={" 1 - Processos 👨‍🏭"}
             define={props.func1}
             ativo={props.modulo1}
           />
           <Gametype
-            texto={" 2 - Materiais 🧱"}
+            texto={" 2 - Materiais 🔩"}
             define={props.func2}
             ativo={props.modulo2}
           />
@@ -66,6 +66,7 @@ function Configjogo(props) {
               />
             </div>
           </div>
+
           <Gamemodes
             timer={timer}
             setTimer={setTimer}
