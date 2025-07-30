@@ -47,7 +47,7 @@ function BotaoIdioma(props) {
                 className="w-10"
                 src="https://upload.wikimedia.org/wikipedia/commons/thumb/8/83/Flag_of_the_United_Kingdom_%283-5%29.svg/1280px-Flag_of_the_United_Kingdom_%283-5%29.svg.png"
               />
-              <p>English</p>
+              <p>British</p>
               <p> ▼ </p>
             </div>
           )}
