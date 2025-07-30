@@ -1,35 +1,49 @@
 import { useEffect, useState } from "react";
 
 function Ajuda(props) {
-  const [close, setClose] = useState(false);
+  // State para controlar a visibilidade e acionar a animação
+  const [isShowing, setIsShowing] = useState(false);
 
+  // useEffect para a animação de entrada
   useEffect(() => {
     const timer = setTimeout(() => {
-      setClose(true);
-    }, 300);
+      setIsShowing(true);
+    }, 10);
     return () => clearTimeout(timer);
   }, []);
-  return (
-    <div>
-      <div
-        onClick={() => {
-          if (close) {
-            props.desativar(0);
-          }
-        }}
-        className="fixed inset-0 backdrop-blur-sm z-40 bg-black/40"
-      ></div>
 
-      <div className="fixed flex flex-col top-20 right-80 z-50 bg-white border border-black rounded-xl shadow-lg p-6 space-y-3 w-150 h-120 font-serif ">
+  // Função para fechar o modal com animação de saída
+  const handleClose = () => {
+    setIsShowing(false);
+    setTimeout(() => {
+      props.desativar(0);
+    }, 300);
+  };
+
+  return (
+    // O container do componente agora é o próprio backdrop
+    <div
+      onClick={handleClose}
+      className={`fixed inset-0 z-40 flex items-center justify-center bg-black/40 backdrop-blur-sm transition-opacity duration-300
+        ${isShowing ? "opacity-100" : "opacity-0"}
+      `}
+    >
+      {/* Modal (Conteúdo) */}
+      <div
+        onClick={(e) => e.stopPropagation()}
+        className={`relative z-50 w-11/12 max-w-2xl h-auto max-h-[85vh] overflow-y-auto bg-white border border-black rounded-xl shadow-lg p-6 space-y-3 font-serif transition-all duration-300
+          ${isShowing ? "opacity-100 translate-y-0" : "opacity-0 -translate-y-10"}
+        `}
+      >
+        {/* Usando o 'X' no mesmo estilo do componente anterior */}
         <div
-          className="place-self-end w-8 flex justify-center px-4 py-1 cursor-pointer center-items"
-          onClick={() => {
-            props.desativar(0);
-          }}
+          className="place-self-end w-8 flex justify-end px-4 py-1 cursor-pointer"
+          onClick={handleClose}
         >
           <p>❌</p>
         </div>
 
+        {/* Conteúdo original do componente Ajuda */}
         <p className="underline">Ajuda</p>
         <p className="underline">Menu</p>
         <p>
