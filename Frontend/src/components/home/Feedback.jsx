@@ -37,7 +37,11 @@ function Feedback(props) {
         <div
           onClick={(e) => e.stopPropagation()}
           className={`relative z-50 w-11/12 max-w-2xl h-auto max-h-[85vh] overflow-y-auto bg-white border border-black rounded-xl shadow-lg p-6 space-y-3 font-serif transition-all duration-300
-            ${isShowing ? "opacity-100 translate-y-0" : "opacity-0 -translate-y-10"}
+            ${
+              isShowing
+                ? "opacity-100 translate-y-0"
+                : "opacity-0 -translate-y-10"
+            }
           `}
         >
           {/* MUDANÇA: Retornando ao 'X' original */}
@@ -58,19 +62,19 @@ function Feedback(props) {
                 knowledge by answering this quiz! The quiz structure is based on
                 the IIW-IAB welding personnel qualification system consisting of
                 four modules: Welding Processes, Materials, Welding Design and
-                Fabrication. You can choose one of four modules or any combination
-                of them. The quiz is composed by multiple-choice questions grouped
-                in 20 difficulty levels. There are 3000 questions in this quiz.
-                Each question has only one correct answer. In order to confirm the
-                correct answer choice, you have to click on “Enter”. You can
-                choose the “Timer” option (60 s to answer the question) or “No
-                Timer” option. In this first version of the quiz, there are only
-                two languages available: English and Portuguese (Brazil). The
-                functions “Last week winner” and “Your victories” are not
-                activated yet. The quiz was developed in the Federal University of
-                Uberlandia (https://ufu.br), Faculty of Mechanical Engineering,
-                Welding Group (Laprosolda). Your comments and suggestions are very
-                welcome: ...@...
+                Fabrication. You can choose one of four modules or any
+                combination of them. The quiz is composed by multiple-choice
+                questions grouped in 20 difficulty levels. There are 3000
+                questions in this quiz. Each question has only one correct
+                answer. In order to confirm the correct answer choice, you have
+                to click on “Enter”. You can choose the “Timer” option (60 s to
+                answer the question) or “No Timer” option. In this first version
+                of the quiz, there are only two languages available: English and
+                Portuguese (Brazil). The functions “Last week winner” and “Your
+                victories” are not activated yet. The quiz was developed in the
+                Federal University of Uberlandia (https://ufu.br), Faculty of
+                Mechanical Engineering, Welding Group (Laprosolda). Your
+                comments and suggestions are very welcome: ...@...
               </p>
               <button
                 onClick={() => setPage(1)}
@@ -86,50 +90,40 @@ function Feedback(props) {
             <div>
               <p className="my-4 text-xl font-bold">Feedback</p>
               <div className="bg-gray-300 w-full h-1 mb-6 "></div>
-              <p className="text-gray-700">
-                  Insira seu e-mail
-              </p>
-           
-        <input
-            className="border w-full mb-5"
-            type="text"
-            value={text1}
-            onChange={(e) => {
-              setText1(e);
-            }}
-          /> 
-          <p className="text-gray-700">
-                  Código da pergunta
-              </p>
-           
-        <input
-            className="border w-full mb-5"
-            type="text"
-            value={text2}
-            onChange={(e) => {
-              setText1(e);
-            }}
-            />
+              <p className="text-gray-700">Insira seu e-mail</p>
 
-                    <p className="text-gray-700">
-                  Comentário
-              </p>
+              <input
+                className="border w-full mb-5"
+                type="text"
+                value={text1}
+                onChange={(e) => {
+                  setText1(e);
+                }}
+              />
+              <p className="text-gray-700">Código da pergunta</p>
 
-                      <input
-            className="border w-full mb-5"
-            type="text"
-            value={text3}
-            onChange={(e) => {
-              setText1(e);
-            }}
-            />
-                          <button
-                className="!bg-green-500 text-white font-bold py-2 px-4 rounded my-10 mx-5"
-              >
+              <input
+                className="border w-full mb-5"
+                type="text"
+                value={text2}
+                onChange={(e) => {
+                  setText1(e);
+                }}
+              />
+
+              <p className="text-gray-700">Comentário</p>
+
+              <input
+                className="border w-full mb-5"
+                type="text"
+                value={text3}
+                onChange={(e) => {
+                  setText1(e);
+                }}
+              />
+              <button className="!bg-green-500 text-white font-bold py-2 px-4 rounded my-10 mx-5">
                 Enviar
               </button>
-
-
 
               <button
                 onClick={() => setPage(0)}

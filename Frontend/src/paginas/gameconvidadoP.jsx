@@ -129,7 +129,7 @@ function Game_convidado_P(props) {
     <div>
       {/* DEBUG ================================================================================ */}
 
-      {/* <p>
+      <p>
         {pergunta
           ? "DEBUG: Foi possível carregar as perguntas"
           : "DEBUG: Não foi possível carregar as perguntas"}
@@ -152,51 +152,57 @@ function Game_convidado_P(props) {
         >
           +1
         </button>
-      )} */}
+      )}
 
       {/* DEBUG ================================================================================ */}
 
       <div className="flex justify-center w-full">
         <div className="w-full max-w-xl flex flex-col items-center">
           {pergunta && (
-            <div className="flex flex-col my-2 space-y-2 center ">
+            <div className="w-full max-w-3xl mx-auto bg-white rounded-2xl shadow-xl border border-gray-200 dark:border-gray-700 p-6 md:p-8 flex flex-col space-y-8">
+              {/* Componente da Pergunta (sem alteração na chamada) */}
               <Perguntas pergunta={pergunta.pergunta} nivel={nivel} />
-              <Respostas
-                texto={pergunta.resposta_0}
-                ativar={() => setAtivoA(true)}
-                desativar={() => setAtivoA(false)}
-                ativo={ativoA}
-                gabarito={pergunta && Number(pergunta.gabarito) + 1}
-                modo={checkResposta}
-                gabaritoDesse={1}
-              />
-              <Respostas
-                texto={pergunta.resposta_1}
-                ativar={() => setAtivoB(true)}
-                desativar={() => setAtivoB(false)}
-                ativo={ativoB}
-                gabarito={pergunta && Number(pergunta.gabarito) + 1}
-                modo={checkResposta}
-                gabaritoDesse={2}
-              />
-              <Respostas
-                texto={pergunta.resposta_2}
-                ativar={() => setAtivoC(true)}
-                desativar={() => setAtivoC(false)}
-                ativo={ativoC}
-                gabarito={pergunta && Number(pergunta.gabarito) + 1}
-                modo={checkResposta}
-                gabaritoDesse={3}
-              />
-              <Respostas
-                texto={pergunta.resposta_3}
-                ativar={() => setAtivoD(true)}
-                desativar={() => setAtivoD(false)}
-                ativo={ativoD}
-                gabarito={pergunta && Number(pergunta.gabarito) + 1}
-                modo={checkResposta}
-                gabaritoDesse={4}
-              />
+
+              {/* Container das Respostas com layout 2x2 usando GRID */}
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
+                {/* O Grid organiza os 4 itens automaticamente e garante o alinhamento */}
+                <Respostas
+                  texto={pergunta.resposta_0}
+                  ativar={() => setAtivoA(true)}
+                  desativar={() => setAtivoA(false)}
+                  ativo={ativoA}
+                  gabarito={pergunta && Number(pergunta.gabarito) + 1}
+                  modo={checkResposta}
+                  gabaritoDesse={1}
+                />
+                <Respostas
+                  texto={pergunta.resposta_1}
+                  ativar={() => setAtivoB(true)}
+                  desativar={() => setAtivoB(false)}
+                  ativo={ativoB}
+                  gabarito={pergunta && Number(pergunta.gabarito) + 1}
+                  modo={checkResposta}
+                  gabaritoDesse={2}
+                />
+                <Respostas
+                  texto={pergunta.resposta_2}
+                  ativar={() => setAtivoC(true)}
+                  desativar={() => setAtivoC(false)}
+                  ativo={ativoC}
+                  gabarito={pergunta && Number(pergunta.gabarito) + 1}
+                  modo={checkResposta}
+                  gabaritoDesse={3}
+                />
+                <Respostas
+                  texto={pergunta.resposta_3}
+                  ativar={() => setAtivoD(true)}
+                  desativar={() => setAtivoD(false)}
+                  ativo={ativoD}
+                  gabarito={pergunta && Number(pergunta.gabarito) + 1}
+                  modo={checkResposta}
+                  gabaritoDesse={4}
+                />
+              </div>
             </div>
           )}
         </div>
