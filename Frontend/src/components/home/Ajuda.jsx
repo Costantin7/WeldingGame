@@ -44,8 +44,9 @@ function Ajuda(props) {
         </div>
 
         {/* Conteúdo original do componente Ajuda */}
-        <p className="underline">Ajuda</p>
-        <p className="underline">Menu</p>
+        <p className="underline my-2 text-xl font-bold">Ajuda</p>
+        <div className="bg-gray-300 w-full h-1 mb-6 "></div>
+        <p className=" my-4 text-l font-bold">Menu</p>
         <p>
           Ao selecionar o menu, você conta com as opções de: Ajuda, Feedback e
           Sobre nós.{" "}

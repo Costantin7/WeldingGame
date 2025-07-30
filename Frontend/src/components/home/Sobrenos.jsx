@@ -65,7 +65,7 @@ function Sobrenos({ desativar }) {
   // Função para fechar o modal com animação
   const handleClose = () => {
     setIsShowing(false);
-    setTimeout(() => desativar(0), 300); // 300ms é a duração da animação
+    setTimeout(() => desativar(0), 300);
   };
 
   return (
@@ -79,22 +79,27 @@ function Sobrenos({ desativar }) {
       {/* Modal (conteúdo) */}
       <div
         onClick={(e) => e.stopPropagation()}
-        // MUDANÇA: As classes de animação foram trocadas aqui.
         className={`relative w-11/12 max-w-4xl bg-white rounded-xl shadow-lg font-serif p-6 transition-all duration-300 max-h-[85vh] overflow-y-auto ${
           isShowing ? "translate-y-0 opacity-100" : "-translate-y-10 opacity-0"
         }`}
       >
-        {/* Cabeçalho com o botão de emoji */}
-        <div className="flex justify-center items-center mb-4">
-          <h2 className="text-2xl font-bold">Sobre nós</h2>
-          <p onClick={handleClose} className="text-xl p-1 -mt-1 !bg-white">
-            ❌
-          </p>
+
+        <div
+          className="place-self-end w-8 flex justify-end px-4 py-1 cursor-pointer"
+          onClick={handleClose}
+        >
+          <p>❌</p>
         </div>
+
+        <h2 className="text-2xl font-bold mb-4">Sobre nós</h2>
+
+        <div className="bg-gray-300 w-full h-1 mb-3 "></div>
 
         <p className="mb-4 text-gray-600">
           Veja abaixo os contribuidores deste projeto:
         </p>
+
+        
 
         {/* Tabela para Desktop */}
         <div className="hidden md:block">

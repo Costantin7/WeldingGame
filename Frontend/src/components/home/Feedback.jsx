@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import Linha from "./LinhaHorizontal";
 
 function Feedback(props) {
   // State para controlar a visibilidade e acionar a animação
@@ -49,7 +50,8 @@ function Feedback(props) {
           {page === 0 && (
             <div>
               <p className="my-4 text-xl font-bold">Feedback</p>
-              <p className="text-gray-700">
+              <div className="bg-gray-300 w-full h-1 mb-6 "></div>
+              <p className="my-3 text-gray-700">
                 Dear Welding Enthusiast, You are welcome to assess your welding
                 knowledge by answering this quiz! The quiz structure is based on
                 the IIW-IAB welding personnel qualification system consisting of
