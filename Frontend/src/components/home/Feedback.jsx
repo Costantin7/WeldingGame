@@ -5,7 +5,9 @@ function Feedback(props) {
   // State para controlar a visibilidade e acionar a animação
   const [isShowing, setIsShowing] = useState(false);
   const [page, setPage] = useState(0);
-
+  const [text1, setText1] = useState("Insira seu e-mail");
+  const [text2, setText2] = useState("Insira o código da pergunta");
+  const [text3, setText3] = useState("Insira seu comentário aqui");
   // useEffect para a animação de entrada
   useEffect(() => {
     const timer = setTimeout(() => {
@@ -83,13 +85,52 @@ function Feedback(props) {
           {page === 1 && (
             <div>
               <p className="my-4 text-xl font-bold">Feedback</p>
+              <div className="bg-gray-300 w-full h-1 mb-6 "></div>
               <p className="text-gray-700">
-                This is the second page of the feedback modal. You can place
-                different content here. The structure is based on the IIW-IAB welding
-                personnel qualification system consisting of four modules:
-                Welding Processes, Materials, Welding Design and Fabrication...
-                (Sample text for page 2).
+                  Insira seu e-mail
               </p>
+           
+        <input
+            className="border w-full mb-5"
+            type="text"
+            value={text1}
+            onChange={(e) => {
+              setText1(e);
+            }}
+          /> 
+          <p className="text-gray-700">
+                  Código da pergunta
+              </p>
+           
+        <input
+            className="border w-full mb-5"
+            type="text"
+            value={text2}
+            onChange={(e) => {
+              setText1(e);
+            }}
+            />
+
+                    <p className="text-gray-700">
+                  Comentário
+              </p>
+
+                      <input
+            className="border w-full mb-5"
+            type="text"
+            value={text3}
+            onChange={(e) => {
+              setText1(e);
+            }}
+            />
+                          <button
+                className="!bg-green-500 text-white font-bold py-2 px-4 rounded my-10 mx-5"
+              >
+                Enviar
+              </button>
+
+
+
               <button
                 onClick={() => setPage(0)}
                 className="!bg-blue-500 text-white font-bold py-2 px-4 rounded my-10"
