@@ -175,7 +175,7 @@ function Game_convidado_P(props) {
           {pergunta && (
             <div className="flex flex-col space-y-6 flex-1 px-4">
               <Perguntas pergunta={pergunta.pergunta} nivel={nivel} />
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
+              <div className="grid grid-cols-1 md:grid-cols-1 gap-2">
                 <Respostas
                   texto={pergunta.resposta_0}
                   ativar={() => setAtivoA(true)}

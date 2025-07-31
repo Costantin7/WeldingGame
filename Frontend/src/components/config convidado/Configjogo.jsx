@@ -42,12 +42,12 @@ function Configjogo(props) {
             ativo={props.modulo2}
           />
           <Gametype
-            texto={" 3 - Projeto ‍🏭"}
+            texto={" 3 - Projeto ‍📝"}
             define={props.func3}
             ativo={props.modulo3}
           />
           <Gametype
-            texto={" 4 - Fabricação 📐"}
+            texto={" 4 - Fabricação 🏭"}
             define={props.func4}
             ativo={props.modulo4}
           />
