@@ -4,8 +4,9 @@ import { useEffect, useState } from "react";
 // 1. Defina os cabeçalhos e as chaves de dados correspondentes aqui.
 // A tabela será renderizada com base nesta configuração.
 const headers = [
-  { key: "NickName", label: "Apelido" },
   { key: "posicao", label: "Posição" },
+  { key: "pais", label: "País" },
+  { key: "Nickname", label: "Nome/Apelido" },
   { key: "tempo", label: "Tempo" },
   { key: "nivelMax", label: "Nível Máx." },
   { key: "modulos", label: "Módulos" },
@@ -15,31 +16,43 @@ const headers = [
 // Os valores de string para NickName agora estão entre aspas.
 const rankingData = [
   {
-    NickName: "vlad_weld",
+    Nickname: "vlad_weld",
     posicao: 1,
+    pais: "BR",
     tempo: "05:12",
     nivelMax: 8,
     modulos: "A, B, C",
   },
   {
-    NickName: "Lucas_head",
+    Nickname: "Lucas_head",
     posicao: 2,
+    pais: "BR",
     tempo: "07:45",
     nivelMax: 7,
     modulos: "A, B",
   },
   {
-    NickName: "Mari_clara",
+    Nickname: "Mari_clara",
     posicao: 3,
+    pais: "BR",
     tempo: "14:30",
     nivelMax: 8,
     modulos: "B, C",
   },
   {
-    NickName: "Heitor_dev",
+    Nickname: "Heitor_dev",
     posicao: 4,
+    pais: "BR",
     tempo: "15:22",
     nivelMax: 9,
+    modulos: "A, B, C, D",
+  },
+  {
+    Nickname: "costantin_",
+    posicao: 5,
+    pais: "BR",
+    tempo: "19:22",
+    nivelMax: 3,
     modulos: "A, B, C, D",
   },
 ];

@@ -35,7 +35,6 @@ function Lugarnaescada(props) {
   }
 }
 
-//${-props.level*10
 function EscadaJogo(props) {
   return (
     <div>
