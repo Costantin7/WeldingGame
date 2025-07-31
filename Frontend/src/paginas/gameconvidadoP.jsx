@@ -156,58 +156,73 @@ function Game_convidado_P(props) {
 
       {/* DEBUG ================================================================================ */}
 
-      <div className="flex justify-center w-full">
-        <div className="w-full max-w-xl flex flex-col items-center">
-          {pergunta && (
-            <div className="w-full max-w-3xl mx-auto bg-white rounded-2xl shadow-xl border border-gray-200 dark:border-gray-700 p-6 md:p-8 flex flex-col space-y-8">
-              {/* Componente da Pergunta (sem alteração na chamada) */}
-              <Perguntas pergunta={pergunta.pergunta} nivel={nivel} />
-
-              {/* Container das Respostas com layout 2x2 usando GRID */}
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
-                {/* O Grid organiza os 4 itens automaticamente e garante o alinhamento */}
-                <Respostas
-                  texto={pergunta.resposta_0}
-                  ativar={() => setAtivoA(true)}
-                  desativar={() => setAtivoA(false)}
-                  ativo={ativoA}
-                  gabarito={pergunta && Number(pergunta.gabarito) + 1}
-                  modo={checkResposta}
-                  gabaritoDesse={1}
-                />
-                <Respostas
-                  texto={pergunta.resposta_1}
-                  ativar={() => setAtivoB(true)}
-                  desativar={() => setAtivoB(false)}
-                  ativo={ativoB}
-                  gabarito={pergunta && Number(pergunta.gabarito) + 1}
-                  modo={checkResposta}
-                  gabaritoDesse={2}
-                />
-                <Respostas
-                  texto={pergunta.resposta_2}
-                  ativar={() => setAtivoC(true)}
-                  desativar={() => setAtivoC(false)}
-                  ativo={ativoC}
-                  gabarito={pergunta && Number(pergunta.gabarito) + 1}
-                  modo={checkResposta}
-                  gabaritoDesse={3}
-                />
-                <Respostas
-                  texto={pergunta.resposta_3}
-                  ativar={() => setAtivoD(true)}
-                  desativar={() => setAtivoD(false)}
-                  ativo={ativoD}
-                  gabarito={pergunta && Number(pergunta.gabarito) + 1}
-                  modo={checkResposta}
-                  gabaritoDesse={4}
-                />
-              </div>
+      <div className="w-full flex justify-center">
+        <div className="w-full max-w-screen-xl bg-white rounded-2xl shadow-xl border border-gray-200 dark:border-gray-700 p-6 md:p-8 flex flex-row space-x-8 items-start">
+          {/* TIMER à esquerda */}
+          {props.timer && (
+            <div className="flex flex-col items-center">
+              <video className="w-64 h-40" autoPlay muted playsInline loop>
+                <source src="/videos/clock.mp4" type="video/mp4" />
+                Clock_Timer_View ERROR
+              </video>
+              <p className="mt-2 text-center">
+                Remaining time: {60 - actualTime}
+              </p>
             </div>
           )}
-        </div>
 
-        {/* <ImagemEnunciado /> */}
+          {/* PERGUNTA + RESPOSTAS no centro */}
+          <div className="flex flex-col space-y-6 flex-1">
+            <Perguntas pergunta={pergunta.pergunta} nivel={nivel} />
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
+              <Respostas
+                texto={pergunta.resposta_0}
+                ativar={() => setAtivoA(true)}
+                desativar={() => setAtivoA(false)}
+                ativo={ativoA}
+                gabarito={pergunta && Number(pergunta.gabarito) + 1}
+                modo={checkResposta}
+                gabaritoDesse={1}
+              />
+              <Respostas
+                texto={pergunta.resposta_1}
+                ativar={() => setAtivoB(true)}
+                desativar={() => setAtivoB(false)}
+                ativo={ativoB}
+                gabarito={pergunta && Number(pergunta.gabarito) + 1}
+                modo={checkResposta}
+                gabaritoDesse={2}
+              />
+              <Respostas
+                texto={pergunta.resposta_2}
+                ativar={() => setAtivoC(true)}
+                desativar={() => setAtivoC(false)}
+                ativo={ativoC}
+                gabarito={pergunta && Number(pergunta.gabarito) + 1}
+                modo={checkResposta}
+                gabaritoDesse={3}
+              />
+              <Respostas
+                texto={pergunta.resposta_3}
+                ativar={() => setAtivoD(true)}
+                desativar={() => setAtivoD(false)}
+                ativo={ativoD}
+                gabarito={pergunta && Number(pergunta.gabarito) + 1}
+                modo={checkResposta}
+                gabaritoDesse={4}
+              />
+            </div>
+          </div>
+
+          {/* IMAGEM à direita */}
+          <div className="flex items-center">
+            <img
+              className="w-64 max-w-full rounded-lg"
+              src="https://www.fvmt.com/hubfs/Images/Blog%20Images/Aluminum%20vs%20Stainless%20Steel%20Welding.jpg"
+              alt="Imagem não renderizada"
+            />
+          </div>
+        </div>
       </div>
 
       <LinhaProgresso nivel={nivel} />
