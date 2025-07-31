@@ -172,48 +172,49 @@ function Game_convidado_P(props) {
           )}
 
           {/* PERGUNTA + RESPOSTAS no centro */}
-          <div className="flex flex-col space-y-6 flex-1">
-            <Perguntas pergunta={pergunta.pergunta} nivel={nivel} />
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
-              <Respostas
-                texto={pergunta.resposta_0}
-                ativar={() => setAtivoA(true)}
-                desativar={() => setAtivoA(false)}
-                ativo={ativoA}
-                gabarito={pergunta && Number(pergunta.gabarito) + 1}
-                modo={checkResposta}
-                gabaritoDesse={1}
-              />
-              <Respostas
-                texto={pergunta.resposta_1}
-                ativar={() => setAtivoB(true)}
-                desativar={() => setAtivoB(false)}
-                ativo={ativoB}
-                gabarito={pergunta && Number(pergunta.gabarito) + 1}
-                modo={checkResposta}
-                gabaritoDesse={2}
-              />
-              <Respostas
-                texto={pergunta.resposta_2}
-                ativar={() => setAtivoC(true)}
-                desativar={() => setAtivoC(false)}
-                ativo={ativoC}
-                gabarito={pergunta && Number(pergunta.gabarito) + 1}
-                modo={checkResposta}
-                gabaritoDesse={3}
-              />
-              <Respostas
-                texto={pergunta.resposta_3}
-                ativar={() => setAtivoD(true)}
-                desativar={() => setAtivoD(false)}
-                ativo={ativoD}
-                gabarito={pergunta && Number(pergunta.gabarito) + 1}
-                modo={checkResposta}
-                gabaritoDesse={4}
-              />
+          {pergunta && (
+            <div className="flex flex-col space-y-6 flex-1">
+              <Perguntas pergunta={pergunta.pergunta} nivel={nivel} />
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
+                <Respostas
+                  texto={pergunta.resposta_0}
+                  ativar={() => setAtivoA(true)}
+                  desativar={() => setAtivoA(false)}
+                  ativo={ativoA}
+                  gabarito={pergunta && Number(pergunta.gabarito) + 1}
+                  modo={checkResposta}
+                  gabaritoDesse={1}
+                />
+                <Respostas
+                  texto={pergunta.resposta_1}
+                  ativar={() => setAtivoB(true)}
+                  desativar={() => setAtivoB(false)}
+                  ativo={ativoB}
+                  gabarito={pergunta && Number(pergunta.gabarito) + 1}
+                  modo={checkResposta}
+                  gabaritoDesse={2}
+                />
+                <Respostas
+                  texto={pergunta.resposta_2}
+                  ativar={() => setAtivoC(true)}
+                  desativar={() => setAtivoC(false)}
+                  ativo={ativoC}
+                  gabarito={pergunta && Number(pergunta.gabarito) + 1}
+                  modo={checkResposta}
+                  gabaritoDesse={3}
+                />
+                <Respostas
+                  texto={pergunta.resposta_3}
+                  ativar={() => setAtivoD(true)}
+                  desativar={() => setAtivoD(false)}
+                  ativo={ativoD}
+                  gabarito={pergunta && Number(pergunta.gabarito) + 1}
+                  modo={checkResposta}
+                  gabaritoDesse={4}
+                />
+              </div>
             </div>
-          </div>
-
+          )}
           {/* IMAGEM à direita */}
           <div className="flex items-center">
             <img
