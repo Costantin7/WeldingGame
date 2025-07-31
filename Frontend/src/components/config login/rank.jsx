@@ -1,6 +1,6 @@
 import React from "react";
 import { useState } from "react";
-import MenuRanking from "./Menuranking";
+import MenuRanking from "./MenuRanking";
 import MenuHistorico from "./MenuHistorico";
 
 function Rank() {

@@ -49,7 +49,7 @@ function EscadaJogo(props) {
           <div className=" z-50 my-10 center justify-center center-items">
             {props.actualTime && (
               <video
-                className="w-64 h-40 right-10 top-260 absolute"
+                className="w-64 h-40 right-275 top-65 absolute"
                 width
                 autoPlay
                 muted
