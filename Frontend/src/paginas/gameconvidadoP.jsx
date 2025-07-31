@@ -157,15 +157,15 @@ function Game_convidado_P(props) {
       {/* DEBUG ================================================================================ */}
 
       <div className="w-full flex justify-center">
-        <div className="w-full max-w-screen-xl bg-white rounded-2xl shadow-xl border border-gray-200 dark:border-gray-700 p-6 md:p-8 flex flex-row space-x-8 items-start">
-          {/* TIMER à esquerda */}
+        <div className=" w-full max-w-screen-xl bg-white rounded-2xl shadow-xl border border-gray-200 dark:border-gray-700 p-6 md:p-8 flex flex-row justify-between items-center">
+          {/* TIMER à esquerda - agora maior e centralizado */}
           {props.timer && (
-            <div className="flex flex-col items-center">
-              <video className="w-64 h-40" autoPlay muted playsInline loop>
+            <div className="flex flex-col items-center justify-center w-72">
+              <video className="w-72 h-48" autoPlay muted playsInline loop>
                 <source src="/videos/clock.mp4" type="video/mp4" />
                 Clock_Timer_View ERROR
               </video>
-              <p className="mt-2 text-center">
+              <p className="mt-2 text-center text-lg font-medium">
                 Remaining time: {60 - actualTime}
               </p>
             </div>
@@ -173,7 +173,7 @@ function Game_convidado_P(props) {
 
           {/* PERGUNTA + RESPOSTAS no centro */}
           {pergunta && (
-            <div className="flex flex-col space-y-6 flex-1">
+            <div className="flex flex-col space-y-6 flex-1 px-4">
               <Perguntas pergunta={pergunta.pergunta} nivel={nivel} />
               <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
                 <Respostas
@@ -181,7 +181,7 @@ function Game_convidado_P(props) {
                   ativar={() => setAtivoA(true)}
                   desativar={() => setAtivoA(false)}
                   ativo={ativoA}
-                  gabarito={pergunta && Number(pergunta.gabarito) + 1}
+                  gabarito={Number(pergunta.gabarito) + 1}
                   modo={checkResposta}
                   gabaritoDesse={1}
                 />
@@ -190,7 +190,7 @@ function Game_convidado_P(props) {
                   ativar={() => setAtivoB(true)}
                   desativar={() => setAtivoB(false)}
                   ativo={ativoB}
-                  gabarito={pergunta && Number(pergunta.gabarito) + 1}
+                  gabarito={Number(pergunta.gabarito) + 1}
                   modo={checkResposta}
                   gabaritoDesse={2}
                 />
@@ -199,7 +199,7 @@ function Game_convidado_P(props) {
                   ativar={() => setAtivoC(true)}
                   desativar={() => setAtivoC(false)}
                   ativo={ativoC}
-                  gabarito={pergunta && Number(pergunta.gabarito) + 1}
+                  gabarito={Number(pergunta.gabarito) + 1}
                   modo={checkResposta}
                   gabaritoDesse={3}
                 />
@@ -208,17 +208,18 @@ function Game_convidado_P(props) {
                   ativar={() => setAtivoD(true)}
                   desativar={() => setAtivoD(false)}
                   ativo={ativoD}
-                  gabarito={pergunta && Number(pergunta.gabarito) + 1}
+                  gabarito={Number(pergunta.gabarito) + 1}
                   modo={checkResposta}
                   gabaritoDesse={4}
                 />
               </div>
             </div>
           )}
-          {/* IMAGEM à direita */}
-          <div className="flex items-center">
+
+          {/* IMAGEM à direita - agora maior e centralizada */}
+          <div className="flex items-center justify-center w-72">
             <img
-              className="w-64 max-w-full rounded-lg"
+              className="w-72 h-48 object-cover rounded-lg"
               src="https://www.fvmt.com/hubfs/Images/Blog%20Images/Aluminum%20vs%20Stainless%20Steel%20Welding.jpg"
               alt="Imagem não renderizada"
             />
