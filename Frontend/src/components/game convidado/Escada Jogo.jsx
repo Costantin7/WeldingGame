@@ -41,7 +41,7 @@ function EscadaJogo(props) {
       <div className="w-screen relative">
         <img className="absolute " src={props.link} alt={props.nome} />
         <Lugarnaescada level={props.nivel} />
-        <div className="flex absolute top-10 left-280 z-49">
+        <div className="flex absolute top-10 left-280 z-10">
           <NivelSoldador nivel={props.nivel} />
         </div>
       </div>

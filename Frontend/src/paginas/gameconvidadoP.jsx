@@ -129,7 +129,7 @@ function Game_convidado_P(props) {
     <div>
       {/* DEBUG ================================================================================ */}
 
-      <p>
+      {/* <p>
         {pergunta
           ? "DEBUG: Foi possível carregar as perguntas"
           : "DEBUG: Não foi possível carregar as perguntas"}
@@ -152,7 +152,7 @@ function Game_convidado_P(props) {
         >
           +1
         </button>
-      )}
+      )} */}
 
       {/* DEBUG ================================================================================ */}
 
@@ -271,11 +271,6 @@ function Game_convidado_P(props) {
           />
         )}
 
-        {telainfo === true && <TelaErro desativar={setTelainfo} />}
-
-        {checkResposta === 1 && nivel === 20 && (
-          <TelaVitoria desativar={setCheckResposta} />
-        )}
         <BotaoDesistir valor={Zerolevel} />
       </div>
 
@@ -286,6 +281,11 @@ function Game_convidado_P(props) {
         timer={props.timer}
         actualTime={actualTime}
       />
+      {telainfo === true && <TelaErro desativar={setTelainfo} />}
+
+      {checkResposta === 1 && nivel === 20 && (
+        <TelaVitoria desativar={setCheckResposta} />
+      )}
     </div>
   );
 }
