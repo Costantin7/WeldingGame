@@ -129,7 +129,7 @@ function Game_convidado_P(props) {
     <div>
       {/* DEBUG ================================================================================ */}
 
-      {/* <p>
+      <p>
         {pergunta
           ? "DEBUG: Foi possível carregar as perguntas"
           : "DEBUG: Não foi possível carregar as perguntas"}
@@ -152,7 +152,7 @@ function Game_convidado_P(props) {
         >
           +1
         </button>
-      )} */}
+      )}
 
       {/* DEBUG ================================================================================ */}
 
