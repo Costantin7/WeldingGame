@@ -157,7 +157,7 @@ function Game_convidado_P(props) {
       )} */}
       {/* DEBUG ================================================================================ */}
       <div className="w-full flex justify-center">
-        <div className=" w-full max-w-screen-xl bg-white rounded-2xl shadow-xl border border-gray-200 dark:border-gray-700 p-6 md:p-8 flex flex-row justify-between items-center">
+        <div className="fixed top-3  w-full max-w-screen-xl !bg-white rounded-2xl shadow-xl border border-gray-200 dark:border-gray-700 p-6 md:p-8 flex flex-row justify-between items-center min-w-[80vw] z-20">
           {/* TIMER à esquerda - agora maior e centralizado */}
           <div className=" flex justify-center flex-col items-center">
             {props.timer && (
@@ -227,7 +227,7 @@ function Game_convidado_P(props) {
           )}
 
           {/* IMAGEM à direita - agora maior e centralizada */}
-          <div className="flex flex-col  items-center justify-center w-72">
+          <div className="flex flex-col  items-center justify-center w-72 mx-4">
             <img
               className="w-72 h-48 object-cover rounded-lg"
               src="https://www.fvmt.com/hubfs/Images/Blog%20Images/Aluminum%20vs%20Stainless%20Steel%20Welding.jpg"

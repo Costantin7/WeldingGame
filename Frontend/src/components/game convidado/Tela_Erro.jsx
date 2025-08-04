@@ -10,6 +10,7 @@ function TelaErro(props) {
     return () => clearTimeout(timer);
   }, []);
   return (
+    // A estrutura geral com o backdrop é mantida
     <div>
       <div
         onClick={() => {
@@ -20,9 +21,11 @@ function TelaErro(props) {
         className="fixed inset-0 backdrop-blur-sm z-40 bg-black/40 "
       ></div>
 
-      <div className="relative bottom-100 right-30 z-1000 bg-white border border-black rounded-xl shadow-lg p-6 space-y-3 w-150 h-80 font-serif">
+      {/* ===== LINHA MODIFICADA ===== */}
+      {/* As classes de posicionamento foram ajustadas aqui para centralizar o modal */}
+      <div className="fixed top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 z-50 bg-white border border-black rounded-xl shadow-lg p-6 space-y-3 w-[600px] h-auto font-serif flex flex-col">
         <div
-          className="place-self-end w-8 flex justify-center px-4 py-1 cursor-pointer center-items"
+          className="place-self-end w-8 flex justify-center px-4 py-1 cursor-pointer items-center"
           onClick={() => {
             props.desativar(0);
           }}
@@ -30,7 +33,8 @@ function TelaErro(props) {
           <p>❌</p>
         </div>
         <p className="font-bold text-xl">Você errou!</p>
-        <div className="bg-gray-400 h-1"></div>
+        <div className="bg-gray-400 h-px w-full"></div>{" "}
+        {/* Usei h-px para uma linha mais fina e w-full */}
         <div className="my-2">
           <p>Nível atingido: *importar nivel</p>
           <p>Resposta correta: *importar resposta</p>

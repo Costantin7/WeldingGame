@@ -37,8 +37,8 @@ function Lugarnaescada(props) {
 
 function EscadaJogo(props) {
   return (
-    <div className="scale-[0.7] origin-top-left">
-      <div className="w-screen relative">
+    <div className="min-w-[65vw] origin-top-left pt-80">
+      <div className="w-full relative">
         <img className="absolute" src={props.link} alt={props.nome} />
         <Lugarnaescada level={props.nivel} />
         <div className="flex absolute top-10 left-280 z-10">
