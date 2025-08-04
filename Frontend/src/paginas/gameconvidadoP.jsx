@@ -130,7 +130,6 @@ function Game_convidado_P(props) {
   return (
     <div>
       {/* DEBUG ================================================================================ */}
-
       {/* <p>
         {pergunta
           ? "DEBUG: Foi possível carregar as perguntas"
@@ -156,23 +155,23 @@ function Game_convidado_P(props) {
           +1
         </button>
       )} */}
-
       {/* DEBUG ================================================================================ */}
-
       <div className="w-full flex justify-center">
         <div className=" w-full max-w-screen-xl bg-white rounded-2xl shadow-xl border border-gray-200 dark:border-gray-700 p-6 md:p-8 flex flex-row justify-between items-center">
           {/* TIMER à esquerda - agora maior e centralizado */}
-          {props.timer && (
-            <div className="flex flex-col items-center justify-center w-72">
-              <video className="w-72 h-48" autoPlay muted playsInline loop>
-                <source src="/videos/clock.mp4" type="video/mp4" />
-                Clock_Timer_View ERROR
-              </video>
-              <p className="mt-2 text-center text-lg font-medium">
-                Remaining time: {60 - actualTime}
-              </p>
-            </div>
-          )}
+          <div className=" flex justify-center flex-col items-center">
+            {props.timer && (
+              <div className="flex flex-col items-center justify-center w-72">
+                <video className="w-72 h-48" autoPlay muted playsInline loop>
+                  <source src="/videos/clock.mp4" type="video/mp4" />
+                  Clock_Timer_View ERROR
+                </video>
+                <p className="mt-2 text-center text-lg font-medium">
+                  Remaining time: {60 - actualTime}
+                </p>
+              </div>
+            )}
+          </div>
 
           {/* PERGUNTA + RESPOSTAS no centro */}
           {pergunta && (
@@ -228,17 +227,49 @@ function Game_convidado_P(props) {
           )}
 
           {/* IMAGEM à direita - agora maior e centralizada */}
-          <div className="flex items-center justify-center w-72">
+          <div className="flex flex-col  items-center justify-center w-72">
             <img
               className="w-72 h-48 object-cover rounded-lg"
               src="https://www.fvmt.com/hubfs/Images/Blog%20Images/Aluminum%20vs%20Stainless%20Steel%20Welding.jpg"
               alt="Imagem não renderizada"
             />
+            <div className="flex mx-2">
+              {checkResposta === 0 && (
+                <BotaoResponder
+                  valor={Addlevel}
+                  gabarito={pergunta && Number(pergunta.gabarito) + 1}
+                  selecionado={VerAtivo}
+                  deselectA={() => setAtivoA(false)}
+                  deselectB={() => setAtivoB(false)}
+                  deselectC={() => setAtivoC(false)}
+                  deselectD={() => setAtivoD(false)}
+                  resposta={resposta}
+                  setResposta={setResposta}
+                  checkResposta={checkResposta}
+                  setCheckResposta={setCheckResposta}
+                  setTelainfo={setTelainfo}
+                />
+              )}
+
+              {checkResposta === 1 && (
+                <BotaoProsseguir
+                  valor={Addlevel}
+                  setCheckResposta={setCheckResposta}
+                />
+              )}
+
+              {checkResposta === -1 && (
+                <BotaoReiniciar
+                  valor={Zerolevel}
+                  setCheckResposta={setCheckResposta}
+                />
+              )}
+              <BotaoDesistir valor={Zerolevel} />
+            </div>
           </div>
         </div>
       </div>
-
-      <LinhaProgresso nivel={nivel} />
+      {/* <LinhaProgresso nivel={nivel} /> */} {/* ----  usar só para mobile */}
       {/* {props.timer && (
         <div className="my-10 center justify-center center-items">
           {actualTime && (
@@ -250,41 +281,6 @@ function Game_convidado_P(props) {
           <p>Remaining time: {60 - actualTime}</p>
         </div>
       )} */}
-      <div className="flex justify-end gap-4">
-        {checkResposta === 0 && (
-          <BotaoResponder
-            valor={Addlevel}
-            gabarito={pergunta && Number(pergunta.gabarito) + 1}
-            selecionado={VerAtivo}
-            deselectA={() => setAtivoA(false)}
-            deselectB={() => setAtivoB(false)}
-            deselectC={() => setAtivoC(false)}
-            deselectD={() => setAtivoD(false)}
-            resposta={resposta}
-            setResposta={setResposta}
-            checkResposta={checkResposta}
-            setCheckResposta={setCheckResposta}
-            setTelainfo={setTelainfo}
-          />
-        )}
-
-        {checkResposta === 1 && (
-          <BotaoProsseguir
-            valor={Addlevel}
-            setCheckResposta={setCheckResposta}
-          />
-        )}
-
-        {checkResposta === -1 && (
-          <BotaoReiniciar
-            valor={Zerolevel}
-            setCheckResposta={setCheckResposta}
-          />
-        )}
-
-        <BotaoDesistir valor={Zerolevel} />
-      </div>
-
       <EscadaJogo
         link="./src/img/Escada Jogo.png"
         nome="Imagem Escada"
@@ -293,7 +289,6 @@ function Game_convidado_P(props) {
         actualTime={actualTime}
       />
       {telainfo === true && <TelaErro desativar={setTelainfo} />}
-
       {checkResposta === 1 && nivel === 20 && (
         <TelaVitoria desativar={setCheckResposta} />
       )}

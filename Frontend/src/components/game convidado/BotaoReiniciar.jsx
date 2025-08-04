@@ -1,6 +1,6 @@
 function BotaoReiniciar(props) {
   return (
-    <div className="my-12 flex justify-end">
+    <div className="mx-2 my-2 flex justify-end">
       <button
         onClick={() => {
           props.setCheckResposta(0);
