@@ -37,7 +37,7 @@ function Lugarnaescada(props) {
 
 function EscadaJogo(props) {
   return (
-    <div className="min-w-[65vw] origin-top-left pt-80">
+    <div className="min-w-[75vw] origin-top-left pt-75">
       <div className="w-full relative">
         <img className="absolute" src={props.link} alt={props.nome} />
         <Lugarnaescada level={props.nivel} />
