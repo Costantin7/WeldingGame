@@ -23,6 +23,8 @@ function Game_convidado_P(props) {
   const [actualTime, setActualTime] = useState(0);
   const [checkResposta, setCheckResposta] = useState(0);
   const [telainfo, setTelainfo] = useState(false);
+  const [selecionado, setSelecionado] = useState(0); //REFERENTE a seleção de perguntas
+
   useEffect(() => {
     if (ativoA === true) {
       setAtivoB(false);
@@ -129,7 +131,7 @@ function Game_convidado_P(props) {
     <div>
       {/* DEBUG ================================================================================ */}
 
-      <p>
+      {/* <p>
         {pergunta
           ? "DEBUG: Foi possível carregar as perguntas"
           : "DEBUG: Não foi possível carregar as perguntas"}
@@ -142,6 +144,7 @@ function Game_convidado_P(props) {
       )}
       {pergunta && <p>RespostaState: {checkResposta}</p>}
       {pergunta && <p>Remaining time: {60 - actualTime}</p>}
+      {pergunta && <p>Selecionado: {selecionado}</p>}
       {pergunta && <p>Tela informativa: {telainfo}</p>}
       {pergunta && (
         <button
@@ -152,7 +155,7 @@ function Game_convidado_P(props) {
         >
           +1
         </button>
-      )}
+      )} */}
 
       {/* DEBUG ================================================================================ */}
 
@@ -173,7 +176,7 @@ function Game_convidado_P(props) {
 
           {/* PERGUNTA + RESPOSTAS no centro */}
           {pergunta && (
-            <div className="flex flex-col space-y-6 flex-1 px-4">
+            <div className="flex flex-col flex-1 px-4 ">
               <Perguntas pergunta={pergunta.pergunta} nivel={nivel} />
               <div className="grid grid-cols-1 md:grid-cols-1 gap-2">
                 <Respostas
@@ -184,6 +187,8 @@ function Game_convidado_P(props) {
                   gabarito={Number(pergunta.gabarito) + 1}
                   modo={checkResposta}
                   gabaritoDesse={1}
+                  selecionado={selecionado}
+                  setSelecionado={setSelecionado}
                 />
                 <Respostas
                   texto={pergunta.resposta_1}
@@ -193,6 +198,8 @@ function Game_convidado_P(props) {
                   gabarito={Number(pergunta.gabarito) + 1}
                   modo={checkResposta}
                   gabaritoDesse={2}
+                  selecionado={selecionado}
+                  setSelecionado={setSelecionado}
                 />
                 <Respostas
                   texto={pergunta.resposta_2}
@@ -202,6 +209,8 @@ function Game_convidado_P(props) {
                   gabarito={Number(pergunta.gabarito) + 1}
                   modo={checkResposta}
                   gabaritoDesse={3}
+                  selecionado={selecionado}
+                  setSelecionado={setSelecionado}
                 />
                 <Respostas
                   texto={pergunta.resposta_3}
@@ -211,6 +220,8 @@ function Game_convidado_P(props) {
                   gabarito={Number(pergunta.gabarito) + 1}
                   modo={checkResposta}
                   gabaritoDesse={4}
+                  selecionado={selecionado}
+                  setSelecionado={setSelecionado}
                 />
               </div>
             </div>

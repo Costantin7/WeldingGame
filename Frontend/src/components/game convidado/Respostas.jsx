@@ -2,8 +2,10 @@ function Respostas(props) {
   const butt = () => {
     if (props.ativo == false) {
       props.ativar();
+      props.setSelecionado(props.gabaritoDesse);
     } else if (props.ativo == true) {
       props.desativar();
+      props.setSelecionado(0);
     }
   };
 
@@ -36,8 +38,10 @@ function Respostas(props) {
         <button
           className={
             props.gabaritoDesse != props.gabarito
-              ? "w-full  h-full max-w-xl text-center border border-gray-400 rounded-lg p-3 bg-white hover:bg-blue-100 cursor-pointer transition-all duration-200 my-2 w-auto h-auto border !bg-red-300 rounded-md shadow-lg"
-              : "w-full  h-full max-w-xl text-center border border-gray-400 rounded-lg p-3 bg-white hover:bg-blue-100 cursor-pointer transition-all duration-200 my-2 w-auto h-auto border !bg-green-300 rounded-md shadow-lg"
+              ? props.selecionado == props.gabaritoDesse
+                ? "w-full h-full max-w-xl text-center border border-gray-400 rounded-lg p-3 bg-white hover:bg-blue-100 cursor-pointer transition-all duration-200 my-2 w-auto h-auto !bg-red-500 rounded-md shadow-lg"
+                : "w-full h-full max-w-xl text-center border border-gray-400 rounded-lg p-3 bg-white hover:bg-blue-100 cursor-pointer transition-all duration-200 my-2 w-auto h-auto !bg-red-300 rounded-md shadow-lg"
+              : "w-full h-full max-w-xl text-center border border-gray-400 rounded-lg p-3 bg-white hover:bg-blue-100 cursor-pointer transition-all duration-200 my-2 w-auto h-auto !bg-green-300 rounded-md shadow-lg"
           }
         >
           <p className="font-serif">{props.texto}</p>
