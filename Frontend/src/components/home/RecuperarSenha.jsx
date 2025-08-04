@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 
 function RecuperarSenha(props) {
-  const [emailText, setEmailText] = useState("  Insira seu email");
+  const [emailText, setEmailText] = useState("   Insira seu email");
   const [senha1, setSenha1] = useState("*****1");
   const [senha2, setSenha2] = useState("*****2");
   const [close, setClose] = useState(false);
@@ -23,7 +23,7 @@ function RecuperarSenha(props) {
         className="fixed inset-0 backdrop-blur-sm z-40 bg-black/40"
       ></div>
       {tela == 0 && (
-        <div className="flex flex-col justify-center items-center fixed top-20 right-80 z-50 bg-white border border-black rounded-xl shadow-lg p-5 w-100 h-60 font-serif">
+        <div className="flex flex-col justify-center items-center fixed top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 z-50 bg-white border border-black rounded-xl shadow-lg p-5 w-100 h-60 font-serif">
           <p className="font-bold mb-2">Recuperar senha</p>
           <div className="bg-gray-300 w-full h-1 mb-3 "></div>
           <p className="mb-3"> Insira seu e-mail cadastrado</p>
@@ -43,7 +43,7 @@ function RecuperarSenha(props) {
       )}
 
       {tela == 1 && (
-        <div className="flex flex-col justify-center items-center fixed top-20 right-80 z-50 bg-white border border-black rounded-xl shadow-lg p-6 w-100 h-70 font-serif">
+        <div className="flex flex-col justify-center items-center fixed top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 z-50 bg-white border border-black rounded-xl shadow-lg p-6 w-100 h-70 font-serif">
           <p className="font-bold my-3">Recuperar senha</p>
           <div className="bg-gray-300 w-full h-1 mb-5 "></div>
           <p>Insira o código recebido em seu email</p>
@@ -89,7 +89,7 @@ function RecuperarSenha(props) {
       )}
 
       {tela == 2 && (
-        <div className="flex flex-col justify-center items-center fixed top-20 right-80 z-50 bg-white border border-black rounded-xl shadow-lg p-6  w-100 h-80 font-serif">
+        <div className="flex flex-col justify-center items-center fixed top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 z-50 bg-white border border-black rounded-xl shadow-lg p-6  w-100 h-80 font-serif">
           <p className="font-bold my-3">Recuperar senha</p>
           <div className="bg-gray-300 w-full h-1 mb-5 "></div>
           <p>Insira a nova senha</p>
