@@ -129,33 +129,6 @@ function Game_convidado_P(props) {
 
   return (
     <div>
-      {/* DEBUG ================================================================================ */}
-      {/* <p>
-        {pergunta
-          ? "DEBUG: Foi possível carregar as perguntas"
-          : "DEBUG: Não foi possível carregar as perguntas"}
-      </p>
-      {pergunta && <p>gabarito: {Number(pergunta.gabarito) + 1} </p>}
-      {pergunta && (
-        <p>
-          Timer: {props.timer && "ON"} {!props.timer && "OFF"}
-        </p>
-      )}
-      {pergunta && <p>RespostaState: {checkResposta}</p>}
-      {pergunta && <p>Remaining time: {60 - actualTime}</p>}
-      {pergunta && <p>Selecionado: {selecionado}</p>}
-      {pergunta && <p>Tela informativa: {telainfo}</p>}
-      {pergunta && (
-        <button
-          className="!bg-blue-300"
-          onClick={() => {
-            props.Addlevel();
-          }}
-        >
-          +1
-        </button>
-      )} */}
-      {/* DEBUG ================================================================================ */}
       <div className="w-full flex justify-center">
         <div className="fixed top-3  w-full max-w-screen-xl !bg-white rounded-2xl shadow-xl border border-gray-200 dark:border-gray-700 p-6 md:p-8 flex flex-row justify-between items-center min-w-[80vw] z-20">
           {/* TIMER à esquerda - agora maior e centralizado */}
@@ -292,6 +265,35 @@ function Game_convidado_P(props) {
       {checkResposta === 1 && nivel === 20 && (
         <TelaVitoria desativar={setCheckResposta} />
       )}
+      {/* DEBUG ================================================================================ */}
+      {/* <div className="bottom p-90">
+        <p>
+          {pergunta
+            ? "DEBUG: Foi possível carregar as perguntas"
+            : "DEBUG: Não foi possível carregar as perguntas"}
+        </p>
+        {pergunta && <p>gabarito: {Number(pergunta.gabarito) + 1} </p>}
+        {pergunta && (
+          <p>
+            Timer: {props.timer && "ON"} {!props.timer && "OFF"}
+          </p>
+        )}
+        {pergunta && <p>RespostaState: {checkResposta}</p>}
+        {pergunta && <p>Remaining time: {60 - actualTime}</p>}
+        {pergunta && <p>Selecionado: {selecionado}</p>}
+        {pergunta && <p>Tela informativa: {telainfo}</p>}
+        {pergunta && (
+          <button
+            className="!bg-blue-300"
+            onClick={() => {
+              props.Addlevel();
+            }}
+          >
+            +1
+          </button>
+        )}
+      </div> */}
+      {/* DEBUG ================================================================================ */}
     </div>
   );
 }
