@@ -266,7 +266,7 @@ function Game_convidado_P(props) {
         <TelaVitoria desativar={setCheckResposta} />
       )}
       {/* DEBUG ================================================================================ */}
-      <div className="bottom p-90">
+      {/* <div className="bottom p-90">
         <p>
           {pergunta
             ? "DEBUG: Foi possível carregar as perguntas"
@@ -292,8 +292,16 @@ function Game_convidado_P(props) {
             +1
           </button>
         )}
-      </div>
+      </div> */}
       {/* DEBUG ================================================================================ */}
+      <button
+        className="!bg-blue-300 bottom p-90 h-500"
+        onClick={() => {
+          props.Addlevel();
+        }}
+      >
+        +1
+      </button>
     </div>
   );
 }
