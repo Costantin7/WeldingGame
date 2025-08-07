@@ -266,7 +266,7 @@ function Game_convidado_P(props) {
         <TelaVitoria desativar={setCheckResposta} />
       )}
       {/* DEBUG ================================================================================ */}
-      {/* <div className="bottom p-90">
+      <div className="bottom p-90">
         <p>
           {pergunta
             ? "DEBUG: Foi possível carregar as perguntas"
@@ -292,7 +292,7 @@ function Game_convidado_P(props) {
             +1
           </button>
         )}
-      </div> */}
+      </div>
       {/* DEBUG ================================================================================ */}
     </div>
   );

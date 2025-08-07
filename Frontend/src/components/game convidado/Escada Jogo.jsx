@@ -11,7 +11,7 @@ function Lugarnaescada(props) {
   if (props.level === 0) {
     return (
       <div
-        className="relative z-45 w-[120px]"
+        className="relative z-10 w-[120px]"
         style={{ top: `${valy0}px`, left: `${valx0}px` }}
       >
         <img
@@ -23,7 +23,7 @@ function Lugarnaescada(props) {
   } else {
     return (
       <div
-        className="relative z-30 w-[220px]"
+        className="relative z-10 w-[220px]"
         style={{ top: `${valy}px`, left: `${valx}px` }}
       >
         <img

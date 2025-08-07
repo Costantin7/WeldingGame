@@ -1,13 +1,16 @@
 import { useEffect, useState } from "react";
 import winVideo from "../../img/videos/win.mp4";
 
-function TelaVitoria({ onClose }) {
-  const [canClose, setCanClose] = useState(false);
+// ALTERAÇÃO 1: A prop foi alterada de { onClose } para (props)
+function TelaVitoria(props) {
+  // ALTERAÇÃO 2: O nome do estado foi alterado para 'close'
+  const [close, setClose] = useState(false);
 
   useEffect(() => {
     const timer = setTimeout(() => {
-      setCanClose(true);
-    }, 500);
+      // ALTERAÇÃO 3: O timer foi ajustado para 300ms e atualiza o estado 'close'
+      setClose(true);
+    }, 300);
     return () => clearTimeout(timer);
   }, []);
 
@@ -16,8 +19,11 @@ function TelaVitoria({ onClose }) {
       {/* Backdrop (fundo) */}
       <div
         className="fixed inset-0 bg-black/60 backdrop-blur-sm z-40"
+        // ALTERAÇÃO 4: A lógica de clique agora é idêntica à da TelaErro
         onClick={() => {
-          if (canClose) onClose();
+          if (close) {
+            props.desativar(0);
+          }
         }}
       ></div>
 
@@ -26,10 +32,11 @@ function TelaVitoria({ onClose }) {
         {/* Header do Modal */}
         <div className="flex justify-between items-center p-4 border-b border-gray-200">
           <h2 className="text-xl font-bold text-green-600">Você venceu!</h2>
-
-          {/* 1. Botão 'X' trocado para o estilo da TelaErro original */}
           <div
-            onClick={onClose}
+            // ALTERAÇÃO 5: O botão de fechar agora chama props.desativar(0)
+            onClick={() => {
+              props.desativar(0);
+            }}
             className="cursor-pointer p-1"
             aria-label="Fechar"
           >
@@ -51,10 +58,13 @@ function TelaVitoria({ onClose }) {
           </video>
         </div>
 
-        {/* 2. Footer do Modal com o novo botão 'Sair' */}
+        {/* Footer do Modal */}
         <div className="flex justify-end p-4 bg-gray-50 border-t border-gray-200 rounded-b-xl items-center justify-center">
           <button
-            onClick={onClose} // A ação de sair é a mesma de fechar
+            // ALTERAÇÃO 6: O botão 'Sair' também chama props.desativar(0)
+            onClick={() => {
+              props.desativar(0);
+            }}
             className="px-5 py-2 !bg-red-600 text-white font-semibold rounded-lg hover:bg-red-700 transition-colors"
           >
             Sair
