@@ -4,14 +4,12 @@ function Resgistrar(props) {
   const [close, setClose] = useState(false);
   const [nome, setNome] = useState("Insira seu nome");
   const [apelido, setApelido] = useState("Insira seu apelido");
-  const [email, setEmail] = useState("Insira seu nome");
+  const [email, setEmail] = useState("Insira seu email");
   const [senha, setSenha] = useState("Insira sua senha");
-  const [confirmarsenha, setConfirmarsenha] = useState(
-    "Insira seu confirmarsenha"
-  );
+  const [confirmarsenha, setConfirmarsenha] = useState("Confirme sua senha");
   const [instituicao, setInstituicao] = useState("Insira sua instituicao");
   const [pais, setPais] = useState("Insira seu pais");
-  const [profissao, setProfissao] = useState("Insira sua profissao");
+  const [profissao, setProfissao] = useState("Insira sua profissão");
   const [escolaridada, setEscolaridada] = useState("Insira sua escolaridada");
 
   useEffect(() => {
@@ -41,6 +39,11 @@ function Resgistrar(props) {
           className="border w-full mb-5"
           type="text"
           value={nome}
+          onFocus={() => {
+            if (nome === "Insira seu nome") {
+              setNome("");
+            }
+          }}
           onChange={(e) => {
             setNome(e.target.value);
           }}
@@ -51,6 +54,11 @@ function Resgistrar(props) {
             className="border w-full mb-5"
             type="text"
             value={apelido}
+            onFocus={() => {
+              if (apelido === "Insira seu apelido") {
+                setApelido("");
+              }
+            }}
             onChange={(e) => {
               setApelido(e.target.value);
             }}
@@ -62,6 +70,11 @@ function Resgistrar(props) {
             className="border w-full mb-5"
             type="text"
             value={email}
+            onFocus={() => {
+              if (email === "Insira seu email") {
+                setEmail("");
+              }
+            }}
             onChange={(e) => {
               setEmail(e.target.value);
             }}
@@ -73,6 +86,11 @@ function Resgistrar(props) {
             className="border w-full mb-5"
             type="text"
             value={senha}
+            onFocus={() => {
+              if (senha === "Insira sua senha") {
+                setSenha("");
+              }
+            }}
             onChange={(e) => {
               setSenha(e.target.value);
             }}
@@ -85,6 +103,11 @@ function Resgistrar(props) {
             className="border w-full mb-5"
             type="text"
             value={confirmarsenha}
+            onFocus={() => {
+              if (confirmarsenha === "Confirme sua senha") {
+                setConfirmarsenha("");
+              }
+            }}
             onChange={(e) => {
               setConfirmarsenha(e.target.value);
             }}
@@ -99,6 +122,11 @@ function Resgistrar(props) {
                 className="border w-full mb-5"
                 type="text"
                 value={instituicao}
+                onFocus={() => {
+                  if (instituicao === "Insira sua instituicao") {
+                    setInstituicao("");
+                  }
+                }}
                 onChange={(e) => {
                   setInstituicao(e.target.value);
                 }}
@@ -113,17 +141,27 @@ function Resgistrar(props) {
                 onChange={(e) => {
                   setPais(e.target.value);
                 }}
+                onFocus={() => {
+                  if (pais === "Insira seu pais") {
+                    setPais("");
+                  }
+                }}
               />
             </div>
           </div>
 
           <div className="flex flex-col ml-25">
             <div>
-              <p className="font-semibold text-left">Profissao: </p>
+              <p className="font-semibold text-left">Profissão: </p>
               <input
                 className="border w-full mb-5"
                 type="text"
                 value={profissao}
+                onFocus={() => {
+                  if (profissao === "Insira sua profissão") {
+                    setProfissao("");
+                  }
+                }}
                 onChange={(e) => {
                   setProfissao(e.target.value);
                 }}
@@ -135,6 +173,11 @@ function Resgistrar(props) {
                 className="border w-full mb-5"
                 type="text"
                 value={escolaridada}
+                onFocus={() => {
+                  if (escolaridada === "Insira sua escolaridada") {
+                    setEscolaridada("");
+                  }
+                }}
                 onChange={(e) => {
                   setEscolaridada(e.target.value);
                 }}
