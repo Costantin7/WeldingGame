@@ -4,7 +4,7 @@ import LinhaProgresso from "../components/game convidado/Linha progresso";
 import BotaoResponder from "../components/game convidado/BotaoResponder";
 import BotaoDesistir from "../components/game convidado/BotaoDesistir";
 import EscadaJogo from "../components/game convidado/Escada Jogo";
-import { useEffect, useState, useMemo, use } from "react";
+import { useEffect, useState, useMemo, useRef } from "react";
 import axios from "axios";
 import NivelSoldador from "../components/game convidado/NivelSoldador";
 import BotaoProsseguir from "../components/game convidado/BotaoProsseguir";
@@ -26,6 +26,21 @@ function Game_convidado_P(props) {
   const [selecionado, setSelecionado] = useState(0); //REFERENTE a seleção de perguntas
   const [tempoGasto, setTempoGasto] = useState(0); //por pergunta
   const [tempoGastoTotal, setTempoGastoTotal] = useState(0); //somatório
+  const videoRef = useRef(null);
+
+  useEffect(() => {
+    const video = videoRef.current;
+    if (!video) return;
+
+    if (checkResposta === 0) {
+      video.pause(); // Pausa para garantir reset limpo
+      video.currentTime = 0; // Reinicia o vídeo
+      video.play(); // Dá play novamente
+    } else if (checkResposta === -1 || checkResposta === 1) {
+      video.pause(); // Pausa o vídeo
+    }
+  }, [checkResposta]);
+
   useEffect(() => {
     if (ativoA === true) {
       setAtivoB(false);
@@ -155,18 +170,24 @@ function Game_convidado_P(props) {
           <div className=" flex justify-center flex-col items-center">
             {props.timer && (
               <div className="flex flex-col items-center justify-center w-72">
-                <video className="w-72 h-48" autoPlay muted playsInline loop>
+                <video
+                  ref={videoRef}
+                  className="w-72 h-48"
+                  muted
+                  playsInline
+                  loop={false} // desative loop para que o play manual funcione corretamente
+                >
                   <source src="/videos/clock.mp4" type="video/mp4" />
                   Clock_Timer_View ERROR
                 </video>
                 {actualTime < 60 && checkResposta === 0 && (
                   <p className="mt-2 text-center text-lg font-medium">
-                    Tempo restante: {60 - actualTime}
+                    Tempo restante: {60 - actualTime} segundos
                   </p>
                 )}
                 {checkResposta === 1 && (
                   <p className="mt-2 text-center text-lg font-medium">
-                    Tempo gasto: {tempoGasto}
+                    Tempo gasto: {tempoGasto} segundos
                   </p>
                 )}
                 {actualTime >= 60 && (
