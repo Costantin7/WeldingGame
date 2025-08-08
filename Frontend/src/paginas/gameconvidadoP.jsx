@@ -224,7 +224,7 @@ function Game_convidado_P(props) {
                 />
               )}
 
-              {checkResposta === 1 && (
+              {checkResposta === 1 && nivel != 20 && (
                 <BotaoProsseguir
                   valor={Addlevel}
                   setCheckResposta={setCheckResposta}
@@ -294,14 +294,6 @@ function Game_convidado_P(props) {
         )}
       </div> */}
       {/* DEBUG ================================================================================ */}
-      <button
-        className="!bg-blue-300 bottom p-90 h-500"
-        onClick={() => {
-          props.Addlevel();
-        }}
-      >
-        +1
-      </button>
     </div>
   );
 }

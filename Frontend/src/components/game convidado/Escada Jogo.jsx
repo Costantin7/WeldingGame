@@ -7,19 +7,12 @@ function Lugarnaescada(props) {
   var valx0 = -props.level * 20 + 1040;
   var valy = -props.level * 24 + 260;
   var valx = -props.level * 44 + 920;
-  var ofx = [-165, -190, -190, -220, -260, -260, -270, 0, 0];
-  var ofy = [-25, -40, -47, -40, -30, -70, -60, 0, 0];
-  var size = [
-    200, 200, 185, 185, 195, 190, 170, 190, 190, 190, 190, 190, 190, 190,
-  ];
+
   if (props.level === 0) {
     return (
       <div
-        className="relative z-10 "
-        style={{
-          top: `${valy0 + ofy[props.level - 1]}px`,
-          left: `${valx0 + ofx[props.level - 1]}px`,
-        }}
+        className="relative z-20 w-[120px]"
+        style={{ top: `${valy0}px`, left: `${valx0}px` }}
       >
         <img
           src={`./src/img/Soldadores/Nivel${props.level}.png`}
@@ -30,12 +23,8 @@ function Lugarnaescada(props) {
   } else {
     return (
       <div
-        className="relative z-10 "
-        style={{
-          top: `${valy0 + ofy[props.level - 1]}px`,
-          left: `${valx0 + ofx[props.level - 1]}px`,
-          width: `${size[props.level - 1]}px`,
-        }}
+        className="relative z-20 w-[220px]"
+        style={{ top: `${valy}px`, left: `${valx}px` }}
       >
         <img
           src={`./src/img/Soldadores/Nivel${props.level}.png`}

@@ -31,8 +31,9 @@ function RecuperarSenha(props) {
             className="!border w-full mb-5"
             type="text"
             value={emailText}
-            onChange={(e) => setEmailText(e)}
+            onChange={(e) => setEmailText(e.target.value)}
           ></input>
+
           <button
             onClick={() => setTela(1)}
             className="!bg-blue-600 text-white"
@@ -52,31 +53,31 @@ function RecuperarSenha(props) {
               className="!border w-10 mx-1"
               type="number"
               value={emailText}
-              onChange={(e) => setEmailText(e)}
+              onChange={(e) => setEmailText(e.target.value)}
             ></input>
             <input
               className="!border w-10 mx-1 "
               type="number"
               value={emailText}
-              onChange={(e) => setEmailText(e)}
+              onChange={(e) => setEmailText(e.target.value)}
             ></input>
             <input
               className="!border w-10 mx-1"
               type="number"
               value={emailText}
-              onChange={(e) => setEmailText(e)}
+              onChange={(e) => setEmailText(e.target.value)}
             ></input>
             <input
               className="!border w-10 mx-1"
               type="number"
               value={emailText}
-              onChange={(e) => setEmailText(e)}
+              onChange={(e) => setEmailText(e.target.valuee)}
             ></input>
             <input
               className="!border w-10 mx-1"
               type="number"
               value={emailText}
-              onChange={(e) => setEmailText(e)}
+              onChange={(e) => setEmailText(e.target.value)}
             ></input>
           </div>
           <button
@@ -97,14 +98,14 @@ function RecuperarSenha(props) {
             className="!border w-full mb-3"
             type="text"
             value={senha1}
-            onChange={(e) => setSenha1(e)}
+            onChange={(e) => setSenha1(e.target.value)}
           ></input>
           <p>Confirme a nova senha</p>
           <input
             className="!border w-full mb-5"
             type="text"
             value={senha2}
-            onChange={(e) => setSenha2(e)}
+            onChange={(e) => setSenha2(e.target.value)}
           ></input>
           <button
             onClick={() => props.desativar(0)}

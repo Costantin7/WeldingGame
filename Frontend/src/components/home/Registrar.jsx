@@ -42,7 +42,7 @@ function Resgistrar(props) {
           type="text"
           value={nome}
           onChange={(e) => {
-            setNome(e);
+            setNome(e.target.value);
           }}
         />
         <div>
@@ -52,7 +52,7 @@ function Resgistrar(props) {
             type="text"
             value={apelido}
             onChange={(e) => {
-              setApelido(e);
+              setApelido(e.target.value);
             }}
           />
         </div>
@@ -63,7 +63,7 @@ function Resgistrar(props) {
             type="text"
             value={email}
             onChange={(e) => {
-              setEmail(e);
+              setEmail(e.target.value);
             }}
           />
         </div>
@@ -74,7 +74,7 @@ function Resgistrar(props) {
             type="text"
             value={senha}
             onChange={(e) => {
-              setSenha(e);
+              setSenha(e.target.value);
             }}
           />
         </div>
@@ -86,7 +86,7 @@ function Resgistrar(props) {
             type="text"
             value={confirmarsenha}
             onChange={(e) => {
-              setConfirmarsenha(e);
+              setConfirmarsenha(e.target.value);
             }}
           />
         </div>
@@ -100,7 +100,7 @@ function Resgistrar(props) {
                 type="text"
                 value={instituicao}
                 onChange={(e) => {
-                  setInstituicao(e);
+                  setInstituicao(e.target.value);
                 }}
               />
             </div>
@@ -111,7 +111,7 @@ function Resgistrar(props) {
                 type="text"
                 value={pais}
                 onChange={(e) => {
-                  setPais(e);
+                  setPais(e.target.value);
                 }}
               />
             </div>
@@ -125,7 +125,7 @@ function Resgistrar(props) {
                 type="text"
                 value={profissao}
                 onChange={(e) => {
-                  setProfissao(e);
+                  setProfissao(e.target.value);
                 }}
               />
             </div>
@@ -136,7 +136,7 @@ function Resgistrar(props) {
                 type="text"
                 value={escolaridada}
                 onChange={(e) => {
-                  setEscolaridada(e);
+                  setEscolaridada(e.target.value);
                 }}
               />
             </div>
