@@ -3,8 +3,8 @@ import { BrowserRouter, Routes, Route, Link } from "react-router-dom";
 
 function LoginUsuario(props) {
   const [close, setClose] = useState(false);
-  const [text1, setText1] = useState("  Insira o usuário aqui");
-  const [text2, setText2] = useState("  Insira a senha aqui");
+  const [text1, setText1] = useState("Insira o usuário aqui");
+  const [text2, setText2] = useState("senha");
   useEffect(() => {
     const timer = setTimeout(() => {
       setClose(true);
@@ -35,6 +35,11 @@ function LoginUsuario(props) {
           className="border p-2 rounded w-full mb-5"
           type="text"
           value={text1}
+          onFocus={() => {
+            if (text1 === "Insira o usuário aqui") {
+              setText1("");
+            }
+          }}
           onChange={(e) => {
             setText1(e.target.value);
           }}
@@ -49,6 +54,11 @@ function LoginUsuario(props) {
           className="border p-2 rounded w-full mb-9"
           type="password"
           value={text2}
+          onFocus={() => {
+            if (text2 === "senha") {
+              setText2("");
+            }
+          }}
           onChange={(e) => {
             setText2(e.target.value);
           }}
