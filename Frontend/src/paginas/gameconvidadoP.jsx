@@ -4,7 +4,7 @@ import LinhaProgresso from "../components/game convidado/Linha progresso";
 import BotaoResponder from "../components/game convidado/BotaoResponder";
 import BotaoDesistir from "../components/game convidado/BotaoDesistir";
 import EscadaJogo from "../components/game convidado/Escada Jogo";
-import { useEffect, useState, useMemo } from "react";
+import { useEffect, useState, useMemo, use } from "react";
 import axios from "axios";
 import NivelSoldador from "../components/game convidado/NivelSoldador";
 import BotaoProsseguir from "../components/game convidado/BotaoProsseguir";
@@ -15,7 +15,7 @@ function Game_convidado_P(props) {
   const [pergunta, setPergunta] = useState(null);
   const { nivel, Addlevel, Zerolevel } = props;
   const idioma = props.idiomaprop;
-  const { resposta, setResposta } = useState(0); // -1=errado 0=nãorespondido 1=correto
+  const [resposta, setResposta] = useState(0); // -1=errado 0=não respondido 1=correto
   const [ativoA, setAtivoA] = useState(false);
   const [ativoB, setAtivoB] = useState(false);
   const [ativoC, setAtivoC] = useState(false);
@@ -24,7 +24,8 @@ function Game_convidado_P(props) {
   const [checkResposta, setCheckResposta] = useState(0);
   const [telainfo, setTelainfo] = useState(false);
   const [selecionado, setSelecionado] = useState(0); //REFERENTE a seleção de perguntas
-
+  const [tempoGasto, setTempoGasto] = useState(0); //por pergunta
+  const [tempoGastoTotal, setTempoGastoTotal] = useState(0); //somatório
   useEffect(() => {
     if (ativoA === true) {
       setAtivoB(false);
@@ -127,6 +128,25 @@ function Game_convidado_P(props) {
     }
   }, [nivel]);
 
+  useEffect(() => {
+    if (actualTime >= 60 && checkResposta == 0) {
+      setCheckResposta(-1);
+    }
+  }, [actualTime]);
+
+  useEffect(() => {
+    if (props.timer && checkResposta === 0) {
+      setActualTime(0);
+    }
+  }, [checkResposta]);
+
+  useEffect(() => {
+    if (checkResposta === 1) {
+      setTempoGasto(actualTime);
+      setTempoGastoTotal(tempoGastoTotal + actualTime);
+    }
+  }, [checkResposta]);
+
   return (
     <div>
       <div className="w-full flex justify-center">
@@ -139,9 +159,21 @@ function Game_convidado_P(props) {
                   <source src="/videos/clock.mp4" type="video/mp4" />
                   Clock_Timer_View ERROR
                 </video>
-                <p className="mt-2 text-center text-lg font-medium">
-                  Remaining time: {60 - actualTime}
-                </p>
+                {actualTime < 60 && checkResposta === 0 && (
+                  <p className="mt-2 text-center text-lg font-medium">
+                    Tempo restante: {60 - actualTime}
+                  </p>
+                )}
+                {checkResposta === 1 && (
+                  <p className="mt-2 text-center text-lg font-medium">
+                    Tempo gasto: {tempoGasto}
+                  </p>
+                )}
+                {actualTime >= 60 && (
+                  <p className="mt-2 text-center text-lg font-medium">
+                    Tempo esgotado!
+                  </p>
+                )}
               </div>
             )}
           </div>
