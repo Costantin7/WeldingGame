@@ -4,6 +4,11 @@ function RecuperarSenha(props) {
   const [emailText, setEmailText] = useState("Insira seu email");
   const [senha1, setSenha1] = useState("Insira a senha nova");
   const [senha2, setSenha2] = useState("Confirme a senha nova");
+  const [c1, setC1] = useState();
+  const [c2, setC2] = useState();
+  const [c3, setC3] = useState();
+  const [c4, setC4] = useState();
+  const [c5, setC5] = useState();
   const [close, setClose] = useState(false);
   const [tela, setTela] = useState(0);
   useEffect(() => {
@@ -57,32 +62,32 @@ function RecuperarSenha(props) {
             <input
               className="!border w-10 mx-1"
               type="number"
-              value={emailText}
-              onChange={(e) => setEmailText(e.target.value)}
+              value={c1}
+              onChange={(e) => setC1(e.target.value)}
             ></input>
             <input
               className="!border w-10 mx-1 "
               type="number"
-              value={emailText}
-              onChange={(e) => setEmailText(e.target.value)}
+              value={c2}
+              onChange={(e) => setC2(e.target.value)}
             ></input>
             <input
               className="!border w-10 mx-1"
               type="number"
-              value={emailText}
-              onChange={(e) => setEmailText(e.target.value)}
+              value={c3}
+              onChange={(e) => setC3(e.target.value)}
             ></input>
             <input
               className="!border w-10 mx-1"
               type="number"
-              value={emailText}
-              onChange={(e) => setEmailText(e.target.valuee)}
+              value={c4}
+              onChange={(e) => setC4(e.target.valuee)}
             ></input>
             <input
               className="!border w-10 mx-1"
               type="number"
-              value={emailText}
-              onChange={(e) => setEmailText(e.target.value)}
+              value={c5}
+              onChange={(e) => setC5(e.target.value)}
             ></input>
           </div>
           <button
