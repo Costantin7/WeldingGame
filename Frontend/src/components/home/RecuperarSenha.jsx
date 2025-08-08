@@ -1,9 +1,9 @@
 import { useEffect, useState } from "react";
 
 function RecuperarSenha(props) {
-  const [emailText, setEmailText] = useState("   Insira seu email");
-  const [senha1, setSenha1] = useState("*****1");
-  const [senha2, setSenha2] = useState("*****2");
+  const [emailText, setEmailText] = useState("Insira seu email");
+  const [senha1, setSenha1] = useState("Insira a senha nova");
+  const [senha2, setSenha2] = useState("Confirme a senha nova");
   const [close, setClose] = useState(false);
   const [tela, setTela] = useState(0);
   useEffect(() => {
@@ -31,6 +31,11 @@ function RecuperarSenha(props) {
             className="!border w-full mb-5"
             type="text"
             value={emailText}
+            onFocus={() => {
+              if (emailText === "Insira seu email") {
+                setEmailText("");
+              }
+            }}
             onChange={(e) => setEmailText(e.target.value)}
           ></input>
 
@@ -98,6 +103,11 @@ function RecuperarSenha(props) {
             className="!border w-full mb-3"
             type="text"
             value={senha1}
+            onFocus={() => {
+              if (senha1 === "Insira a senha nova") {
+                setSenha1("");
+              }
+            }}
             onChange={(e) => setSenha1(e.target.value)}
           ></input>
           <p>Confirme a nova senha</p>
@@ -105,6 +115,11 @@ function RecuperarSenha(props) {
             className="!border w-full mb-5"
             type="text"
             value={senha2}
+            onFocus={() => {
+              if (senha2 === "Confirme a senha nova") {
+                setSenha2("");
+              }
+            }}
             onChange={(e) => setSenha2(e.target.value)}
           ></input>
           <button
