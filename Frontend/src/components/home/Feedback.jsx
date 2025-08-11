@@ -96,8 +96,13 @@ function Feedback(props) {
                 className="border w-full mb-5"
                 type="text"
                 value={text1}
+                onFocus={() => {
+                  if (text1 === "Insira seu e-mail") {
+                    setText1("");
+                  }
+                }}
                 onChange={(e) => {
-                  setText1(e);
+                  setText1(e.target.value);
                 }}
               />
               <p className="text-gray-700">Código da pergunta</p>
@@ -106,8 +111,13 @@ function Feedback(props) {
                 className="border w-full mb-5"
                 type="text"
                 value={text2}
+                onFocus={() => {
+                  if (text2 === "Insira o código da pergunta") {
+                    setText2("");
+                  }
+                }}
                 onChange={(e) => {
-                  setText1(e);
+                  setText2(e.target.value);
                 }}
               />
 
@@ -117,8 +127,13 @@ function Feedback(props) {
                 className="border w-full mb-5"
                 type="text"
                 value={text3}
+                onFocus={() => {
+                  if (text3 === "Insira seu comentário aqui") {
+                    setText3("");
+                  }
+                }}
                 onChange={(e) => {
-                  setText1(e);
+                  setText3(e.target.value);
                 }}
               />
               <button className="!bg-green-500 text-white font-bold py-2 px-4 rounded my-10 mx-5">
