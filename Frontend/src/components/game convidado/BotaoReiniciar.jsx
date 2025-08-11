@@ -5,6 +5,7 @@ function BotaoReiniciar(props) {
         onClick={() => {
           props.setCheckResposta(0);
           props.valor();
+          props.setTempoGastoTotal(0);
         }}
         className="my-2 w-[150px] h-[40px] border !bg-yellow-400 rounded-md shadow-lg"
       >

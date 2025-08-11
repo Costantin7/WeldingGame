@@ -287,7 +287,9 @@ function Game_convidado_P(props) {
               {checkResposta === -1 && (
                 <BotaoReiniciar
                   valor={Zerolevel}
+                  valor2={Addlevel}
                   setCheckResposta={setCheckResposta}
+                  setTempoGastoTotal={setTempoGastoTotal}
                 />
               )}
               <BotaoDesistir valor={Zerolevel} />
