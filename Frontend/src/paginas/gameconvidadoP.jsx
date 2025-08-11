@@ -144,7 +144,13 @@ function Game_convidado_P(props) {
   }, [nivel]);
 
   useEffect(() => {
+    //se acabar o tempo e ele não tiver respondido, constata-se erro
     if (actualTime >= 60 && checkResposta == 0) {
+      setAtivoC(false);
+      setAtivoD(false);
+      setAtivoA(false);
+      setAtivoB(false);
+      setTelainfo(true);
       setCheckResposta(-1);
     }
   }, [actualTime]);
@@ -316,7 +322,9 @@ function Game_convidado_P(props) {
         timer={props.timer}
         actualTime={actualTime}
       />
-      {telainfo === true && <TelaErro desativar={setTelainfo} />}
+      {telainfo === true && (
+        <TelaErro desativar={setTelainfo} actualTime={actualTime} />
+      )}
       {checkResposta === 1 && nivel === 20 && (
         <TelaVitoria desativar={setCheckResposta} />
       )}
