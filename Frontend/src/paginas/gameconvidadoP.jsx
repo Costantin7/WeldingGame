@@ -130,7 +130,9 @@ function Game_convidado_P(props) {
   useEffect(() => {
     const timer = setInterval(() => {
       if (props.timer) {
-        setActualTime((oldtime) => oldtime + 1);
+        if (checkResposta == 0) {
+          setActualTime((oldtime) => oldtime + 1);
+        }
       }
     }, 1000);
 
@@ -196,7 +198,7 @@ function Game_convidado_P(props) {
                     Tempo gasto: {tempoGasto} segundos
                   </p>
                 )}
-                {actualTime >= 60 && (
+                {actualTime >= 60 && checkResposta != 1 && (
                   <p className="mt-2 text-center text-lg font-medium">
                     Tempo esgotado!
                   </p>
@@ -266,14 +268,6 @@ function Game_convidado_P(props) {
               alt="Imagem não renderizada"
             />
             <div className="flex mx-2">
-              <button
-                className="!bg-blue-300"
-                onClick={() => {
-                  props.Addlevel();
-                }}
-              >
-                +1
-              </button>
               {checkResposta === 0 && (
                 <BotaoResponder
                   valor={Addlevel}
