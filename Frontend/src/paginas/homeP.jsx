@@ -34,7 +34,7 @@ function Home_P(props) {
         <Botaomenu />
       </div>
 
-      <BotaoLogin />
+      <BotaoLogin setUsername={props.setUsername} />
 
       <div className="relative h-[600px] justify-center items-center">
         <ImagemCentral

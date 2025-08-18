@@ -124,7 +124,7 @@ function App() {
                 setIdiomaUpprop={setIdiomaUp}
                 setIdioma={setIdioma}
                 startgameprop={startgame}
-                setUsername={setUsername()}
+                setUsername={setUsername}
                 username={username}
               />
             }
