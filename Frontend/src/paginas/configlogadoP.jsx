@@ -36,7 +36,7 @@ function Logado_P(props) {
       </header>
 
       <div className="flex justify-start gap-2 px-4">
-        <Voltarhome />
+        <Voltarhome username={props.username} />
       </div>
 
       <div className="flex justify-end gap-2 px-4">

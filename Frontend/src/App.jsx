@@ -47,7 +47,7 @@ function App() {
   const [idioma, setIdioma] = useState(0); //idioma 0==pt/br 1==en
   const [nivel, setNivel] = useState(1); //nivel do jogo
   const [timer, setTimer] = useState(false);
-  const [username, setUsername] = useState("");
+  const [username, setUsername] = useState("username");
   // const [competitive, setCompetitive] = useState(false);
   function startgame() {
     //prop:startgameprop={startgame}  invocador:useEffect(() => {props.startgameprop();}, []);
@@ -135,6 +135,7 @@ function App() {
             element={
               //ROTA PAGINA CONFIGURAÇÃO DE JOGABILIDADE PARA CONVIDADOS
               <Convidado_P
+                username={username}
                 idiomaprop={idioma}
                 setIdiomaDownprop={setIdiomaDown}
                 setIdiomaUpprop={setIdiomaUp}
@@ -177,6 +178,7 @@ function App() {
             element={
               //ROTA PAGINA CONFIGURAÇÃO DE JOGABILIDADE PARA LOGADOS
               <Logado_P
+                username={username}
                 idiomaprop={idioma}
                 setIdiomaDownprop={setIdiomaDown}
                 setIdiomaUpprop={setIdiomaUp}

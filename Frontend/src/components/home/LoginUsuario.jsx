@@ -35,23 +35,24 @@ function LoginUsuario(props) {
 
     try {
       const response = await axios.post(
-        "http://1227.0.0.1:8000/api/token/",
+        "http://127.0.0.1:8000/api/token/",
         payload
       );
 
       const token = response.data.access;
 
       if (token) {
+        // 1. Salva as informações de autenticação
         localStorage.setItem("authToken", token);
         axios.defaults.headers.common["Authorization"] = `Bearer ${token}`;
 
-        // ===== ADICIONADO AQUI =====
-        // Chama a função do componente pai para armazenar o username
+        // 2. Atualiza o estado global no componente pai
         props.setUsername(username);
 
-        console.log("Login bem-sucedido:", response.data);
-        alert("Login realizado com sucesso!");
+        // 3. Fecha o modal de login
+        props.desativar(0);
 
+        // 4. Navega para a próxima página (o alert foi removido)
         navigate("/config_logado");
       } else {
         setError("Token não recebido da API. Verifique a resposta do backend.");
