@@ -1,9 +1,18 @@
 # api/urls.py
+
 from django.urls import path
-from .views import RegisterView # Certifique-se de importar suas views
+# Importe as novas views
+from .views import RegisterView, UserProfileView, MyTokenObtainPairView
 
 urlpatterns = [
-    # A rota /api/register/ será gerenciada pela nossa RegisterView.
+    # Rota de registro (existente)
     path('register/', RegisterView.as_view(), name='auth_register'),
-    # Adicione outras rotas aqui conforme necessário
+    
+
+    
+    # Rota de login (token) que agora aceita username ou email
+    path('token/', MyTokenObtainPairView.as_view(), name='token_obtain_pair'),
+    
+    # Rota para buscar os dados do usuário logado
+    path('user/me/', UserProfileView.as_view(), name='user_profile'),
 ]

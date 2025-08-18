@@ -5,7 +5,8 @@ import axios from "axios";
 function LoginUsuario(props) {
   // --- Estados do componente ---
   const [close, setClose] = useState(false);
-  const [username, setUsername] = useState("Insira o usuário aqui");
+  // 1. Renomeamos o estado para ser mais genérico
+  const [loginInput, setLoginInput] = useState("Usuário ou e-mail");
   const [password, setPassword] = useState("senha");
 
   // --- Novos estados para feedback ao usuário ---
@@ -28,8 +29,9 @@ function LoginUsuario(props) {
     setLoading(true);
     setError(null);
 
+    // 2. O payload ainda usa a chave 'username', como nosso backend espera
     const payload = {
-      username: username,
+      username: loginInput,
       password: password,
     };
 
@@ -42,17 +44,19 @@ function LoginUsuario(props) {
       const token = response.data.access;
 
       if (token) {
-        // 1. Salva as informações de autenticação
         localStorage.setItem("authToken", token);
         axios.defaults.headers.common["Authorization"] = `Bearer ${token}`;
 
-        // 2. Atualiza o estado global no componente pai
-        props.setUsername(username);
+        // 3. ETAPA EXTRA: Buscamos os dados do perfil para pegar o username correto
+        const profileResponse = await axios.get(
+          "http://127.0.0.1:8000/api/user/me/"
+        );
 
-        // 3. Fecha o modal de login
+        // 4. Atualiza o estado global com o username que veio da API
+        props.setUsername(profileResponse.data.username);
+
+        // Fecha o modal e navega para a próxima página
         props.desativar(0);
-
-        // 4. Navega para a próxima página (o alert foi removido)
         navigate("/config_logado");
       } else {
         setError("Token não recebido da API. Verifique a resposta do backend.");
@@ -65,7 +69,6 @@ function LoginUsuario(props) {
     }
   };
 
-  // O JSX (return) continua exatamente o mesmo
   return (
     <div>
       <div
@@ -84,18 +87,19 @@ function LoginUsuario(props) {
         <p className="font-semibold !self-center text-xl">Login</p>
         <div className="bg-gray-300 w-full h-1 my-4"></div>
 
+        {/* 5. Textos e estados do input atualizados */}
         <label htmlFor="usuario" className="font-semibold self-start mb-1">
-          Usuário (Apelido):
+          Usuário ou E-mail:
         </label>
         <input
           id="usuario"
           className="border p-2 rounded w-full mb-5"
           type="text"
-          value={username}
+          value={loginInput}
           onFocus={() => {
-            if (username === "Insira o usuário aqui") setUsername("");
+            if (loginInput === "Usuário ou e-mail") setLoginInput("");
           }}
-          onChange={(e) => setUsername(e.target.value)}
+          onChange={(e) => setLoginInput(e.target.value)}
           required
         />
 
