@@ -132,7 +132,7 @@ function MenuHistorico({ desativar }) {
           />
           <button
             onClick={() => setDataFiltro("")}
-            className="text-sm text-blue-600 hover:underline"
+            className="text-sm !bg-blue-500 text-white hover:underline"
           >
             Limpar filtro
           </button>
