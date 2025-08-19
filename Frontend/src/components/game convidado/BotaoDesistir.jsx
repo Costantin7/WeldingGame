@@ -5,7 +5,7 @@ function BotaoDesistir(props) {
 
   function handleClick() {
     props.valor(0); // faz sua lógica
-    navigate("/config_logado"); // redireciona para a URL
+    navigate("/"); // redireciona para a URL
   }
 
   return (
