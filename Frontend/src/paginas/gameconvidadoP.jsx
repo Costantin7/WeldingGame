@@ -14,7 +14,7 @@ import TelaVitoria from "../components/game convidado/Tela_Vitoria";
 
 function Game_convidado_P(props) {
   const [pergunta, setPergunta] = useState(null);
-  const { nivel, Addlevel, Zerolevel } = props;
+  const { nivel, Addlevel, Zerolevel, username } = props; // Adicionado username
   const idioma = props.idiomaprop;
   const [resposta, setResposta] = useState(0); // -1=errado 0=não respondido 1=correto
   const [ativoA, setAtivoA] = useState(false);
@@ -24,28 +24,79 @@ function Game_convidado_P(props) {
   const [actualTime, setActualTime] = useState(0);
   const [checkResposta, setCheckResposta] = useState(0);
   const [telainfo, setTelainfo] = useState(false);
-  const [selecionado, setSelecionado] = useState(0); //REFERENTE a seleção de perguntas
-  const [tempoGasto, setTempoGasto] = useState(0); //por pergunta
-  const [tempoGastoTotal, setTempoGastoTotal] = useState(0); //somatório
+  const [selecionado, setSelecionado] = useState(0);
+  const [tempoGasto, setTempoGasto] = useState(0);
+  const [tempoGastoTotal, setTempoGastoTotal] = useState(0);
   const videoRef = useRef(null);
-  // NOVO ESTADO PARA FORÇAR A ATUALIZAÇÃO DA PERGUNTA
   const [forceRefetch, setForceRefetch] = useState(0);
+  const [resultadoEnviado, setResultadoEnviado] = useState(false);
 
+  // --- LÓGICA DE ENVIO DE RESULTADO ---
+  useEffect(() => {
+    const enviarResultadoFinal = async (vitoria) => {
+      if (resultadoEnviado) return;
+
+      const modulosSelecionados = [];
+      if (props.modulo1) modulosSelecionados.push("Processos");
+      if (props.modulo2) modulosSelecionados.push("Materiais");
+      if (props.modulo3) modulosSelecionados.push("Projeto");
+      if (props.modulo4) modulosSelecionados.push("Fabricação");
+
+      const dadosDaPartida = {
+        nickname: username || "Convidado",
+        pais: "BR", // Fixo para convidados
+        tempo: tempoGastoTotal,
+        nivel_max: vitoria ? 20 : nivel,
+        modulos: modulosSelecionados.join(", "),
+      };
+
+      try {
+        await axios.post(
+          "http://localhost:8000/leaderboard/salvar/",
+          dadosDaPartida
+        );
+        console.log(
+          "Resultado da partida (convidado) enviado com sucesso!",
+          dadosDaPartida
+        );
+        setResultadoEnviado(true);
+      } catch (error) {
+        console.error(
+          "Tentativa de salvar placar de convidado falhou (esperado):",
+          error.response?.data || error.message
+        );
+      }
+    };
+
+    if ((checkResposta === 1 && nivel === 20) || telainfo === true) {
+      const vitoria = checkResposta === 1 && nivel === 20;
+      enviarResultadoFinal(vitoria);
+    }
+  }, [checkResposta, nivel, telainfo, resultadoEnviado]);
+
+  // Reseta o estado de envio quando o jogo reinicia
+  useEffect(() => {
+    if (nivel === 1) {
+      setResultadoEnviado(false);
+    }
+  }, [nivel]);
+
+  // --- LÓGICA DO JOGO ---
   useEffect(() => {
     const video = videoRef.current;
     if (!video) return;
 
     if (checkResposta === 0) {
-      video.pause(); // Pausa para garantir reset limpo
-      video.currentTime = 0; // Reinicia o vídeo
-      video.play(); // Dá play novamente
+      video.pause();
+      video.currentTime = 0;
+      video.play();
     } else if (checkResposta === -1 || checkResposta === 1) {
-      video.pause(); // Pausa o vídeo
+      video.pause();
     }
   }, [checkResposta]);
 
   useEffect(() => {
-    if (ativoA === true) {
+    if (ativoA) {
       setAtivoB(false);
       setAtivoC(false);
       setAtivoD(false);
@@ -53,28 +104,28 @@ function Game_convidado_P(props) {
   }, [ativoA]);
 
   useEffect(() => {
-    if (ativoD === true) {
+    if (ativoB) {
+      setAtivoA(false);
+      setAtivoC(false);
+      setAtivoD(false);
+    }
+  }, [ativoB]);
+
+  useEffect(() => {
+    if (ativoC) {
+      setAtivoA(false);
+      setAtivoB(false);
+      setAtivoD(false);
+    }
+  }, [ativoC]);
+
+  useEffect(() => {
+    if (ativoD) {
       setAtivoA(false);
       setAtivoB(false);
       setAtivoC(false);
     }
   }, [ativoD]);
-
-  useEffect(() => {
-    if (ativoB === true) {
-      setAtivoC(false);
-      setAtivoD(false);
-      setAtivoA(false);
-    }
-  }, [ativoB]);
-
-  useEffect(() => {
-    if (ativoC === true) {
-      setAtivoD(false);
-      setAtivoA(false);
-      setAtivoB(false);
-    }
-  }, [ativoC]);
 
   useEffect(() => {
     async function fetchPergunta() {
@@ -85,22 +136,48 @@ function Game_convidado_P(props) {
       if (props.modulo4) temasIncluidos.push(4);
 
       if (temasIncluidos.length === 0) {
+        console.log(
+          "Nenhum módulo selecionado. A busca de perguntas foi interrompida."
+        );
         setPergunta(null);
-        console.error("Nenhum módulo selecionado.");
         return;
       }
 
+      const params = {
+        idioma: idioma.toString(),
+        nivel: nivel.toString(),
+        temas: temasIncluidos.join(","),
+      };
+
       try {
-        const response = await axios.get("http://localhost:8000/perguntas/", {
-          params: {
-            idioma: idioma.toString(),
-            nivel: nivel.toString(),
-            temas: temasIncluidos.join(","),
-          },
-        });
+        console.log(
+          "A tentar buscar pergunta com os seguintes parâmetros:",
+          params
+        );
+
+        // CORREÇÃO: Adicionado o prefixo 'game/' à URL
+        const response = await axios.get(
+          "http://localhost:8000/game/perguntas/",
+          { params }
+        );
+
+        console.log("Pergunta recebida com sucesso:", response.data);
         setPergunta(response.data);
       } catch (error) {
-        console.error("Erro ao buscar pergunta:", error);
+        console.error(
+          "Ocorreu um erro ao buscar a pergunta. Verifique o terminal do backend para mais detalhes."
+        );
+        if (error.response) {
+          console.error("Dados do erro:", error.response.data);
+          console.error("Status do erro:", error.response.status);
+        } else if (error.request) {
+          console.error(
+            "Nenhuma resposta recebida. O servidor backend está online e o CORS está configurado corretamente?",
+            error.request
+          );
+        } else {
+          console.error("Erro na configuração do pedido:", error.message);
+        }
         setPergunta(null);
       }
     }
@@ -113,34 +190,25 @@ function Game_convidado_P(props) {
     props.modulo2,
     props.modulo3,
     props.modulo4,
-    forceRefetch, // ADICIONADO O NOVO ESTADO ÀS DEPENDÊNCIAS
+    forceRefetch,
   ]);
 
   function VerAtivo() {
-    if (ativoA === true) {
-      return 1;
-    } else if (ativoB === true) {
-      return 2;
-    } else if (ativoC === true) {
-      return 3;
-    } else if (ativoD === true) {
-      return 4;
-    } else {
-      return 0;
-    }
+    if (ativoA) return 1;
+    if (ativoB) return 2;
+    if (ativoC) return 3;
+    if (ativoD) return 4;
+    return 0;
   }
 
   useEffect(() => {
     const timer = setInterval(() => {
-      if (props.timer) {
-        if (checkResposta == 0) {
-          setActualTime((oldtime) => oldtime + 1);
-        }
+      if (props.timer && checkResposta === 0) {
+        setActualTime((oldtime) => oldtime + 1);
       }
     }, 1000);
-
     return () => clearInterval(timer);
-  }, [nivel]);
+  }, [props.timer, checkResposta]);
 
   useEffect(() => {
     if (props.timer) {
@@ -149,34 +217,24 @@ function Game_convidado_P(props) {
   }, [nivel]);
 
   useEffect(() => {
-    if (actualTime >= 60 && checkResposta == 0) {
-      setAtivoC(false);
-      setAtivoD(false);
-      setAtivoA(false);
-      setAtivoB(false);
+    if (actualTime >= 60 && checkResposta === 0) {
       setTelainfo(true);
       setCheckResposta(-1);
     }
-  }, [actualTime]);
-
-  useEffect(() => {
-    if (props.timer && checkResposta === 0) {
-      setActualTime(0);
-    }
-  }, [checkResposta]);
+  }, [actualTime, checkResposta]);
 
   useEffect(() => {
     if (checkResposta === 1) {
       setTempoGasto(actualTime);
-      setTempoGastoTotal(tempoGastoTotal + actualTime);
+      setTempoGastoTotal((prevTotal) => prevTotal + actualTime);
     }
   }, [checkResposta]);
 
   return (
     <div>
       <div className="w-full flex justify-center">
-        <div className="fixed top-3  w-full max-w-screen-xl !bg-white rounded-2xl shadow-xl border border-gray-200 dark:border-gray-700 p-6 md:p-8 flex flex-row justify-between items-center min-w-[80vw] z-20">
-          <div className=" flex justify-center flex-col items-center">
+        <div className="fixed top-3 w-full max-w-screen-xl !bg-white rounded-2xl shadow-xl border border-gray-200 dark:border-gray-700 p-6 md:p-8 flex flex-row justify-between items-center min-w-[80vw] z-20">
+          <div className="flex justify-center flex-col items-center">
             {props.timer && (
               <div className="flex flex-col items-center justify-center w-72">
                 <video
@@ -199,7 +257,7 @@ function Game_convidado_P(props) {
                     Tempo gasto: {tempoGasto} segundos
                   </p>
                 )}
-                {actualTime >= 60 && checkResposta != 1 && (
+                {actualTime >= 60 && checkResposta !== 1 && (
                   <p className="mt-2 text-center text-lg font-medium">
                     Tempo esgotado!
                   </p>
@@ -208,8 +266,8 @@ function Game_convidado_P(props) {
             )}
           </div>
 
-          {pergunta && (
-            <div className="flex flex-col flex-1 px-4 ">
+          {pergunta ? (
+            <div className="flex flex-col flex-1 px-4">
               <Perguntas pergunta={pergunta.pergunta} nivel={nivel} />
               <div className="grid grid-cols-1 md:grid-cols-1 gap-2">
                 <Respostas
@@ -258,13 +316,17 @@ function Game_convidado_P(props) {
                 />
               </div>
             </div>
+          ) : (
+            <div className="flex-1 text-center">
+              <p>A carregar pergunta...</p>
+            </div>
           )}
 
-          <div className="flex flex-col  items-center justify-center w-72 mx-4">
+          <div className="flex flex-col items-center justify-center w-72 mx-4">
             <img
               className="w-72 h-48 object-cover rounded-lg"
               src="https://www.fvmt.com/hubfs/Images/Blog%20Images/Aluminum%20vs%20Stainless%20Steel%20Welding.jpg"
-              alt="Imagem não renderizada"
+              alt="Imagem de soldadura"
             />
             <div className="flex mx-2">
               {checkResposta === 0 && (
@@ -272,32 +334,21 @@ function Game_convidado_P(props) {
                   valor={Addlevel}
                   gabarito={pergunta && Number(pergunta.gabarito) + 1}
                   selecionado={VerAtivo}
-                  deselectA={() => setAtivoA(false)}
-                  deselectB={() => setAtivoB(false)}
-                  deselectC={() => setAtivoC(false)}
-                  deselectD={() => setAtivoD(false)}
-                  resposta={resposta}
-                  setResposta={setResposta}
-                  checkResposta={checkResposta}
                   setCheckResposta={setCheckResposta}
                   setTelainfo={setTelainfo}
                 />
               )}
-
-              {checkResposta === 1 && nivel != 20 && (
+              {checkResposta === 1 && nivel < 20 && (
                 <BotaoProsseguir
                   valor={Addlevel}
                   setCheckResposta={setCheckResposta}
                 />
               )}
-
               {checkResposta === -1 && (
                 <BotaoReiniciar
                   valor={Zerolevel}
-                  valor2={Addlevel}
                   setCheckResposta={setCheckResposta}
                   setTempoGastoTotal={setTempoGastoTotal}
-                  // PROP ADICIONADA PARA CHAMAR A FUNÇÃO DE ATUALIZAÇÃO
                   refetchPergunta={() => setForceRefetch((prev) => prev + 1)}
                 />
               )}
@@ -313,9 +364,7 @@ function Game_convidado_P(props) {
         timer={props.timer}
         actualTime={actualTime}
       />
-      {telainfo === true && (
-        <TelaErro desativar={setTelainfo} actualTime={actualTime} />
-      )}
+      {telainfo && <TelaErro desativar={setTelainfo} actualTime={actualTime} />}
       {checkResposta === 1 && nivel === 20 && (
         <TelaVitoria desativar={setCheckResposta} />
       )}
