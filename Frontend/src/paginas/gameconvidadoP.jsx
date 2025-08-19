@@ -11,6 +11,7 @@ import BotaoProsseguir from "../components/game convidado/BotaoProsseguir";
 import BotaoReiniciar from "../components/game convidado/BotaoReiniciar";
 import TelaErro from "../components/game convidado/Tela_Erro";
 import TelaVitoria from "../components/game convidado/Tela_Vitoria";
+
 function Game_convidado_P(props) {
   const [pergunta, setPergunta] = useState(null);
   const { nivel, Addlevel, Zerolevel } = props;
@@ -73,26 +74,31 @@ function Game_convidado_P(props) {
     }
   }, [ativoC]);
 
-  const temasExcluidos = useMemo(() => {
-    const temas = [];
-    if (!props.modulo1) temas.push(1); // Processos
-    if (!props.modulo2) temas.push(2); // Materiais
-    if (!props.modulo3) temas.push(3); // Projeto
-    if (!props.modulo4) temas.push(4); // Fabricação
-    return temas;
-  }, [props.modulo1, props.modulo2, props.modulo3, props.modulo4]);
-
+  // LÓGICA CORRIGIDA ABAIXO =======================================================
   useEffect(() => {
     async function fetchPergunta() {
+      // 1. Criamos uma lista com os temas que estão ATIVOS (true)
+      const temasIncluidos = [];
+      if (props.modulo1) temasIncluidos.push(1); // Processos
+      if (props.modulo2) temasIncluidos.push(2); // Materiais
+      if (props.modulo3) temasIncluidos.push(3); // Projeto
+      if (props.modulo4) temasIncluidos.push(4); // Fabricação
+
+      // Se nenhum tema for selecionado, não faz a busca para evitar erros.
+      if (temasIncluidos.length === 0) {
+        setPergunta(null); // Limpa a pergunta se não houver módulos
+        console.error("Nenhum módulo selecionado.");
+        return; // Interrompe a execução da função
+      }
+
       try {
+        // 2. Enviamos a lista de temas como uma string separada por vírgulas
         const response = await axios.get("http://localhost:8000/perguntas/", {
           params: {
             idioma: idioma.toString(),
             nivel: nivel.toString(),
-            tema1: temasExcluidos[0]?.toString(),
-            tema2: temasExcluidos[1]?.toString(),
-            tema3: temasExcluidos[2]?.toString(),
-            tema4: temasExcluidos[3]?.toString(),
+            // Enviamos apenas um parâmetro 'temas' com os IDs dos módulos ativos
+            temas: temasIncluidos.join(","),
           },
         });
         setPergunta(response.data);
@@ -106,12 +112,12 @@ function Game_convidado_P(props) {
   }, [
     nivel,
     idioma,
-    temasExcluidos,
     props.modulo1,
     props.modulo2,
     props.modulo3,
     props.modulo4,
   ]);
+  // FIM DA LÓGICA CORRIGIDA =======================================================
 
   function VerAtivo() {
     if (ativoA === true) {
@@ -305,7 +311,6 @@ function Game_convidado_P(props) {
           </div>
         </div>
       </div>
-      {/* <LinhaProgresso nivel={nivel} /> */} {/* ----  usar só para mobile */}
       <EscadaJogo
         link="./src/img/Escada Jogo.png"
         nome="Imagem Escada"
@@ -319,35 +324,6 @@ function Game_convidado_P(props) {
       {checkResposta === 1 && nivel === 20 && (
         <TelaVitoria desativar={setCheckResposta} />
       )}
-      {/* DEBUG ================================================================================ */}
-      {/* <div className="bottom p-90">
-        <p>
-          {pergunta
-            ? "DEBUG: Foi possível carregar as perguntas"
-            : "DEBUG: Não foi possível carregar as perguntas"}
-        </p>
-        {pergunta && <p>gabarito: {Number(pergunta.gabarito) + 1} </p>}
-        {pergunta && (
-          <p>
-            Timer: {props.timer && "ON"} {!props.timer && "OFF"}
-          </p>
-        )}
-        {pergunta && <p>RespostaState: {checkResposta}</p>}
-        {pergunta && <p>Remaining time: {60 - actualTime}</p>}
-        {pergunta && <p>Selecionado: {selecionado}</p>}
-        {pergunta && <p>Tela informativa: {telainfo}</p>}
-        {pergunta && (
-          <button
-            className="!bg-blue-300"
-            onClick={() => {
-              props.Addlevel();
-            }}
-          >
-            +1
-          </button>
-        )}
-      </div> */}
-      {/* DEBUG ================================================================================ */}
     </div>
   );
 }
