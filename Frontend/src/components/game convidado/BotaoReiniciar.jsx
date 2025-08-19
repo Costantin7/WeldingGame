@@ -6,6 +6,8 @@ function BotaoReiniciar(props) {
           props.setCheckResposta(0);
           props.valor();
           props.setTempoGastoTotal(0);
+          // CHAMA A NOVA FUNÇÃO PARA FORÇAR A BUSCA DE PERGUNTA
+          props.refetchPergunta();
         }}
         className="my-2 w-[150px] h-[40px] border !bg-yellow-400 rounded-md shadow-lg"
       >

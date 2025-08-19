@@ -28,6 +28,8 @@ function Game_convidado_P(props) {
   const [tempoGasto, setTempoGasto] = useState(0); //por pergunta
   const [tempoGastoTotal, setTempoGastoTotal] = useState(0); //somatório
   const videoRef = useRef(null);
+  // NOVO ESTADO PARA FORÇAR A ATUALIZAÇÃO DA PERGUNTA
+  const [forceRefetch, setForceRefetch] = useState(0);
 
   useEffect(() => {
     const video = videoRef.current;
@@ -74,30 +76,25 @@ function Game_convidado_P(props) {
     }
   }, [ativoC]);
 
-  // LÓGICA CORRIGIDA ABAIXO =======================================================
   useEffect(() => {
     async function fetchPergunta() {
-      // 1. Criamos uma lista com os temas que estão ATIVOS (true)
       const temasIncluidos = [];
-      if (props.modulo1) temasIncluidos.push(1); // Processos
-      if (props.modulo2) temasIncluidos.push(2); // Materiais
-      if (props.modulo3) temasIncluidos.push(3); // Projeto
-      if (props.modulo4) temasIncluidos.push(4); // Fabricação
+      if (props.modulo1) temasIncluidos.push(1);
+      if (props.modulo2) temasIncluidos.push(2);
+      if (props.modulo3) temasIncluidos.push(3);
+      if (props.modulo4) temasIncluidos.push(4);
 
-      // Se nenhum tema for selecionado, não faz a busca para evitar erros.
       if (temasIncluidos.length === 0) {
-        setPergunta(null); // Limpa a pergunta se não houver módulos
+        setPergunta(null);
         console.error("Nenhum módulo selecionado.");
-        return; // Interrompe a execução da função
+        return;
       }
 
       try {
-        // 2. Enviamos a lista de temas como uma string separada por vírgulas
         const response = await axios.get("http://localhost:8000/perguntas/", {
           params: {
             idioma: idioma.toString(),
             nivel: nivel.toString(),
-            // Enviamos apenas um parâmetro 'temas' com os IDs dos módulos ativos
             temas: temasIncluidos.join(","),
           },
         });
@@ -116,8 +113,8 @@ function Game_convidado_P(props) {
     props.modulo2,
     props.modulo3,
     props.modulo4,
+    forceRefetch, // ADICIONADO O NOVO ESTADO ÀS DEPENDÊNCIAS
   ]);
-  // FIM DA LÓGICA CORRIGIDA =======================================================
 
   function VerAtivo() {
     if (ativoA === true) {
@@ -152,7 +149,6 @@ function Game_convidado_P(props) {
   }, [nivel]);
 
   useEffect(() => {
-    //se acabar o tempo e ele não tiver respondido, constata-se erro
     if (actualTime >= 60 && checkResposta == 0) {
       setAtivoC(false);
       setAtivoD(false);
@@ -180,7 +176,6 @@ function Game_convidado_P(props) {
     <div>
       <div className="w-full flex justify-center">
         <div className="fixed top-3  w-full max-w-screen-xl !bg-white rounded-2xl shadow-xl border border-gray-200 dark:border-gray-700 p-6 md:p-8 flex flex-row justify-between items-center min-w-[80vw] z-20">
-          {/* TIMER à esquerda - agora maior e centralizado */}
           <div className=" flex justify-center flex-col items-center">
             {props.timer && (
               <div className="flex flex-col items-center justify-center w-72">
@@ -189,7 +184,7 @@ function Game_convidado_P(props) {
                   className="w-72 h-48"
                   muted
                   playsInline
-                  loop={false} // desative loop para que o play manual funcione corretamente
+                  loop={false}
                 >
                   <source src="/videos/clock.mp4" type="video/mp4" />
                   Clock_Timer_View ERROR
@@ -213,7 +208,6 @@ function Game_convidado_P(props) {
             )}
           </div>
 
-          {/* PERGUNTA + RESPOSTAS no centro */}
           {pergunta && (
             <div className="flex flex-col flex-1 px-4 ">
               <Perguntas pergunta={pergunta.pergunta} nivel={nivel} />
@@ -266,7 +260,6 @@ function Game_convidado_P(props) {
             </div>
           )}
 
-          {/* IMAGEM à direita - agora maior e centralizada */}
           <div className="flex flex-col  items-center justify-center w-72 mx-4">
             <img
               className="w-72 h-48 object-cover rounded-lg"
@@ -304,6 +297,8 @@ function Game_convidado_P(props) {
                   valor2={Addlevel}
                   setCheckResposta={setCheckResposta}
                   setTempoGastoTotal={setTempoGastoTotal}
+                  // PROP ADICIONADA PARA CHAMAR A FUNÇÃO DE ATUALIZAÇÃO
+                  refetchPergunta={() => setForceRefetch((prev) => prev + 1)}
                 />
               )}
               <BotaoDesistir valor={Zerolevel} />
