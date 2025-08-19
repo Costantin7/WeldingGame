@@ -1,168 +1,188 @@
 import { useEffect, useState } from "react";
+import axios from "axios";
 
-// --- CONFIGURAÇÃO MODULAR ---
-// 1. Defina os cabeçalhos e as chaves de dados correspondentes aqui.
-// A tabela será renderizada com base nesta configuração.
-const headers = [
-  { key: "posicao", label: "Posição" },
-  { key: "Nickname", label: "Nome/Apelido" },
-  { key: "pais", label: "País" },
-  { key: "data", label: "data" },
-  { key: "tempo", label: "Tempo" },
-  { key: "nivelMax", label: "Nível Máx." },
-  { key: "modulos", label: "Módulos" },
-];
-
-// 2. Seus dados de exemplo.
-// Os valores de string para NickName agora estão entre aspas.
-const rankingData = [
-  {
-    Nickname: "vlad_weld",
-    posicao: 1,
-    pais: "BR",
-    tempo: "05:12",
-    data: "01/01/1000",
-    nivelMax: 8,
-    modulos: "A, B, C",
-  },
-  {
-    Nickname: "Lucas_head",
-    posicao: 2,
-    pais: "BR",
-    tempo: "07:45",
-    data: "01/01/1000",
-    nivelMax: 7,
-    modulos: "A, B",
-  },
-  {
-    Nickname: "Mari_clara",
-    posicao: 3,
-    pais: "BR",
-    tempo: "14:30",
-    data: "01/01/1000",
-    nivelMax: 8,
-    modulos: "B, C",
-  },
-  {
-    Nickname: "Heitor_dev",
-    posicao: 4,
-    pais: "BR",
-    tempo: "15:22",
-    data: "01/01/1000",
-    nivelMax: 9,
-    modulos: "A, B, C, D",
-  },
-  {
-    Nickname: "costantin_",
-    posicao: 5,
-    pais: "BR",
-    tempo: "19:22",
-    data: "01/01/1000",
-    nivelMax: 3,
-    modulos: "A, B, C, D",
-  },
-];
+// Função para formatar o tempo de segundos para MM:SS
+const formatarTempo = (segundos) => {
+  if (typeof segundos !== "number" || segundos < 0) return "00:00";
+  const min = Math.floor(segundos / 60);
+  const seg = segundos % 60;
+  return `${String(min).padStart(2, "0")}:${String(seg).padStart(2, "0")}`;
+};
 
 function MenuRanking({ desativar }) {
   const [isShowing, setIsShowing] = useState(false);
+  const [top10, setTop10] = useState([]);
+  const [posicaoUsuario, setPosicaoUsuario] = useState(null);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
 
-  // Efeito para a animação de entrada do modal
+  useEffect(() => {
+    const fetchRanking = async () => {
+      try {
+        setLoading(true);
+        // Busca os dados do ranking diário no backend
+        const response = await axios.get(
+          "http://localhost:8000/leaderboard/ranking-diario/"
+        );
+
+        // Adiciona o campo 'posicao' e formata o tempo para o top 10
+        const top10Formatado = response.data.top_10.map((item, index) => ({
+          ...item,
+          posicao: index + 1,
+          tempo: formatarTempo(item.tempo),
+        }));
+        setTop10(top10Formatado);
+
+        // Formata os dados do utilizador, se existirem
+        if (response.data.posicao_usuario) {
+          const dadosUsuario = response.data.posicao_usuario;
+          setPosicaoUsuario({
+            ...dadosUsuario.dados,
+            posicao: dadosUsuario.rank,
+            tempo: formatarTempo(dadosUsuario.dados.tempo),
+          });
+        }
+      } catch (err) {
+        setError(
+          "Não foi possível carregar o ranking. Tente novamente mais tarde."
+        );
+        console.error(err);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchRanking();
+  }, []);
+
   useEffect(() => {
     const timer = setTimeout(() => setIsShowing(true), 10);
     return () => clearTimeout(timer);
   }, []);
 
-  // Função para fechar o modal com animação de saída
   const handleClose = () => {
     setIsShowing(false);
-    // Espera a animação de saída terminar antes de chamar a função desativar
-    setTimeout(() => desativar(0), 300);
+    setTimeout(() => desativar(false), 300); // Alterado para desativar(false)
   };
 
+  const headers = [
+    { key: "posicao", label: "Posição" },
+    { key: "nickname", label: "Nome/Apelido" },
+    { key: "pais", label: "País" },
+    { key: "tempo", label: "Tempo" },
+    { key: "nivel_max", label: "Nível Máx." },
+    { key: "modulos", label: "Módulos" },
+  ];
+
   return (
-    // Backdrop (fundo escurecido e com blur)
     <div
       onClick={handleClose}
       className={`fixed inset-0 z-40 flex items-center justify-center bg-black/40 backdrop-blur-sm transition-opacity duration-300 ${
         isShowing ? "opacity-100" : "opacity-0"
       }`}
     >
-      {/* Modal (conteúdo principal) */}
       <div
-        onClick={(e) => e.stopPropagation()} // Impede que o clique no modal feche-o
+        onClick={(e) => e.stopPropagation()}
         className={`relative w-11/12 max-w-4xl bg-white rounded-xl shadow-lg font-serif p-6 transition-all duration-300 max-h-[85vh] overflow-y-auto ${
           isShowing ? "translate-y-0 opacity-100" : "-translate-y-10 opacity-0"
         }`}
       >
-        {/* Botão de Fechar como <p> */}
         <p
           onClick={handleClose}
           className="absolute top-2 right-3 px-2 py-1 text-gray-600 hover:bg-gray-200 rounded-full transition-colors cursor-pointer"
         >
           ❌
         </p>
-
         <h2 className="text-2xl font-bold mb-4 text-center sm:text-left">
-          Ranking
+          Ranking do Dia
         </h2>
         <div className="bg-gray-300 w-full h-px mb-4"></div>
 
-        {/* Tabela para Telas Médias e Maiores (Desktop) */}
-        <div className="hidden md:block">
-          <table className="w-full border-collapse text-sm">
-            <thead>
-              <tr className="bg-gray-100">
-                {/* Renderiza os cabeçalhos dinamicamente */}
-                {headers.map((header) => (
-                  <th
-                    key={header.key}
-                    className="border border-gray-300 px-3 py-2 text-left font-semibold text-gray-700"
-                  >
-                    {header.label}
-                  </th>
-                ))}
-              </tr>
-            </thead>
-            <tbody>
-              {/* CORREÇÃO: Usando rankingData em vez de historicoData */}
-              {rankingData.map((item, index) => (
-                <tr
-                  key={index}
-                  className="even:bg-gray-50 hover:bg-gray-100 transition-colors"
-                >
-                  {/* Renderiza as células da linha dinamicamente */}
-                  {headers.map((header) => (
-                    <td
-                      key={header.key}
-                      className="border border-gray-300 px-3 py-2"
-                    >
-                      {item[header.key]}
-                    </td>
-                  ))}
-                </tr>
-              ))}
-            </tbody>
-          </table>
-        </div>
+        {loading && <p className="text-center">A carregar ranking...</p>}
+        {error && <p className="text-center text-red-500">{error}</p>}
 
-        {/* Cards para Telas Pequenas (Mobile) */}
-        <div className="md:hidden space-y-3">
-          {/* CORREÇÃO: Usando rankingData em vez de historicoData */}
-          {rankingData.map((item, index) => (
-            <div
-              key={index}
-              className="border border-gray-200 rounded-lg p-4 bg-gray-50 shadow-sm"
-            >
-              {/* Renderiza os campos do card dinamicamente */}
-              {headers.map((header, headerIndex) => (
-                <p key={header.key} className="text-sm text-gray-600">
-                  <strong className="font-semibold">{header.label}:</strong>{" "}
-                  {item[header.key]}
-                </p>
-              ))}
+        {!loading && !error && (
+          <>
+            {/* Tabela Desktop */}
+            <div className="hidden md:block">
+              <table className="w-full border-collapse text-sm">
+                <thead>
+                  <tr className="bg-gray-100">
+                    {headers.map((header) => (
+                      <th
+                        key={header.key}
+                        className="border border-gray-300 px-3 py-2 text-left font-semibold text-gray-700"
+                      >
+                        {header.label}
+                      </th>
+                    ))}
+                  </tr>
+                </thead>
+                <tbody>
+                  {top10.map((item) => (
+                    <tr
+                      key={item.id}
+                      className="even:bg-gray-50 hover:bg-gray-100 transition-colors"
+                    >
+                      {headers.map((header) => (
+                        <td
+                          key={header.key}
+                          className="border border-gray-300 px-3 py-2"
+                        >
+                          {item[header.key]}
+                        </td>
+                      ))}
+                    </tr>
+                  ))}
+                  {/* Linha do utilizador */}
+                  {posicaoUsuario && (
+                    <tr className="bg-blue-100 border-t-2 border-blue-400 font-bold">
+                      {headers.map((header) => (
+                        <td
+                          key={header.key}
+                          className="border border-gray-300 px-3 py-2 text-blue-800"
+                        >
+                          {posicaoUsuario[header.key]}
+                        </td>
+                      ))}
+                    </tr>
+                  )}
+                </tbody>
+              </table>
             </div>
-          ))}
-        </div>
+
+            {/* Cards Mobile */}
+            <div className="md:hidden space-y-3">
+              {top10.map((item) => (
+                <div
+                  key={item.id}
+                  className="border border-gray-200 rounded-lg p-4 bg-gray-50 shadow-sm"
+                >
+                  {headers.map((header) => (
+                    <p key={header.key} className="text-sm text-gray-600">
+                      <strong className="font-semibold">{header.label}:</strong>{" "}
+                      {item[header.key]}
+                    </p>
+                  ))}
+                </div>
+              ))}
+              {/* Card do utilizador */}
+              {posicaoUsuario && (
+                <div className="border-2 border-blue-400 rounded-lg p-4 bg-blue-100 shadow-lg mt-4">
+                  <h3 className="font-bold text-blue-800 mb-2">
+                    A sua melhor pontuação de hoje
+                  </h3>
+                  {headers.map((header) => (
+                    <p key={header.key} className="text-sm text-blue-700">
+                      <strong className="font-semibold">{header.label}:</strong>{" "}
+                      {posicaoUsuario[header.key]}
+                    </p>
+                  ))}
+                </div>
+              )}
+            </div>
+          </>
+        )}
       </div>
     </div>
   );
