@@ -13,9 +13,17 @@ import TelaErro from "../components/game convidado/Tela_Erro";
 import TelaVitoria from "../components/game convidado/Tela_Vitoria";
 
 function Game_convidado_P(props) {
-  const [pergunta, setPergunta] = useState(null);
+  // --- ESTADOS PRINCIPAIS DO JOGO ---
   const { nivel, Addlevel, Zerolevel, username } = props;
   const idioma = props.idiomaprop;
+
+  // --- ESTADOS PARA GERIR AS PERGUNTAS ---
+  const [perguntas, setPerguntas] = useState([]); // Guarda o conjunto de 20 perguntas
+  const [perguntaAtual, setPerguntaAtual] = useState(null); // A pergunta visível no ecrã
+  const [carregandoJogo, setCarregandoJogo] = useState(true); // Estado de carregamento inicial
+  const [gameError, setGameError] = useState(null); // Mensagem de erro
+
+  // --- ESTADOS DE JOGABILIDADE ---
   const [resposta, setResposta] = useState(0);
   const [ativoA, setAtivoA] = useState(false);
   const [ativoB, setAtivoB] = useState(false);
@@ -31,41 +39,104 @@ function Game_convidado_P(props) {
   const [forceRefetch, setForceRefetch] = useState(0);
   const [resultadoEnviado, setResultadoEnviado] = useState(false);
 
+  // --- LÓGICA DE BUSCA INICIAL DAS PERGUNTAS ---
+  useEffect(() => {
+    async function fetchJogoCompleto() {
+      setCarregandoJogo(true);
+      setGameError(null);
+      setPerguntas([]);
+
+      const temasIncluidos = [];
+      if (props.modulo1) temasIncluidos.push(1);
+      if (props.modulo2) temasIncluidos.push(2);
+      if (props.modulo3) temasIncluidos.push(3);
+      if (props.modulo4) temasIncluidos.push(4);
+
+      if (temasIncluidos.length === 0) {
+        setGameError("Por favor, selecione pelo menos um módulo para começar.");
+        setCarregandoJogo(false);
+        return;
+      }
+
+      const params = {
+        idioma: idioma.toString(),
+        temas: temasIncluidos.join(","),
+      };
+
+      try {
+        const response = await axios.get(
+          "http://localhost:8000/game/perguntas/",
+          { params }
+        );
+        if (response.data && response.data.length === 20) {
+          setPerguntas(response.data);
+        } else {
+          setGameError(
+            "Não foi possível carregar o conjunto completo de perguntas. Tente outros módulos."
+          );
+        }
+      } catch (error) {
+        console.error(
+          "Ocorreu um erro ao buscar o conjunto de perguntas.",
+          error
+        );
+        const errorMsg =
+          error.response?.data?.mensagem ||
+          "Erro de comunicação com o servidor.";
+        setGameError(`Não foi possível iniciar o jogo: ${errorMsg}`);
+      } finally {
+        setCarregandoJogo(false);
+      }
+    }
+
+    fetchJogoCompleto();
+  }, [
+    idioma,
+    props.modulo1,
+    props.modulo2,
+    props.modulo3,
+    props.modulo4,
+    forceRefetch,
+  ]);
+
+  // --- ATUALIZA A PERGUNTA ATUAL QUANDO O NÍVEL MUDA ---
+  useEffect(() => {
+    if (perguntas.length > 0 && nivel > 0 && nivel <= perguntas.length) {
+      setPerguntaAtual(perguntas[nivel - 1]);
+      // Limpa as respostas selecionadas ao avançar para a próxima pergunta
+      setAtivoA(false);
+      setAtivoB(false);
+      setAtivoC(false);
+      setAtivoD(false);
+    }
+  }, [nivel, perguntas]);
+
   // --- LÓGICA DE ENVIO DE RESULTADO ---
   useEffect(() => {
     const enviarResultadoFinal = async (vitoria) => {
       if (resultadoEnviado) return;
-
-      const modulosSelecionados = [];
-      if (props.modulo1) modulosSelecionados.push("Processos");
-      if (props.modulo2) modulosSelecionados.push("Materiais");
-      if (props.modulo3) modulosSelecionados.push("Projeto");
-      if (props.modulo4) modulosSelecionados.push("Fabricação");
-
+      const modulosSelecionados = [
+        "Processos",
+        "Materiais",
+        "Projeto",
+        "Fabricação",
+      ].filter((_, i) => props[`modulo${i + 1}`]);
       const dadosDaPartida = {
         nickname: username || "Convidado",
         pais: "BR",
         tempo: tempoGastoTotal,
-        // CORREÇÃO 1: Se o jogador perder, regista o último nível completado (nível atual - 1).
         nivel_max: vitoria ? 20 : nivel > 1 ? nivel - 1 : 0,
         modulos: modulosSelecionados.join(", "),
       };
-
       try {
-        // CORREÇÃO 3: Adiciona o cabeçalho de autorização para jogadores logados.
         const authToken = localStorage.getItem("authToken");
         const headers = authToken
           ? { Authorization: `Bearer ${authToken}` }
           : {};
-
         await axios.post(
           "http://localhost:8000/leaderboard/salvar/",
           dadosDaPartida,
           { headers }
-        );
-        console.log(
-          "Resultado da partida enviado com sucesso!",
-          dadosDaPartida
         );
         setResultadoEnviado(true);
       } catch (error) {
@@ -75,27 +146,20 @@ function Game_convidado_P(props) {
         );
       }
     };
-
     if ((checkResposta === 1 && nivel === 20) || telainfo === true) {
-      const vitoria = checkResposta === 1 && nivel === 20;
-      enviarResultadoFinal(vitoria);
+      enviarResultadoFinal(checkResposta === 1 && nivel === 20);
     }
-    // CORREÇÃO 2: Adiciona `tempoGastoTotal` à lista de dependências para garantir que o valor está atualizado.
   }, [checkResposta, nivel, telainfo, resultadoEnviado, tempoGastoTotal]);
 
-  // Reseta o estado de envio quando o jogo reinicia
   useEffect(() => {
     if (nivel === 1) {
       setResultadoEnviado(false);
-      setTempoGastoTotal(0); // Garante que o tempo total é zerado ao reiniciar
+      setTempoGastoTotal(0);
     }
   }, [nivel]);
-
-  // --- LÓGICA DO JOGO ---
   useEffect(() => {
     const video = videoRef.current;
     if (!video) return;
-
     if (checkResposta === 0) {
       video.pause();
       video.currentTime = 0;
@@ -104,7 +168,6 @@ function Game_convidado_P(props) {
       video.pause();
     }
   }, [checkResposta]);
-
   useEffect(() => {
     if (ativoA) {
       setAtivoB(false);
@@ -133,49 +196,6 @@ function Game_convidado_P(props) {
       setAtivoC(false);
     }
   }, [ativoD]);
-
-  useEffect(() => {
-    async function fetchPergunta() {
-      const temasIncluidos = [];
-      if (props.modulo1) temasIncluidos.push(1);
-      if (props.modulo2) temasIncluidos.push(2);
-      if (props.modulo3) temasIncluidos.push(3);
-      if (props.modulo4) temasIncluidos.push(4);
-
-      if (temasIncluidos.length === 0) {
-        setPergunta(null);
-        return;
-      }
-
-      const params = {
-        idioma: idioma.toString(),
-        nivel: nivel.toString(),
-        temas: temasIncluidos.join(","),
-      };
-
-      try {
-        const response = await axios.get(
-          "http://localhost:8000/game/perguntas/",
-          { params }
-        );
-        setPergunta(response.data);
-      } catch (error) {
-        console.error("Ocorreu um erro ao buscar a pergunta.", error);
-        setPergunta(null);
-      }
-    }
-
-    fetchPergunta();
-  }, [
-    nivel,
-    idioma,
-    props.modulo1,
-    props.modulo2,
-    props.modulo3,
-    props.modulo4,
-    forceRefetch,
-  ]);
-
   function VerAtivo() {
     if (ativoA) return 1;
     if (ativoB) return 2;
@@ -183,35 +203,107 @@ function Game_convidado_P(props) {
     if (ativoD) return 4;
     return 0;
   }
-
   useEffect(() => {
     const timer = setInterval(() => {
       if (props.timer && checkResposta === 0) {
-        setActualTime((oldtime) => oldtime + 1);
+        setActualTime((t) => t + 1);
       }
     }, 1000);
     return () => clearInterval(timer);
   }, [props.timer, checkResposta]);
-
   useEffect(() => {
     if (props.timer) {
       setActualTime(0);
     }
   }, [nivel]);
-
   useEffect(() => {
     if (actualTime >= 60 && checkResposta === 0) {
       setTelainfo(true);
       setCheckResposta(-1);
     }
   }, [actualTime, checkResposta]);
-
   useEffect(() => {
     if (checkResposta === 1) {
       setTempoGasto(actualTime);
-      setTempoGastoTotal((prevTotal) => prevTotal + actualTime);
+      setTempoGastoTotal((t) => t + actualTime);
     }
   }, [checkResposta]);
+
+  // --- RENDERIZAÇÃO ---
+  const renderConteudoPrincipal = () => {
+    if (carregandoJogo) {
+      return (
+        <div className="flex-1 text-center">
+          <p>A preparar o seu jogo...</p>
+        </div>
+      );
+    }
+    if (gameError) {
+      return (
+        <div className="flex-1 text-center text-red-600">
+          <p>{gameError}</p>
+        </div>
+      );
+    }
+    if (perguntaAtual) {
+      return (
+        <div className="flex flex-col flex-1 px-4">
+          <Perguntas pergunta={perguntaAtual.pergunta} nivel={nivel} />
+          <div className="grid grid-cols-1 md:grid-cols-1 gap-2">
+            <Respostas
+              texto={perguntaAtual.resposta_0}
+              ativar={() => setAtivoA(true)}
+              desativar={() => setAtivoA(false)}
+              ativo={ativoA}
+              gabarito={Number(perguntaAtual.gabarito) + 1}
+              modo={checkResposta}
+              gabaritoDesse={1}
+              selecionado={selecionado}
+              setSelecionado={setSelecionado}
+            />
+            <Respostas
+              texto={perguntaAtual.resposta_1}
+              ativar={() => setAtivoB(true)}
+              desativar={() => setAtivoB(false)}
+              ativo={ativoB}
+              gabarito={Number(perguntaAtual.gabarito) + 1}
+              modo={checkResposta}
+              gabaritoDesse={2}
+              selecionado={selecionado}
+              setSelecionado={setSelecionado}
+            />
+            <Respostas
+              texto={perguntaAtual.resposta_2}
+              ativar={() => setAtivoC(true)}
+              desativar={() => setAtivoC(false)}
+              ativo={ativoC}
+              gabarito={Number(perguntaAtual.gabarito) + 1}
+              modo={checkResposta}
+              gabaritoDesse={3}
+              selecionado={selecionado}
+              setSelecionado={setSelecionado}
+            />
+            <Respostas
+              texto={perguntaAtual.resposta_3}
+              ativar={() => setAtivoD(true)}
+              desativar={() => setAtivoD(false)}
+              ativo={ativoD}
+              gabarito={Number(perguntaAtual.gabarito) + 1}
+              modo={checkResposta}
+              gabaritoDesse={4}
+              selecionado={selecionado}
+              setSelecionado={setSelecionado}
+            />
+          </div>
+        </div>
+      );
+    }
+    return (
+      <div className="flex-1 text-center">
+        <p>A carregar pergunta...</p>
+      </div>
+    );
+  };
 
   return (
     <div>
@@ -249,61 +341,7 @@ function Game_convidado_P(props) {
             )}
           </div>
 
-          {pergunta ? (
-            <div className="flex flex-col flex-1 px-4">
-              <Perguntas pergunta={pergunta.pergunta} nivel={nivel} />
-              <div className="grid grid-cols-1 md:grid-cols-1 gap-2">
-                <Respostas
-                  texto={pergunta.resposta_0}
-                  ativar={() => setAtivoA(true)}
-                  desativar={() => setAtivoA(false)}
-                  ativo={ativoA}
-                  gabarito={Number(pergunta.gabarito) + 1}
-                  modo={checkResposta}
-                  gabaritoDesse={1}
-                  selecionado={selecionado}
-                  setSelecionado={setSelecionado}
-                />
-                <Respostas
-                  texto={pergunta.resposta_1}
-                  ativar={() => setAtivoB(true)}
-                  desativar={() => setAtivoB(false)}
-                  ativo={ativoB}
-                  gabarito={Number(pergunta.gabarito) + 1}
-                  modo={checkResposta}
-                  gabaritoDesse={2}
-                  selecionado={selecionado}
-                  setSelecionado={setSelecionado}
-                />
-                <Respostas
-                  texto={pergunta.resposta_2}
-                  ativar={() => setAtivoC(true)}
-                  desativar={() => setAtivoC(false)}
-                  ativo={ativoC}
-                  gabarito={Number(pergunta.gabarito) + 1}
-                  modo={checkResposta}
-                  gabaritoDesse={3}
-                  selecionado={selecionado}
-                  setSelecionado={setSelecionado}
-                />
-                <Respostas
-                  texto={pergunta.resposta_3}
-                  ativar={() => setAtivoD(true)}
-                  desativar={() => setAtivoD(false)}
-                  ativo={ativoD}
-                  gabarito={Number(pergunta.gabarito) + 1}
-                  modo={checkResposta}
-                  gabaritoDesse={4}
-                  selecionado={selecionado}
-                  setSelecionado={setSelecionado}
-                />
-              </div>
-            </div>
-          ) : (
-            <div className="flex-1 text-center">
-              <p>A carregar pergunta...</p>
-            </div>
-          )}
+          {renderConteudoPrincipal()}
 
           <div className="flex flex-col items-center justify-center w-72 mx-4">
             <img
@@ -312,10 +350,10 @@ function Game_convidado_P(props) {
               alt="Imagem de soldadura"
             />
             <div className="flex mx-2">
-              {checkResposta === 0 && (
+              {checkResposta === 0 && !gameError && (
                 <BotaoResponder
                   valor={Addlevel}
-                  gabarito={pergunta && Number(pergunta.gabarito) + 1}
+                  gabarito={perguntaAtual && Number(perguntaAtual.gabarito) + 1}
                   selecionado={VerAtivo}
                   setCheckResposta={setCheckResposta}
                   setTelainfo={setTelainfo}
