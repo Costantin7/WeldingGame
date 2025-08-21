@@ -12,12 +12,12 @@ function Resgistrar(props) {
   const [instituicao, setInstituicao] = useState("Insira sua instituicao");
   const [pais, setPais] = useState("Insira seu pais");
   const [profissao, setProfissao] = useState("Insira sua profissão");
-  // Corrigi o nome do estado para 'escolaridade'
   const [escolaridade, setEscolaridade] = useState("Insira sua escolaridade");
 
   // --- Novos estados para feedback ao usuário ---
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
+  const [success, setSuccess] = useState(false); // Estado para mensagem de sucesso
 
   useEffect(() => {
     const timer = setTimeout(() => {
@@ -31,15 +31,16 @@ function Resgistrar(props) {
     e.preventDefault(); // Impede o recarregamento da página
     setLoading(true);
     setError(null);
+    setSuccess(false);
 
-    // Validação simples para garantir que as senhas coincidem
+    // Validação para garantir que as senhas coincidem
     if (senha !== confirmarsenha) {
       setError("As senhas não coincidem.");
       setLoading(false);
       return;
     }
 
-    // Monta o objeto de dados (payload) exatamente como a API Django espera
+    // Monta o objeto de dados (payload) como a API Django espera
     const payload = {
       username: apelido, // 'apelido' do React vira 'username' no Django
       email: email,
@@ -55,23 +56,30 @@ function Resgistrar(props) {
     };
 
     try {
-      // Envia a requisição POST para o endpoint de registro
+      // A URL DEVE SER a de registo, não a de login (`/api/token/`)
       const response = await axios.post(
         "http://127.0.0.1:8000/api/register/",
         payload
       );
 
-      // Se a requisição for bem-sucedida (status 201 Created)
       console.log("Usuário registrado com sucesso:", response.data);
-      alert("Cadastro realizado com sucesso!"); // Feedback para o usuário
-      props.desativar(0); // Fecha o modal
+      setSuccess(true); // Ativa a mensagem de sucesso
+      // Fecha o modal após um breve período para o utilizador ver a mensagem
+      setTimeout(() => {
+        props.desativar(0);
+      }, 2000);
     } catch (err) {
-      // Se ocorrer um erro
       console.error("Erro no registro:", err.response?.data);
-      // Extrai a mensagem de erro da API para exibir ao usuário
-      const errorMessage = err.response?.data
-        ? JSON.stringify(err.response.data)
-        : "Ocorreu um erro. Tente novamente.";
+      let errorMessage = "Ocorreu um erro. Tente novamente.";
+      if (err.response && err.response.data) {
+        // Formata os erros do Django para serem mais legíveis
+        const errors = err.response.data;
+        const messages = Object.keys(errors).map((key) => {
+          // Transforma a chave e a mensagem de erro numa string legível
+          return `${key}: ${errors[key].join(", ")}`;
+        });
+        errorMessage = messages.join(" ");
+      }
       setError(errorMessage);
     } finally {
       // Garante que o estado de loading seja desativado no final
@@ -90,7 +98,6 @@ function Resgistrar(props) {
         className="fixed inset-0 backdrop-blur-sm z-40 bg-black/40"
       ></div>
 
-      {/* O pop-up de registro agora é um formulário */}
       <form
         onSubmit={handleRegister}
         className="fixed z-50 top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 flex flex-col justify-center bg-white border border-black rounded-xl shadow-lg p-6 w-auto max-w-2xl font-serif"
@@ -98,7 +105,7 @@ function Resgistrar(props) {
         <p className="font-semibold !self-center text-xl">Registro</p>
         <div className="bg-gray-300 w-full h-1 mb-6"></div>
 
-        {/* --- Seus campos de input --- */}
+        {/* --- Campos de input --- */}
         <p className="font-semibold text-left">Nome: </p>
         <input
           className="border w-full mb-5 p-2 rounded"
@@ -127,7 +134,7 @@ function Resgistrar(props) {
           <p className="font-semibold text-left">E-mail: </p>
           <input
             className="border w-full mb-5 p-2 rounded"
-            type="email" // Tipo 'email' para validação do navegador
+            type="email"
             value={email}
             onFocus={() => {
               if (email === "Insira seu email") setEmail("");
@@ -140,7 +147,7 @@ function Resgistrar(props) {
           <p className="font-semibold text-left">Senha: </p>
           <input
             className="border w-full mb-5 p-2 rounded"
-            type="password" // Tipo 'password' para mascarar a senha
+            type="password"
             value={senha}
             onFocus={() => {
               if (senha === "Insira sua senha") setSenha("");
@@ -154,7 +161,7 @@ function Resgistrar(props) {
           <p className="font-semibold text-left">Confirmar Senha: </p>
           <input
             className="border w-full mb-5 p-2 rounded"
-            type="password" // Tipo 'password' para mascarar a senha
+            type="password"
             value={confirmarsenha}
             onFocus={() => {
               if (confirmarsenha === "Confirme sua senha")
@@ -223,14 +230,19 @@ function Resgistrar(props) {
           </div>
         </div>
 
-        {/* Exibe a mensagem de erro, se houver */}
+        {/* Exibe a mensagem de sucesso ou erro */}
+        {success && (
+          <p className="text-green-500 text-center mb-4">
+            Cadastro realizado com sucesso! A fechar...
+          </p>
+        )}
         {error && <p className="text-red-500 text-center mb-4">{error}</p>}
 
         {/* Botão de cadastro com estado de loading */}
         <button
           type="submit"
           className="!bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded justify-self-center disabled:bg-blue-300"
-          disabled={loading} // Desativa o botão durante o carregamento
+          disabled={loading || success} // Desativa o botão durante o loading ou após o sucesso
         >
           {loading ? "Cadastrando..." : "Cadastrar"}
         </button>

@@ -14,9 +14,9 @@ import TelaVitoria from "../components/game convidado/Tela_Vitoria";
 
 function Game_convidado_P(props) {
   const [pergunta, setPergunta] = useState(null);
-  const { nivel, Addlevel, Zerolevel, username } = props; // Adicionado username
+  const { nivel, Addlevel, Zerolevel, username } = props;
   const idioma = props.idiomaprop;
-  const [resposta, setResposta] = useState(0); // -1=errado 0=não respondido 1=correto
+  const [resposta, setResposta] = useState(0);
   const [ativoA, setAtivoA] = useState(false);
   const [ativoB, setAtivoB] = useState(false);
   const [ativoC, setAtivoC] = useState(false);
@@ -44,25 +44,33 @@ function Game_convidado_P(props) {
 
       const dadosDaPartida = {
         nickname: username || "Convidado",
-        pais: "BR", // Fixo para convidados
+        pais: "BR",
         tempo: tempoGastoTotal,
-        nivel_max: vitoria ? 20 : nivel,
+        // CORREÇÃO 1: Se o jogador perder, regista o último nível completado (nível atual - 1).
+        nivel_max: vitoria ? 20 : nivel > 1 ? nivel - 1 : 0,
         modulos: modulosSelecionados.join(", "),
       };
 
       try {
+        // CORREÇÃO 3: Adiciona o cabeçalho de autorização para jogadores logados.
+        const authToken = localStorage.getItem("authToken");
+        const headers = authToken
+          ? { Authorization: `Bearer ${authToken}` }
+          : {};
+
         await axios.post(
           "http://localhost:8000/leaderboard/salvar/",
-          dadosDaPartida
+          dadosDaPartida,
+          { headers }
         );
         console.log(
-          "Resultado da partida (convidado) enviado com sucesso!",
+          "Resultado da partida enviado com sucesso!",
           dadosDaPartida
         );
         setResultadoEnviado(true);
       } catch (error) {
         console.error(
-          "Tentativa de salvar placar de convidado falhou (esperado):",
+          "Falha ao salvar placar:",
           error.response?.data || error.message
         );
       }
@@ -72,12 +80,14 @@ function Game_convidado_P(props) {
       const vitoria = checkResposta === 1 && nivel === 20;
       enviarResultadoFinal(vitoria);
     }
-  }, [checkResposta, nivel, telainfo, resultadoEnviado]);
+    // CORREÇÃO 2: Adiciona `tempoGastoTotal` à lista de dependências para garantir que o valor está atualizado.
+  }, [checkResposta, nivel, telainfo, resultadoEnviado, tempoGastoTotal]);
 
   // Reseta o estado de envio quando o jogo reinicia
   useEffect(() => {
     if (nivel === 1) {
       setResultadoEnviado(false);
+      setTempoGastoTotal(0); // Garante que o tempo total é zerado ao reiniciar
     }
   }, [nivel]);
 
@@ -102,7 +112,6 @@ function Game_convidado_P(props) {
       setAtivoD(false);
     }
   }, [ativoA]);
-
   useEffect(() => {
     if (ativoB) {
       setAtivoA(false);
@@ -110,7 +119,6 @@ function Game_convidado_P(props) {
       setAtivoD(false);
     }
   }, [ativoB]);
-
   useEffect(() => {
     if (ativoC) {
       setAtivoA(false);
@@ -118,7 +126,6 @@ function Game_convidado_P(props) {
       setAtivoD(false);
     }
   }, [ativoC]);
-
   useEffect(() => {
     if (ativoD) {
       setAtivoA(false);
@@ -136,9 +143,6 @@ function Game_convidado_P(props) {
       if (props.modulo4) temasIncluidos.push(4);
 
       if (temasIncluidos.length === 0) {
-        console.log(
-          "Nenhum módulo selecionado. A busca de perguntas foi interrompida."
-        );
         setPergunta(null);
         return;
       }
@@ -150,34 +154,13 @@ function Game_convidado_P(props) {
       };
 
       try {
-        console.log(
-          "A tentar buscar pergunta com os seguintes parâmetros:",
-          params
-        );
-
-        // CORREÇÃO: Adicionado o prefixo 'game/' à URL
         const response = await axios.get(
           "http://localhost:8000/game/perguntas/",
           { params }
         );
-
-        console.log("Pergunta recebida com sucesso:", response.data);
         setPergunta(response.data);
       } catch (error) {
-        console.error(
-          "Ocorreu um erro ao buscar a pergunta. Verifique o terminal do backend para mais detalhes."
-        );
-        if (error.response) {
-          console.error("Dados do erro:", error.response.data);
-          console.error("Status do erro:", error.response.status);
-        } else if (error.request) {
-          console.error(
-            "Nenhuma resposta recebida. O servidor backend está online e o CORS está configurado corretamente?",
-            error.request
-          );
-        } else {
-          console.error("Erro na configuração do pedido:", error.message);
-        }
+        console.error("Ocorreu um erro ao buscar a pergunta.", error);
         setPergunta(null);
       }
     }
