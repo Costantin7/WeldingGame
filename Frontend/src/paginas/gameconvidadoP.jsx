@@ -345,8 +345,8 @@ function Game_convidado_P(props) {
 
           <div className="flex flex-col items-center justify-center w-72 mx-4">
             <img
-              className="w-72 h-48 object-cover rounded-lg"
-              src="https://www.fvmt.com/hubfs/Images/Blog%20Images/Aluminum%20vs%20Stainless%20Steel%20Welding.jpg"
+              className="w-85 h-25 object-cover rounded-lg"
+              src="./src/img/Logo laprosolda completa.jpg"
               alt="Imagem de soldadura"
             />
             <div className="flex mx-2">
