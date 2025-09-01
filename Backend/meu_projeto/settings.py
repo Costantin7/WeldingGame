@@ -44,6 +44,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'rest_framework_simplejwt',
     'rest_framework',
     'corsheaders',
     'welding',
@@ -135,3 +136,16 @@ STATIC_URL = 'static/'
 # https://docs.djangoproject.com/en/5.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+from datetime import timedelta
+
+SIMPLE_JWT = {
+    # Define o tempo de vida do token de acesso para 1 dia
+    "ACCESS_TOKEN_LIFETIME": timedelta(days=1),
+
+    # Define o tempo de vida do token de atualização (opcional, mas recomendado)
+    "REFRESH_TOKEN_LIFETIME": timedelta(days=7),
+    
+    # Outras configurações padrão...
+    "AUTH_HEADER_TYPES": ("Bearer",),
+}
