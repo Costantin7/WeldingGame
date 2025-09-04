@@ -385,7 +385,18 @@ function Game_convidado_P(props) {
         timer={props.timer}
         actualTime={actualTime}
       />
-      {telainfo && <TelaErro desativar={setTelainfo} actualTime={actualTime} />}
+      {telainfo && (
+        <TelaErro
+          desativar={setTelainfo}
+          actualTime={actualTime}
+          nivel={nivel}
+          gabarito={Number(perguntaAtual.gabarito) + 1}
+          gabaritoA={perguntaAtual.resposta_0}
+          gabaritoB={perguntaAtual.resposta_1}
+          gabaritoC={perguntaAtual.resposta_2}
+          gabaritoD={perguntaAtual.resposta_3}
+        />
+      )}
       {checkResposta === 1 && nivel === 20 && (
         <TelaVitoria desativar={setCheckResposta} />
       )}

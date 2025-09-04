@@ -3,6 +3,21 @@ import { useEffect, useState } from "react";
 function TelaErro(props) {
   const [close, setClose] = useState(false);
   const [tempo, setTempo] = useState(0);
+  const [resposta, setResposta] = useState("");
+  const [explicacao, setExplicacao] = useState(false);
+  useEffect(() => {
+    if (props.gabarito === 1) {
+      setResposta(props.gabaritoA);
+    } else if (props.gabarito === 2) {
+      setResposta(props.gabaritoB);
+    } else if (props.gabarito === 3) {
+      setResposta(props.gabaritoC);
+    } else if (props.gabarito === 4) {
+      setResposta(props.gabaritoD);
+    } else {
+      setResposta("Gabarito não encontrado.");
+    }
+  }, [props.gabarito, props.gabaritoA, props.gabaritoB, props.gabaritoC]);
 
   useEffect(() => {
     setTempo(props.actualTime);
@@ -40,9 +55,9 @@ function TelaErro(props) {
             <p className="font-bold text-xl">Você errou!</p>
             <div className="bg-gray-400 h-1 w-full"></div>{" "}
             <div className="my-2">
-              <p>Nível atingido: *importar nivel</p>
-              <p>Resposta correta: *importar resposta</p>
-              <p>Explicação: *importar explicações </p>
+              <p>Nível atingido: {props.nivel}</p>
+              <p>Resposta correta: {resposta}</p>
+              {explicacao && <p>Explicação: *importar explicações </p>}
             </div>
             <div className="flex flex-row justify-center mx-3 my-8">
               <button className=" mx-2 !bg-blue-500"> Reiniciar </button>
@@ -55,8 +70,8 @@ function TelaErro(props) {
             <p className="font-bold text-xl">Você não respondeu a tempo!</p>
             <div className="bg-gray-400 h-1 w-full"></div>{" "}
             <div className="my-2">
-              <p>Nível atingido: *importar nivel</p>
-              <p>Resposta correta: *importar resposta</p>
+              <p>Nível atingido: {props.nivel}</p>
+              <p>Resposta correta: {resposta}</p>
               <p>Explicação: *importar explicações </p>
             </div>
             <div className="flex flex-row justify-center mx-3 my-8">
