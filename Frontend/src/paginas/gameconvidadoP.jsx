@@ -49,10 +49,10 @@ function Game_convidado_P(props) {
       setActualTime(0);
 
       const temasIncluidos = [];
-      if (props.modulo1) temasIncluidos.push(1);
-      if (props.modulo2) temasIncluidos.push(2);
-      if (props.modulo3) temasIncluidos.push(3);
-      if (props.modulo4) temasIncluidos.push(4);
+      if (props.modulo1) temasIncluidos.push(0);
+      if (props.modulo2) temasIncluidos.push(1);
+      if (props.modulo3) temasIncluidos.push(2);
+      if (props.modulo4) temasIncluidos.push(3);
 
       if (temasIncluidos.length === 0) {
         setGameError("Por favor, selecione pelo menos um módulo para começar.");
@@ -376,13 +376,13 @@ function Game_convidado_P(props) {
             {/* CORREÇÃO DO BUG DA IMAGEM: A lógica agora está aqui. */}
             <img
               className={
-                imagem
-                  ? "w-85 h-80 object-cover rounded-lg"
+                imagem && imagem != "nan"
+                  ? " object-cover rounded-lg"
                   : "w-85 h-25 object-cover rounded-lg"
               }
               // Se 'imagem' existir, monta o caminho dela, senão, usa o logo padrão.
               src={
-                imagem
+                imagem && imagem != "nan"
                   ? `./src/img/img_game/${imagem}.jpg`
                   : "./src/img/Logo laprosolda completa.jpg"
               }
