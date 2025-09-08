@@ -63,7 +63,19 @@ function TelaErro(props) {
               {props.explanation && <p>Explicação: {props.explanation}</p>}
             </div>
             <div className="flex flex-row justify-center mx-3 my-8">
-              <button className=" mx-2 !bg-blue-500"> Reiniciar </button>
+              <button
+                onClick={() => {
+                  props.setCheckResposta(0);
+                  props.valor(0);
+                  props.desativar(0);
+                  props.setTempoGastoTotal(0);
+                  props.refetchPergunta();
+                }}
+                className=" mx-2 !bg-blue-500"
+              >
+                {" "}
+                Reiniciar{" "}
+              </button>
               <button className="mx-2 !bg-red-500"> Sair </button>
             </div>
           </div>
@@ -80,7 +92,19 @@ function TelaErro(props) {
               {props.explanation && <p>Explicação: {props.explanation}</p>}
             </div>
             <div className="flex flex-row justify-center mx-3 my-8">
-              <button className=" mx-2 !bg-blue-500"> Reiniciar </button>
+              <button
+                onClick={() => {
+                  props.setCheckResposta(0);
+                  props.valor(0);
+                  props.setTempoGastoTotal(0);
+                  props.desativar(0);
+                  props.refetchPergunta();
+                }}
+                className=" mx-2 !bg-blue-500"
+              >
+                {" "}
+                Reiniciar{" "}
+              </button>
               <button className="mx-2 !bg-red-500"> Sair </button>
             </div>
           </div>

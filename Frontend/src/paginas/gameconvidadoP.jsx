@@ -437,6 +437,9 @@ function Game_convidado_P(props) {
           gabaritoC={perguntaAtual.resposta_2}
           gabaritoD={perguntaAtual.resposta_3}
           explanation={explanation}
+          valor={Zerolevel}
+          setCheckResposta={setCheckResposta}
+          setTempoGastoTotal={setTempoGastoTotal}
         />
       )}
       {checkResposta === 1 && nivel === 20 && winscreen == true && (

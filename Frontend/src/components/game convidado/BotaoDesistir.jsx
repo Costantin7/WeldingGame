@@ -5,7 +5,7 @@ function BotaoDesistir(props) {
 
   function handleClick() {
     props.valor(0);
-    navigate("/");
+    navigate(-1);
   }
 
   return (
