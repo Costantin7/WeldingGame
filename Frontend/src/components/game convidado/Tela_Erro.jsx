@@ -4,7 +4,9 @@ function TelaErro(props) {
   const [close, setClose] = useState(false);
   const [tempo, setTempo] = useState(0);
   const [resposta, setResposta] = useState("");
-  const [explicacao, setExplicacao] = useState(false);
+  // A linha abaixo foi removida pois a explicação vem das props
+  // const [explicacao, setExplicacao] = useState(false);
+
   useEffect(() => {
     if (props.gabarito === 1) {
       setResposta(props.gabaritoA);
@@ -21,7 +23,7 @@ function TelaErro(props) {
 
   useEffect(() => {
     setTempo(props.actualTime);
-  }, []);
+  }, [props.actualTime]); // Adicionado props.actualTime aqui para consistência
 
   useEffect(() => {
     const timer = setTimeout(() => {
@@ -57,7 +59,8 @@ function TelaErro(props) {
             <div className="my-2">
               <p>Nível atingido: {props.nivel}</p>
               <p>Resposta correta: {resposta}</p>
-              {explicacao && <p>Explicação: *importar explicações </p>}
+              {/* ALTERAÇÃO MÍNIMA AQUI */}
+              {props.explanation && <p>Explicação: {props.explanation}</p>}
             </div>
             <div className="flex flex-row justify-center mx-3 my-8">
               <button className=" mx-2 !bg-blue-500"> Reiniciar </button>
@@ -72,7 +75,9 @@ function TelaErro(props) {
             <div className="my-2">
               <p>Nível atingido: {props.nivel}</p>
               <p>Resposta correta: {resposta}</p>
-              <p>Explicação: *importar explicações </p>
+
+              {/* ALTERAÇÃO MÍNIMA AQUI */}
+              {props.explanation && <p>Explicação: {props.explanation}</p>}
             </div>
             <div className="flex flex-row justify-center mx-3 my-8">
               <button className=" mx-2 !bg-blue-500"> Reiniciar </button>

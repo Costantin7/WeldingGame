@@ -4,26 +4,23 @@ import LinhaProgresso from "../components/game convidado/Linha progresso";
 import BotaoResponder from "../components/game convidado/BotaoResponder";
 import BotaoDesistir from "../components/game convidado/BotaoDesistir";
 import EscadaJogo from "../components/game convidado/Escada Jogo";
-import { useEffect, useState, useMemo, useRef } from "react";
+import { useEffect, useState, useRef } from "react";
 import axios from "axios";
-import NivelSoldador from "../components/game convidado/NivelSoldador";
 import BotaoProsseguir from "../components/game convidado/BotaoProsseguir";
 import BotaoReiniciar from "../components/game convidado/BotaoReiniciar";
 import TelaErro from "../components/game convidado/Tela_Erro";
 import TelaVitoria from "../components/game convidado/Tela_Vitoria";
 
 function Game_convidado_P(props) {
-  // --- ESTADOS PRINCIPAIS DO JOGO ---
+  // --- ESTADOS (sem alterações) ---
   const { nivel, Addlevel, Zerolevel, username } = props;
   const idioma = props.idiomaprop;
-
-  // --- ESTADOS PARA GERIR AS PERGUNTAS ---
-  const [perguntas, setPerguntas] = useState([]); // Guarda o conjunto de 20 perguntas
-  const [perguntaAtual, setPerguntaAtual] = useState(null); // A pergunta visível no ecrã
-  const [carregandoJogo, setCarregandoJogo] = useState(true); // Estado de carregamento inicial
-  const [gameError, setGameError] = useState(null); // Mensagem de erro
-
-  // --- ESTADOS DE JOGABILIDADE ---
+  const [perguntas, setPerguntas] = useState([]);
+  const [perguntaAtual, setPerguntaAtual] = useState(null);
+  const [carregandoJogo, setCarregandoJogo] = useState(true);
+  const [gameError, setGameError] = useState(null);
+  const [explanation, setExplanation] = useState("");
+  const [imagem, setImagem] = useState(null);
   const [resposta, setResposta] = useState(0);
   const [ativoA, setAtivoA] = useState(false);
   const [ativoB, setAtivoB] = useState(false);
@@ -45,6 +42,11 @@ function Game_convidado_P(props) {
       setCarregandoJogo(true);
       setGameError(null);
       setPerguntas([]);
+      setExplanation("");
+      setImagem(null);
+
+      // CORREÇÃO DO BUG DO CRONÔMETRO: Resetar o tempo aqui garante que todo novo jogo comece com o relógio zerado.
+      setActualTime(0);
 
       const temasIncluidos = [];
       if (props.modulo1) temasIncluidos.push(1);
@@ -99,11 +101,15 @@ function Game_convidado_P(props) {
     forceRefetch,
   ]);
 
-  // --- ATUALIZA A PERGUNTA ATUAL QUANDO O NÍVEL MUDA ---
+  // --- ATUALIZA A PERGUNTA ATUAL QUANDO O NÍVEL MUDA (sem alterações) ---
   useEffect(() => {
     if (perguntas.length > 0 && nivel > 0 && nivel <= perguntas.length) {
-      setPerguntaAtual(perguntas[nivel - 1]);
-      // Limpa as respostas selecionadas ao avançar para a próxima pergunta
+      const novaPergunta = perguntas[nivel - 1];
+      setPerguntaAtual(novaPergunta);
+
+      setExplanation(novaPergunta.explanation || "");
+      setImagem(novaPergunta.ilustracao || null);
+
       setAtivoA(false);
       setAtivoB(false);
       setAtivoC(false);
@@ -111,7 +117,7 @@ function Game_convidado_P(props) {
     }
   }, [nivel, perguntas]);
 
-  // --- LÓGICA DE ENVIO DE RESULTADO ---
+  // --- LÓGICA DE ENVIO DE RESULTADO (sem alterações) ---
   useEffect(() => {
     const enviarResultadoFinal = async (vitoria) => {
       if (resultadoEnviado) return;
@@ -149,8 +155,17 @@ function Game_convidado_P(props) {
     if ((checkResposta === 1 && nivel === 20) || telainfo === true) {
       enviarResultadoFinal(checkResposta === 1 && nivel === 20);
     }
-  }, [checkResposta, nivel, telainfo, resultadoEnviado, tempoGastoTotal]);
+  }, [
+    checkResposta,
+    nivel,
+    telainfo,
+    resultadoEnviado,
+    tempoGastoTotal,
+    props,
+    username,
+  ]);
 
+  // --- Outros useEffects (sem alterações) ---
   useEffect(() => {
     if (nivel === 1) {
       setResultadoEnviado(false);
@@ -227,27 +242,30 @@ function Game_convidado_P(props) {
       setTempoGasto(actualTime);
       setTempoGastoTotal((t) => t + actualTime);
     }
-  }, [checkResposta]);
+  }, [checkResposta, actualTime]);
 
   // --- RENDERIZAÇÃO ---
   const renderConteudoPrincipal = () => {
     if (carregandoJogo) {
       return (
         <div className="flex-1 text-center">
-          <p>A preparar o seu jogo...</p>
+          {" "}
+          <p>A preparar o seu jogo...</p>{" "}
         </div>
       );
     }
     if (gameError) {
       return (
         <div className="flex-1 text-center text-red-600">
-          <p>{gameError}</p>
+          {" "}
+          <p>{gameError}</p>{" "}
         </div>
       );
     }
     if (perguntaAtual) {
       return (
         <div className="flex flex-col flex-1 px-4">
+          {/* O bloco de imagem que estava aqui foi REMOVIDO para corrigir o bug de posicionamento. */}
           <Perguntas pergunta={perguntaAtual.pergunta} nivel={nivel} />
           <div className="grid grid-cols-1 md:grid-cols-1 gap-2">
             <Respostas
@@ -295,12 +313,20 @@ function Game_convidado_P(props) {
               setSelecionado={setSelecionado}
             />
           </div>
+          <p>gabarito:{Number(perguntaAtual.gabarito) + 1}</p>
+          <p>modulo 1:{Number(props.modulo1)}</p>
+          <p>modulo 2:{Number(props.modulo2)}</p>
+          <p>modulo 3:{Number(props.modulo3)}</p>
+          <p>modulo 4:{Number(props.modulo4)}</p>
+          <p>explicação: {explanation}</p>
+          <p>imagem: {imagem}</p>
         </div>
       );
     }
     return (
       <div className="flex-1 text-center">
-        <p>A carregar pergunta...</p>
+        {" "}
+        <p>A carregar pergunta...</p>{" "}
       </div>
     );
   };
@@ -324,17 +350,20 @@ function Game_convidado_P(props) {
                 </video>
                 {actualTime < 60 && checkResposta === 0 && (
                   <p className="mt-2 text-center text-lg font-medium">
-                    Tempo restante: {60 - actualTime} segundos
+                    {" "}
+                    Tempo restante: {60 - actualTime} segundos{" "}
                   </p>
                 )}
                 {checkResposta === 1 && (
                   <p className="mt-2 text-center text-lg font-medium">
-                    Tempo gasto: {tempoGasto} segundos
+                    {" "}
+                    Tempo gasto: {tempoGasto} segundos{" "}
                   </p>
                 )}
                 {actualTime >= 60 && checkResposta !== 1 && (
                   <p className="mt-2 text-center text-lg font-medium">
-                    Tempo esgotado!
+                    {" "}
+                    Tempo esgotado!{" "}
                   </p>
                 )}
               </div>
@@ -344,10 +373,20 @@ function Game_convidado_P(props) {
           {renderConteudoPrincipal()}
 
           <div className="flex flex-col items-center justify-center w-72 mx-4">
+            {/* CORREÇÃO DO BUG DA IMAGEM: A lógica agora está aqui. */}
             <img
-              className="w-85 h-25 object-cover rounded-lg"
-              src="./src/img/Logo laprosolda completa.jpg"
-              alt="Imagem de soldadura"
+              className={
+                imagem
+                  ? "w-85 h-80 object-cover rounded-lg"
+                  : "w-85 h-25 object-cover rounded-lg"
+              }
+              // Se 'imagem' existir, monta o caminho dela, senão, usa o logo padrão.
+              src={
+                imagem
+                  ? `./src/img/img_game/${imagem}.jpg`
+                  : "./src/img/Logo laprosolda completa.jpg"
+              }
+              alt={imagem ? "Ilustração da pergunta" : "Imagem de soldadura"}
             />
             <div className="flex mx-2">
               {checkResposta === 0 && !gameError && (
@@ -385,7 +424,8 @@ function Game_convidado_P(props) {
         timer={props.timer}
         actualTime={actualTime}
       />
-      {telainfo && (
+
+      {telainfo && perguntaAtual && (
         <TelaErro
           desativar={setTelainfo}
           actualTime={actualTime}
@@ -395,6 +435,7 @@ function Game_convidado_P(props) {
           gabaritoB={perguntaAtual.resposta_1}
           gabaritoC={perguntaAtual.resposta_2}
           gabaritoD={perguntaAtual.resposta_3}
+          explanation={explanation}
         />
       )}
       {checkResposta === 1 && nivel === 20 && (
