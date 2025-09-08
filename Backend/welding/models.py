@@ -15,7 +15,7 @@ class Perguntas(models.Model):
     tema = models.IntegerField()
     idioma = models.CharField(max_length=5)
     ilustracao = models.CharField(max_length=256, blank=True, null=True)
-    explanation = models.TextField(blank=True, null=True)
+    explicacao = models.TextField(blank=True, null=True)
     
     def __str__(self):
         return f"{self.pergunta[:50]}"

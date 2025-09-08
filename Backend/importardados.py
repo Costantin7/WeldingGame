@@ -22,7 +22,6 @@ arquivos = [
 ]
 
 # Definição das colunas esperadas no arquivo Excel
-# 'Explanation' foi adicionada como uma coluna opcional
 colunas_obrigatorias = [
     'Nº', 'PERGUNTA',
     'RESPOSTA 0', 'RESPOSTA 1', 'RESPOSTA 2', 'RESPOSTA 3',
@@ -43,11 +42,8 @@ for arquivo, modulo, idioma_padrao in arquivos:
         print(f"  - Processando aba: {sheet_name} (nível {nivel})")
 
         df = pd.read_excel(xls, sheet_name=sheet_name)
-        
-        # Limpa espaços em branco nos nomes das colunas
         df.columns = [str(col).strip() for col in df.columns]
 
-        # Verifica se todas as colunas obrigatórias existem
         colunas_faltando = [col for col in colunas_obrigatorias if col not in df.columns]
         if colunas_faltando:
             print(f"❌ Colunas obrigatórias faltando na aba {sheet_name}: {colunas_faltando}. Pulando aba.")
@@ -55,38 +51,41 @@ for arquivo, modulo, idioma_padrao in arquivos:
 
         for idx, row in df.iterrows():
             try:
-                # Pula linhas com campos obrigatórios ausentes
                 if pd.isnull(row['Nº']) or pd.isnull(row['GABARITO: 0,1,2,3']) or pd.isnull(row['Tema: 0,1,2,3']):
                     print(f"⚠️ Linha {idx+2} ignorada por dados obrigatórios ausentes na aba {sheet_name}")
                     continue
 
-                # Prepara os dados para criação do objeto
-                dados_para_criar = {
-                    'modulo': modulo,
-                    'nivel': nivel,
-                    'numero': int(row['Nº']),
-                    'pergunta': row.get('PERGUNTA'),
-                    'resposta_0': row.get('RESPOSTA 0'),
-                    'resposta_1': row.get('RESPOSTA 1'),
-                    'resposta_2': row.get('RESPOSTA 2'),
-                    'resposta_3': row.get('RESPOSTA 3'),
-                    'gabarito': int(row['GABARITO: 0,1,2,3']),
-                    'tema': int(row['Tema: 0,1,2,3']),
-                    'idioma': idioma_padrao,
-                }
+                # ==================== A ÚNICA MUDANÇA É ESTA LINHA ====================
+                # Trocamos 'create' por 'update_or_create'
+                
+                obj, created = Perguntas.objects.update_or_create(
+                    # 1. Estes são os campos para ENCONTRAR a pergunta:
+                    modulo=modulo,
+                    nivel=nivel,
+                    numero=int(row['Nº']),
+                    
+                    # 2. 'defaults' contém os dados para ATUALIZAR ou CRIAR:
+                    defaults={
+                        'pergunta': row.get('PERGUNTA'),
+                        'resposta_0': row.get('RESPOSTA 0'),
+                        'resposta_1': row.get('RESPOSTA 1'),
+                        'resposta_2': row.get('RESPOSTA 2'),
+                        'resposta_3': row.get('RESPOSTA 3'),
+                        'gabarito': int(row['GABARITO: 0,1,2,3']),
+                        'tema': int(row['Tema: 0,1,2,3']),
+                        'idioma': idioma_padrao,
+                        'ilustracao': row.get('Ilustração') if 'Ilustração' in df.columns and pd.notna(row.get('Ilustração')) else None,
+                        'explicacao': row.get('Explicação') if 'Explicação' in df.columns and pd.notna(row.get('Explicação')) else None,
+                    }
+                )
+                # ======================== FIM DA MUDANÇA ========================
 
-                # Adiciona a ilustração se a coluna existir e não for nula
-                if 'Ilustração' in df.columns and pd.notna(row['Ilustração']):
-                    dados_para_criar['ilustracao'] = row['Ilustração']
-
-                # Adiciona a explicação se a coluna existir e não for nula
-                # Assumindo que o nome do campo no seu modelo Django é 'explicacao'
-                if 'Explanation' in df.columns and pd.notna(row['Explanation']):
-                    dados_para_criar['explicacao'] = row['Explanation']
-
-                Perguntas.objects.create(**dados_para_criar)
+                if created:
+                    print(f"   ✓ Criada: Módulo {modulo}, Nível {nivel}, Nº {int(row['Nº'])}")
+                else:
+                    print(f"   → Atualizada: Módulo {modulo}, Nível {nivel}, Nº {int(row['Nº'])}")
 
             except Exception as e:
                 print(f"❌ Erro ao processar linha {idx+2} da aba {sheet_name}: {e}")
 
-    print(f"✅ Importado com sucesso: {arquivo}")
+    print(f"✅ Importação de {arquivo} concluída.")
