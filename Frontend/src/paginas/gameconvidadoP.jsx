@@ -314,13 +314,13 @@ function Game_convidado_P(props) {
               setSelecionado={setSelecionado}
             />
           </div>
-          <p>gabarito:{Number(perguntaAtual.gabarito) + 1}</p>
+          {/* <p>gabarito:{Number(perguntaAtual.gabarito) + 1}</p>
           <p>modulo 1:{Number(props.modulo1)}</p>
           <p>modulo 2:{Number(props.modulo2)}</p>
           <p>modulo 3:{Number(props.modulo3)}</p>
           <p>modulo 4:{Number(props.modulo4)}</p>
           <p>explicação: {explanation}</p>
-          <p>imagem: {imagem}</p>
+          <p>imagem: {imagem}</p> */}
         </div>
       );
     }
@@ -440,6 +440,7 @@ function Game_convidado_P(props) {
           valor={Zerolevel}
           setCheckResposta={setCheckResposta}
           setTempoGastoTotal={setTempoGastoTotal}
+          refetchPergunta={() => setForceRefetch((prev) => prev + 1)}
         />
       )}
       {checkResposta === 1 && nivel === 20 && winscreen == true && (
