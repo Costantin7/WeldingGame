@@ -8,7 +8,6 @@ function TelaVitoria(props) {
 
   useEffect(() => {
     const timer = setTimeout(() => {
-      // ALTERAÇÃO 3: O timer foi ajustado para 300ms e atualiza o estado 'close'
       setClose(true);
     }, 300);
     return () => clearTimeout(timer);
@@ -16,10 +15,8 @@ function TelaVitoria(props) {
 
   return (
     <div>
-      {/* Backdrop (fundo) */}
       <div
         className="fixed inset-0 bg-black/60 backdrop-blur-sm z-40"
-        // ALTERAÇÃO 4: A lógica de clique agora é idêntica à da TelaErro
         onClick={() => {
           if (close) {
             props.desativar(0);
@@ -27,13 +24,10 @@ function TelaVitoria(props) {
         }}
       ></div>
 
-      {/* Janela do Pop-up */}
       <div className="fixed top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 z-50 min-w-[55vw] min-h-[45vh] bg-white rounded-xl shadow-2xl font-serif">
-        {/* Header do Modal */}
         <div className="flex justify-between items-center p-4 border-b border-gray-200">
           <h2 className="text-xl font-bold text-green-600">Você venceu!</h2>
           <div
-            // ALTERAÇÃO 5: O botão de fechar agora chama props.desativar(0)
             onClick={() => {
               props.desativar(0);
             }}
@@ -58,10 +52,8 @@ function TelaVitoria(props) {
           </video>
         </div>
 
-        {/* Footer do Modal */}
         <div className="flex justify-end p-4 bg-gray-50 border-t border-gray-200 rounded-b-xl items-center justify-center">
           <button
-            // ALTERAÇÃO 6: O botão 'Sair' também chama props.desativar(0)
             onClick={() => {
               props.desativar(0);
             }}

@@ -35,6 +35,7 @@ function Game_convidado_P(props) {
   const videoRef = useRef(null);
   const [forceRefetch, setForceRefetch] = useState(0);
   const [resultadoEnviado, setResultadoEnviado] = useState(false);
+  const [winscreen, setWinscreen] = useState(true);
 
   // --- LÓGICA DE BUSCA INICIAL DAS PERGUNTAS ---
   useEffect(() => {
@@ -438,8 +439,8 @@ function Game_convidado_P(props) {
           explanation={explanation}
         />
       )}
-      {checkResposta === 1 && nivel === 20 && (
-        <TelaVitoria desativar={setCheckResposta} />
+      {checkResposta === 1 && nivel === 20 && winscreen == true && (
+        <TelaVitoria desativar={setWinscreen} />
       )}
     </div>
   );
