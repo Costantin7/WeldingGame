@@ -1,9 +1,12 @@
 import { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 function TelaErro(props) {
   const [close, setClose] = useState(false);
   const [tempo, setTempo] = useState(0);
   const [resposta, setResposta] = useState("");
+  const navigate = useNavigate();
+
   // A linha abaixo foi removida pois a explicação vem das props
   // const [explicacao, setExplicacao] = useState(false);
 
@@ -76,7 +79,15 @@ function TelaErro(props) {
                 {" "}
                 Reiniciar{" "}
               </button>
-              <button className="mx-2 !bg-red-500"> Sair </button>
+              <button
+                onClick={() => {
+                  navigate(-1);
+                }}
+                className="mx-2 !bg-red-500"
+              >
+                {" "}
+                Sair{" "}
+              </button>
             </div>
           </div>
         )}
@@ -105,7 +116,15 @@ function TelaErro(props) {
                 {" "}
                 Reiniciar{" "}
               </button>
-              <button className="mx-2 !bg-red-500"> Sair </button>
+              <button
+                onClick={() => {
+                  navigate(-1);
+                }}
+                className="mx-2 !bg-red-500"
+              >
+                {" "}
+                Sair{" "}
+              </button>
             </div>
           </div>
         )}
