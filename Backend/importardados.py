@@ -55,6 +55,13 @@ for arquivo, modulo, idioma_padrao in arquivos:
                     print(f"⚠️ Linha {idx+2} ignorada por dados obrigatórios ausentes na aba {sheet_name}")
                     continue
 
+                # Lógica para encontrar o valor da explicação em 'Explicação' ou 'Explanation'
+                explicacao_val = None
+                if 'Explicação' in df.columns and pd.notna(row.get('Explicação')):
+                    explicacao_val = row.get('Explicação')
+                elif 'Explanation' in df.columns and pd.notna(row.get('Explanation')):
+                    explicacao_val = row.get('Explanation')
+
                 # ==================== MUDANÇA PRINCIPAL ====================
                 # Movemos o 'idioma' para a chave de busca.
                 # Agora, o script procura por uma pergunta com o mesmo módulo, nível, número E idioma.
@@ -77,7 +84,7 @@ for arquivo, modulo, idioma_padrao in arquivos:
                         'gabarito': int(row['GABARITO: 0,1,2,3']),
                         'tema': int(row['Tema: 0,1,2,3']),
                         'ilustracao': row.get('Ilustração') if 'Ilustração' in df.columns and pd.notna(row.get('Ilustração')) else None,
-                        'explicacao': row.get('Explicação') if 'Explicação' in df.columns and pd.notna(row.get('Explicação')) else None,
+                        'explicacao': explicacao_val,
                     }
                 )
                 # ======================== FIM DA MUDANÇA ========================
@@ -91,3 +98,4 @@ for arquivo, modulo, idioma_padrao in arquivos:
                 print(f"❌ Erro ao processar linha {idx+2} da aba {sheet_name}: {e}")
 
     print(f"✅ Importação de {arquivo} concluída.")
+
