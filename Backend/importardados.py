@@ -55,14 +55,17 @@ for arquivo, modulo, idioma_padrao in arquivos:
                     print(f"⚠️ Linha {idx+2} ignorada por dados obrigatórios ausentes na aba {sheet_name}")
                     continue
 
-                # ==================== A ÚNICA MUDANÇA É ESTA LINHA ====================
-                # Trocamos 'create' por 'update_or_create'
+                # ==================== MUDANÇA PRINCIPAL ====================
+                # Movemos o 'idioma' para a chave de busca.
+                # Agora, o script procura por uma pergunta com o mesmo módulo, nível, número E idioma.
+                # Se não encontrar, cria uma nova. Se encontrar, atualiza.
                 
                 obj, created = Perguntas.objects.update_or_create(
                     # 1. Estes são os campos para ENCONTRAR a pergunta:
                     modulo=modulo,
                     nivel=nivel,
                     numero=int(row['Nº']),
+                    idioma=idioma_padrao, # <-- O idioma agora faz parte da identificação!
                     
                     # 2. 'defaults' contém os dados para ATUALIZAR ou CRIAR:
                     defaults={
@@ -73,7 +76,6 @@ for arquivo, modulo, idioma_padrao in arquivos:
                         'resposta_3': row.get('RESPOSTA 3'),
                         'gabarito': int(row['GABARITO: 0,1,2,3']),
                         'tema': int(row['Tema: 0,1,2,3']),
-                        'idioma': idioma_padrao,
                         'ilustracao': row.get('Ilustração') if 'Ilustração' in df.columns and pd.notna(row.get('Ilustração')) else None,
                         'explicacao': row.get('Explicação') if 'Explicação' in df.columns and pd.notna(row.get('Explicação')) else None,
                     }
@@ -81,9 +83,9 @@ for arquivo, modulo, idioma_padrao in arquivos:
                 # ======================== FIM DA MUDANÇA ========================
 
                 if created:
-                    print(f"   ✓ Criada: Módulo {modulo}, Nível {nivel}, Nº {int(row['Nº'])}")
+                    print(f"  ✓ Criada: Módulo {modulo}, Nível {nivel}, Nº {int(row['Nº'])}, Idioma: {idioma_padrao.upper()}")
                 else:
-                    print(f"   → Atualizada: Módulo {modulo}, Nível {nivel}, Nº {int(row['Nº'])}")
+                    print(f"  → Atualizada: Módulo {modulo}, Nível {nivel}, Nº {int(row['Nº'])}, Idioma: {idioma_padrao.upper()}")
 
             except Exception as e:
                 print(f"❌ Erro ao processar linha {idx+2} da aba {sheet_name}: {e}")
