@@ -16,7 +16,7 @@ function Home_P(props) {
 
   return (
     <div className="relative w-full max-w-[1372px] mx-auto aspect-[1372/858]">
-      <header>
+      <header className="absolute top-[0%] right-[36%] flex-col items-center gap-[0.6vw] z-500">
         <Tittle />
         <Subtitulo />
       </header>
@@ -33,7 +33,7 @@ function Home_P(props) {
 
       <BotaoLogin setUsername={props.setUsername} />
 
-      <div className="relative h-[600px] justify-center items-center">
+      <div className="relative h-[80%] justify-center items-center">
         <ImagemCentral
           link="./src/img/escada_transparente.jpg"
           nome="Escada de niveis"
@@ -43,12 +43,11 @@ function Home_P(props) {
         <ImagemCentral
           link="./src/img/Medinhos.png"
           nome="Escada de niveis"
-          class="relative top-[30px] right-[-40px] h-[530px] z-20 object-contain mx-auto"
+          class="absolute top-[5%] left-[25%] h-[90%] z-20 object-contain mx-auto"
         />
       </div>
 
       <Linha />
-      {/* <p className="text-left font-serif ml-2 mt-2">Idealizadores</p> */}
 
       <footer className="flex gap-45 !mt-5">
         <Empresas
