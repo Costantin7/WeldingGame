@@ -1,4 +1,3 @@
-import React from "react";
 import Tittle from "../components/home/Tittle";
 import Subtitulo from "../components/home/Subtitulo";
 import ImagemCentral from "../components/home/ImagemCentral";
@@ -6,7 +5,6 @@ import Empresas from "../components/home/Empresas";
 import BotaoLogin from "../components/home/BotaoLogin";
 import BotaoIdioma from "../components/home/Botaoidioma";
 import Linha from "../components/home/LinhaHorizontal";
-import Configjogo from "../components/config convidado/Configjogo";
 import Botaomenu from "../components/home/Botaomenu";
 import { useEffect } from "react";
 
@@ -17,20 +15,19 @@ function Home_P(props) {
   //useEffect(() => {props.resetmoduleprop();}, []);
 
   return (
-    <div>
+    <div className="relative w-full max-w-[1372px] mx-auto aspect-[1372/858]">
       <header>
         <Tittle />
         <Subtitulo />
       </header>
 
-      <div className="flex justify-end gap-2 px-4">
+      <div className="absolute top-[5.5%] right-[2.9%] flex items-center gap-[0.6vw] z-500">
         <BotaoIdioma
           langprops={props.idiomaprop}
           setlangUpprops={props.setIdiomaUpprop}
           setlangDownprops={props.setIdiomaDownprop}
           setIdioma={props.setIdioma}
         />
-
         <Botaomenu />
       </div>
 

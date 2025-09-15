@@ -8,7 +8,7 @@ function BotaoLogin(props) {
 
   return (
     <div className="text-right">
-      <div className=" mx-auto ">
+      <div className=" absolute top-[15.5%] right-[2.9%] flex-col items-center z-500">
         <button
           onClick={() => setAtivo(1)}
           className="!bg-blue-600 !text-white !px-12 !py-2 !rounded-md"
