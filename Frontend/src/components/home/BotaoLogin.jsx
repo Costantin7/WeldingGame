@@ -11,9 +11,11 @@ function BotaoLogin(props) {
       <div className=" absolute top-[15.5%] right-[2.9%] flex-col items-center z-500">
         <button
           onClick={() => setAtivo(1)}
-          className="!bg-blue-600 !text-white !px-12 !py-2 !rounded-md"
+          className="!bg-blue-600 !text-white  !px-[5%] sm:!px-[10%] md:!px-[25%] lg:!px-[30%]  !py-[4%] !rounded-md"
         >
-          <p className="font-bold font-serif">Login</p>
+          <p className="font-bold font-serif text-[clamp(0.3rem,2vw,1rem)]">
+            Login
+          </p>
         </button>
 
         {ativo == 1 && (
@@ -25,7 +27,7 @@ function BotaoLogin(props) {
         {/*========================================================= URL  */}
 
         <Link to="/config_convidado">
-          <p className=" font-serif underline text-black underline-offset-4">
+          <p className=" font-serif underline text-black underline-offset-4 text-[clamp(0.3rem,1.5vw,1rem)]">
             {" "}
             Jogar como convidado{" "}
           </p>
