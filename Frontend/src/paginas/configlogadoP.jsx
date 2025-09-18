@@ -75,7 +75,7 @@ function Logado_P(props) {
         <Linha></Linha>
       </div>
 
-      <footer className="flex gap-45 !mt-10">
+      <footer className="flex justify-between w-full mt-2 md:mt-3 lg:mt-4">
         <Empresas
           site="https://laprosolda.com"
           imagem="./src/img/lapro.png"

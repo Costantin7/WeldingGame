@@ -49,7 +49,7 @@ function Home_P(props) {
 
       <Linha />
 
-      <footer className="flex justify-between w-full sm:mt-2 md:mt-3 lg:mt-4">
+      <footer className="flex justify-between w-full mt-2 md:mt-3 lg:mt-4">
         <Empresas
           site="https://laprosolda.com"
           imagem="./src/img/lapro.png"
