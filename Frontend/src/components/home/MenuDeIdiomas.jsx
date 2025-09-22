@@ -12,7 +12,7 @@ function MenuDeIdiomas(props) {
   return (
     <div>
       <div
-        className="fixed inset-0 backdrop-blur-sm z-40 bg-black/40"
+        className="fixed inset-0 backdrop-blur-sm z-50 bg-black/40"
         onClick={() => {
           if (close == true) {
             props.setAtivo(0);
