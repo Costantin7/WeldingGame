@@ -1,8 +1,14 @@
-import texto from "../../paginas/texto";
+import React from "react";
+import { getText } from "../../paginas/ftexto.js";
+/**
+ * Componente que renderiza o título do jogo, já traduzido.
+ * @param {object} props - Propriedades do componente.
+ * @param {number} props.lang - O idioma atual (0 para PT, 1 para EN).
+ */
 function Tittle(props) {
   return (
     <p className="font-serif font-extrabold text-black text-shadow text-[clamp(1rem,2.5vw,3rem)]">
-      Jogo de Soldagem
+      {getText({ lang: props.lang, endereco: "Tittle.jogoDeSoldagem" })}
     </p>
   );
 }

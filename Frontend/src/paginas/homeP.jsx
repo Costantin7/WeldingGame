@@ -17,7 +17,7 @@ function Home_P(props) {
   return (
     <div className="relative w-full max-w-[1372px] mx-auto aspect-[1372/858]">
       <header className="absolute top-[0%] right-[36%] flex-col items-center gap-[0.6vw] z-500">
-        <Tittle />
+        <Tittle lang={props.idiomaprop} />
         <Subtitulo />
       </header>
 
