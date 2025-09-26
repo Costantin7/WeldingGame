@@ -1,18 +1,39 @@
 import { useEffect, useState } from "react";
 import axios from "axios"; // Importe o axios para fazer requisições HTTP
-
+import { getText } from "../../ftexto";
 function Resgistrar(props) {
   // --- Seus estados existentes ---
   const [close, setClose] = useState(false);
-  const [nome, setNome] = useState("Insira seu nome");
-  const [apelido, setApelido] = useState("Insira seu apelido");
-  const [email, setEmail] = useState("Insira seu email");
-  const [senha, setSenha] = useState("Insira sua senha");
-  const [confirmarsenha, setConfirmarsenha] = useState("Confirme sua senha");
-  const [instituicao, setInstituicao] = useState("Insira sua instituicao");
-  const [pais, setPais] = useState("Insira seu pais");
-  const [profissao, setProfissao] = useState("Insira sua profissão");
-  const [escolaridade, setEscolaridade] = useState("Insira sua escolaridade");
+  const [nome, setNome] = useState(
+    getText({ lang: props.lang, endereco: "Registrar.insiraSeuNome" })
+  );
+  const [apelido, setApelido] = useState(
+    getText({
+      lang: props.lang,
+      endereco: "Registrar.insiraSeuApelido",
+    })
+  );
+  const [email, setEmail] = useState(
+    getText({ lang: props.lang, endereco: "Registrar.insiraSeuEmail" })
+  );
+  const [senha, setSenha] = useState(
+    getText({ lang: props.lang, endereco: "Registrar.insiraSuaSenha" })
+  );
+  const [confirmarsenha, setConfirmarsenha] = useState(
+    getText({ lang: props.lang, endereco: "Registrar.confirmeSuaSenha" })
+  );
+  const [instituicao, setInstituicao] = useState(
+    getText({ lang: props.lang, endereco: "Registrar.insiraSuaInstituicao" })
+  );
+  const [pais, setPais] = useState(
+    getText({ lang: props.lang, endereco: "Registrar.insiraSeuPais" })
+  );
+  const [profissao, setProfissao] = useState(
+    getText({ lang: props.lang, endereco: "Registrar.insiraSuaProfissao" })
+  );
+  const [escolaridade, setEscolaridade] = useState(
+    getText({ lang: props.lang, endereco: "Registrar.insiraSuaEscolaridade" })
+  );
 
   // --- Novos estados para feedback ao usuário ---
   const [loading, setLoading] = useState(false);
@@ -102,11 +123,15 @@ function Resgistrar(props) {
         onSubmit={handleRegister}
         className="fixed z-50 top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 flex flex-col justify-center bg-white border border-black rounded-xl shadow-lg p-6 w-auto max-w-2xl font-serif"
       >
-        <p className="font-semibold !self-center text-xl">Registro</p>
+        <p className="font-semibold !self-center text-xl">
+          {getText({ lang: props.lang, endereco: "Registrar.registro" })}
+        </p>
         <div className="bg-gray-300 w-full h-1 mb-6"></div>
 
         {/* --- Campos de input --- */}
-        <p className="font-semibold text-left">Nome: </p>
+        <p className="font-semibold text-left">
+          {getText({ lang: props.lang, endereco: "Registrar.nome" })}
+        </p>
         <input
           className="border w-full mb-5 p-2 rounded"
           type="text"
@@ -118,7 +143,9 @@ function Resgistrar(props) {
           required
         />
         <div>
-          <p className="font-semibold text-left">Apelido (será seu login): </p>
+          <p className="font-semibold text-left">
+            {getText({ lang: props.lang, endereco: "Registrar.apelido" })}{" "}
+          </p>
           <input
             className="border w-full mb-5 p-2 rounded"
             type="text"
@@ -131,7 +158,9 @@ function Resgistrar(props) {
           />
         </div>
         <div>
-          <p className="font-semibold text-left">E-mail: </p>
+          <p className="font-semibold text-left">
+            {getText({ lang: props.lang, endereco: "Registrar.email" })}{" "}
+          </p>
           <input
             className="border w-full mb-5 p-2 rounded"
             type="email"
@@ -144,7 +173,9 @@ function Resgistrar(props) {
           />
         </div>
         <div>
-          <p className="font-semibold text-left">Senha: </p>
+          <p className="font-semibold text-left">
+            {getText({ lang: props.lang, endereco: "Registrar.senha" })}{" "}
+          </p>
           <input
             className="border w-full mb-5 p-2 rounded"
             type="password"
@@ -158,7 +189,12 @@ function Resgistrar(props) {
         </div>
 
         <div>
-          <p className="font-semibold text-left">Confirmar Senha: </p>
+          <p className="font-semibold text-left">
+            {getText({
+              lang: props.lang,
+              endereco: "Registrar.confirmarSenha",
+            })}{" "}
+          </p>
           <input
             className="border w-full mb-5 p-2 rounded"
             type="password"
@@ -175,7 +211,12 @@ function Resgistrar(props) {
         <div className="flex flex-row gap-8">
           <div className="flex flex-col flex-1">
             <div>
-              <p className="font-semibold text-left">Instituição: </p>
+              <p className="font-semibold text-left">
+                {getText({
+                  lang: props.lang,
+                  endereco: "Registrar.instituicao",
+                })}
+              </p>
               <input
                 className="border w-full mb-5 p-2 rounded"
                 type="text"
@@ -188,7 +229,9 @@ function Resgistrar(props) {
               />
             </div>
             <div>
-              <p className="font-semibold text-left">País: </p>
+              <p className="font-semibold text-left">
+                {getText({ lang: props.lang, endereco: "Registrar.pais" })}{" "}
+              </p>
               <input
                 className="border w-full mb-5 p-2 rounded"
                 type="text"
@@ -203,7 +246,9 @@ function Resgistrar(props) {
 
           <div className="flex flex-col flex-1">
             <div>
-              <p className="font-semibold text-left">Profissão: </p>
+              <p className="font-semibold text-left">
+                {getText({ lang: props.lang, endereco: "Registrar.profissao" })}{" "}
+              </p>
               <input
                 className="border w-full mb-5 p-2 rounded"
                 type="text"
@@ -215,7 +260,12 @@ function Resgistrar(props) {
               />
             </div>
             <div>
-              <p className="font-semibold text-left">Escolaridade: </p>
+              <p className="font-semibold text-left">
+                {getText({
+                  lang: props.lang,
+                  endereco: "Registrar.escolaridade",
+                })}{" "}
+              </p>
               <input
                 className="border w-full mb-5 p-2 rounded"
                 type="text"
@@ -244,7 +294,12 @@ function Resgistrar(props) {
           className="!bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded justify-self-center disabled:bg-blue-300"
           disabled={loading || success} // Desativa o botão durante o loading ou após o sucesso
         >
-          {loading ? "Cadastrando..." : "Cadastrar"}
+          {loading
+            ? getText({
+                lang: props.lang,
+                endereco: "Registrar.cadastroRealizadoComSucesso",
+              })
+            : getText({ lang: props.lang, endereco: "Registrar.cadastrar" })}
         </button>
       </form>
     </div>

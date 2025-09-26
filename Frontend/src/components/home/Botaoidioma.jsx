@@ -43,9 +43,9 @@ function BotaoIdioma(props) {
           )}
 
           {props.langprops === 1 && (
-            <div className="flex items-center gap-[clamp(0.25rem,1vw,0.5rem)] text-[clamp(0.875rem,1.2vw,1rem)]">
+            <div className="flex items-center gap-[clamp(0.25rem,1vw,0.5rem)] text-[clamp(0.875rem,1vw,1rem)]">
               <img
-                className="w-[30%] object-contain"
+                className="w-[20%] object-contain"
                 src="https://upload.wikimedia.org/wikipedia/commons/thumb/8/83/Flag_of_the_United_Kingdom_%283-5%29.svg/1280px-Flag_of_the_United_Kingdom_%283-5%29.svg.png"
                 alt="Bandeira do Reino Unido"
               />
