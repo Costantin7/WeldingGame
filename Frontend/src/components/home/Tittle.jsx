@@ -1,5 +1,5 @@
 import React from "react";
-import { getText } from "../../paginas/ftexto.js";
+import { getText } from "../../ftexto.js";
 /**
  * Componente que renderiza o título do jogo, já traduzido.
  * @param {object} props - Propriedades do componente.

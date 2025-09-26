@@ -1,4 +1,4 @@
-import idiomas from "../idioma.js";
+import idiomas from "./idioma.js";
 /**
  * Busca um texto traduzido navegando por um objeto aninhado.
  * @param {object} params - Os parâmetros para a busca.
