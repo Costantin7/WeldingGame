@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
-
+import { getText } from "../../ftexto";
 function LoginUsuario(props) {
   // --- Estados do componente ---
   const [close, setClose] = useState(false);
@@ -84,12 +84,17 @@ function LoginUsuario(props) {
         onSubmit={handleLogin}
         className="flex flex-col fixed top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 z-50 bg-white border border-black rounded-xl shadow-lg p-6 w-[480px] h-auto font-serif"
       >
-        <p className="font-semibold !self-center text-xl">Login</p>
+        <p className="font-semibold !self-center text-xl">
+          {getText({ lang: props.lang, endereco: "LoginUsuario.login" })}
+        </p>
         <div className="bg-gray-300 w-full h-1 my-4"></div>
 
         {/* 5. Textos e estados do input atualizados */}
         <label htmlFor="usuario" className="font-semibold self-start mb-1">
-          Usuário ou E-mail:
+          {getText({
+            lang: props.lang,
+            endereco: "LoginUsuario.usuarioOuEmail",
+          })}
         </label>
         <input
           id="usuario"
@@ -104,7 +109,10 @@ function LoginUsuario(props) {
         />
 
         <label htmlFor="senha" className="font-semibold self-start mb-1">
-          Senha:
+          {getText({
+            lang: props.lang,
+            endereco: "LoginUsuario.senha",
+          })}
         </label>
         <input
           id="senha"
@@ -125,30 +133,51 @@ function LoginUsuario(props) {
           className="!bg-blue-600 hover:bg-blue-700 disabled:bg-blue-300 text-white font-bold py-2 px-4 rounded self-center"
           disabled={loading}
         >
-          {loading ? "Entrando..." : "Fazer Login"}
+          {loading
+            ? getText({ lang: props.lang, endereco: "LoginUsuario.entrando" })
+            : getText({
+                lang: props.lang,
+                endereco: "LoginUsuario.fazerLogin",
+              })}
         </button>
 
         <div className="flex flex-row justify-between w-full mt-6">
           <div className="flex flex-col items-center">
-            <p className="text-sm">Não tem cadastro?</p>
+            <p className="text-sm">
+              {getText({
+                lang: props.lang,
+                endereco: "LoginUsuario.naoTemCadastro",
+              })}
+            </p>
             <p
               onClick={() => {
                 if (close) props.desativar(3);
               }}
               className="text-blue-800 underline cursor-pointer text-sm"
             >
-              Fazer Registro
+              {getText({
+                lang: props.lang,
+                endereco: "LoginUsuario.fazerRegistro",
+              })}
             </p>
           </div>
           <div className="flex flex-col items-center">
-            <p className="self-center text-sm">Esqueceu a senha?</p>
+            <p className="self-center text-sm">
+              {getText({
+                lang: props.lang,
+                endereco: "LoginUsuario.esqueceuASenha",
+              })}
+            </p>
             <p
               onClick={() => {
                 if (close) props.desativar(2);
               }}
               className="text-blue-800 underline cursor-pointer self-center text-sm"
             >
-              Recuperar senha
+              {getText({
+                lang: props.lang,
+                endereco: "LoginUsuario.recuperarSenha",
+              })}
             </p>
           </div>
         </div>

@@ -20,10 +20,16 @@ function BotaoLogin(props) {
         </button>
 
         {ativo == 1 && (
-          <LoginUsuario setUsername={props.setUsername} desativar={setAtivo} />
+          <LoginUsuario
+            setUsername={props.setUsername}
+            desativar={setAtivo}
+            lang={props.lang}
+          />
         )}
-        {ativo == 2 && <RecuperarSenha desativar={setAtivo} />}
-        {ativo == 3 && <Resgistrar desativar={setAtivo} />}
+        {ativo == 2 && (
+          <RecuperarSenha desativar={setAtivo} lang={props.lang} />
+        )}
+        {ativo == 3 && <Resgistrar desativar={setAtivo} lang={props.lang} />}
         <Link to="/config_logado"></Link>
         {/*========================================================= URL  */}
 
