@@ -18,7 +18,7 @@ function Home_P(props) {
     <div className="relative w-full max-w-[1372px] mx-auto aspect-[1372/858]">
       <header className="absolute top-[0%] right-[36%] flex-col items-center gap-[0.6vw] z-500">
         <Tittle lang={props.idiomaprop} />
-        <Subtitulo />
+        <Subtitulo lang={props.idiomaprop} />
       </header>
 
       <div className="absolute top-[5.5%] right-[2.9%] flex items-center gap-[0.6vw] z-500">
@@ -28,10 +28,10 @@ function Home_P(props) {
           setlangDownprops={props.setIdiomaDownprop}
           setIdioma={props.setIdioma}
         />
-        <Botaomenu />
+        <Botaomenu lang={props.idiomaprop} />
       </div>
 
-      <BotaoLogin setUsername={props.setUsername} />
+      <BotaoLogin setUsername={props.setUsername} lang={props.idiomaprop} />
 
       <div className="relative h-[80%] justify-center items-center">
         <ImagemCentral

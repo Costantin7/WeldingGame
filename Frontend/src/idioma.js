@@ -450,6 +450,10 @@ export default {
       pt: "Ajuda",
       en: "Help",
     },
+    menus: {
+      pt: "← Menu",
+      en: "← Menu",
+    },
   },
   Feedback: {
     feedback: {
@@ -655,6 +659,13 @@ export default {
       en: "Welding Game",
     },
   },
+  Subtittle: {
+    jogoDeSoldagem: {
+      pt: "Teste seus conhecimentos em soldagem!",
+      en: "Test your welding knowledge!",
+    },
+  },
+
   gamelogadoP: {
     emDesenvolvimento: {
       pt: "Em desenvolvimento...",

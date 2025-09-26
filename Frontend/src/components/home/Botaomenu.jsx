@@ -2,8 +2,9 @@ import { useState, useEffect } from "react";
 import Feedback from "./Feedback";
 import Sobrenos from "./Sobrenos";
 import Ajuda from "./Ajuda";
+import { getText } from "../../ftexto";
 
-function Botaomenu() {
+function Botaomenu(props) {
   const [ativo, setAtivo] = useState(0);
   const [close, setClose] = useState(false);
 
@@ -26,7 +27,9 @@ function Botaomenu() {
             onClick={() => setAtivo(1)}
             className="shadow shadow-[3px_3px_1px_rgba(0,0,0,0.1)] h-[clamp(1.25rem,4vw,2.75rem)] px-[clamp(0.4rem,1.5vw,1.5rem)] shadow-md !border !border-black !bg-white rounded-lg flex items-center ml-auto mb-10 hover:bg-gray-100 transition-all"
           >
-            <p className="text-[clamp(0.5rem,1.5vw,1.125rem)]">≡ Menu</p>
+            <p className="text-[clamp(0.5rem,1.5vw,1.125rem)]">
+              {getText({ lang: props.lang, endereco: "Botaomenu.menu" })}
+            </p>
           </button>
         </div>
       )}
@@ -47,25 +50,25 @@ function Botaomenu() {
               onClick={() => setAtivo(0)}
               className="!border !border-black shadow shadow-[3px_3px_1px_rgba(0,0,0,0.1)] !bg-white w-full py-2 px-4 text-left hover:bg-gray-100 rounded transition-all"
             >
-              ← Menu
+              {getText({ lang: props.lang, endereco: "Botaomenu.menus" })}
             </button>
             <button
               onClick={() => setAtivo(2)}
               className="!border !border-black shadow shadow-[3px_3px_1px_rgba(0,0,0,0.1)] !bg-white w-full py-2 px-4 text-left hover:bg-gray-100 rounded transition-all"
             >
-              Feedback
+              {getText({ lang: props.lang, endereco: "Botaomenu.feedback" })}
             </button>
             <button
               onClick={() => setAtivo(3)}
               className="!border !border-black shadow shadow-[3px_3px_1px_rgba(0,0,0,0.1)] !bg-white w-full py-2 px-4 text-left hover:bg-gray-100 rounded transition-all"
             >
-              Sobre nós
+              {getText({ lang: props.lang, endereco: "Botaomenu.sobreNos" })}
             </button>
             <button
               onClick={() => setAtivo(4)}
               className="!border !border-black shadow shadow-[3px_3px_1px_rgba(0,0,0,0.1)] !bg-white w-full py-2 px-4 text-left hover:bg-gray-100 rounded transition-all"
             >
-              Ajuda
+              {getText({ lang: props.lang, endereco: "Botaomenu.ajuda" })}
             </button>
           </div>
         </div>
