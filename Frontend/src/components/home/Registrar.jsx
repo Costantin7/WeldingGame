@@ -137,7 +137,11 @@ function Resgistrar(props) {
           type="text"
           value={nome}
           onFocus={() => {
-            if (nome === "Insira seu nome") setNome("");
+            if (
+              nome ===
+              getText({ lang: props.lang, endereco: "Registrar.insiraSeuNome" })
+            )
+              setNome("");
           }}
           onChange={(e) => setNome(e.target.value)}
           required
@@ -151,7 +155,14 @@ function Resgistrar(props) {
             type="text"
             value={apelido}
             onFocus={() => {
-              if (apelido === "Insira seu apelido") setApelido("");
+              if (
+                apelido ===
+                getText({
+                  lang: props.lang,
+                  endereco: "Registrar.insiraSeuApelido",
+                })
+              )
+                setApelido("");
             }}
             onChange={(e) => setApelido(e.target.value)}
             required
@@ -166,7 +177,14 @@ function Resgistrar(props) {
             type="email"
             value={email}
             onFocus={() => {
-              if (email === "Insira seu email") setEmail("");
+              if (
+                email ===
+                getText({
+                  lang: props.lang,
+                  endereco: "Registrar.insiraSeuEmail",
+                })
+              )
+                setEmail("");
             }}
             onChange={(e) => setEmail(e.target.value)}
             required
@@ -181,7 +199,14 @@ function Resgistrar(props) {
             type="password"
             value={senha}
             onFocus={() => {
-              if (senha === "Insira sua senha") setSenha("");
+              if (
+                senha ===
+                getText({
+                  lang: props.lang,
+                  endereco: "Registrar.insiraSuaSenha",
+                })
+              )
+                setSenha("");
             }}
             onChange={(e) => setSenha(e.target.value)}
             required
@@ -200,7 +225,13 @@ function Resgistrar(props) {
             type="password"
             value={confirmarsenha}
             onFocus={() => {
-              if (confirmarsenha === "Confirme sua senha")
+              if (
+                confirmarsenha ===
+                getText({
+                  lang: props.lang,
+                  endereco: "Registrar.confirmeSuaSenha",
+                })
+              )
                 setConfirmarsenha("");
             }}
             onChange={(e) => setConfirmarsenha(e.target.value)}
@@ -222,7 +253,13 @@ function Resgistrar(props) {
                 type="text"
                 value={instituicao}
                 onFocus={() => {
-                  if (instituicao === "Insira sua instituicao")
+                  if (
+                    instituicao ===
+                    getText({
+                      lang: props.lang,
+                      endereco: "Registrar.insiraSuaInstituicao",
+                    })
+                  )
                     setInstituicao("");
                 }}
                 onChange={(e) => setInstituicao(e.target.value)}
@@ -238,7 +275,14 @@ function Resgistrar(props) {
                 value={pais}
                 onChange={(e) => setPais(e.target.value)}
                 onFocus={() => {
-                  if (pais === "Insira seu pais") setPais("");
+                  if (
+                    pais ===
+                    getText({
+                      lang: props.lang,
+                      endereco: "Registrar.insiraSeuPais",
+                    })
+                  )
+                    setPais("");
                 }}
               />
             </div>
@@ -254,7 +298,14 @@ function Resgistrar(props) {
                 type="text"
                 value={profissao}
                 onFocus={() => {
-                  if (profissao === "Insira sua profissão") setProfissao("");
+                  if (
+                    profissao ===
+                    getText({
+                      lang: props.lang,
+                      endereco: "Registrar.insiraSuaProfissao",
+                    })
+                  )
+                    setProfissao("");
                 }}
                 onChange={(e) => setProfissao(e.target.value)}
               />
@@ -271,7 +322,13 @@ function Resgistrar(props) {
                 type="text"
                 value={escolaridade}
                 onFocus={() => {
-                  if (escolaridade === "Insira sua escolaridade")
+                  if (
+                    escolaridade ===
+                    getText({
+                      lang: props.lang,
+                      endereco: "Registrar.insiraSuaEscolaridade",
+                    })
+                  )
                     setEscolaridade("");
                 }}
                 onChange={(e) => setEscolaridade(e.target.value)}
