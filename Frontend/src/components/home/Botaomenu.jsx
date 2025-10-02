@@ -76,19 +76,19 @@ function Botaomenu(props) {
 
       {ativo === 2 && (
         <div>
-          <Feedback desativar={setAtivo} />
+          <Feedback lang={props.lang} desativar={setAtivo} />
         </div>
       )}
 
       {ativo === 3 && (
         <div>
-          <Sobrenos desativar={setAtivo} />
+          <Sobrenos lang={props.lang} desativar={setAtivo} />
         </div>
       )}
 
       {ativo === 4 && (
         <div>
-          <Ajuda desativar={setAtivo} />
+          <Ajuda lang={props.lang} desativar={setAtivo} />
         </div>
       )}
     </div>

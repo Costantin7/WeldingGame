@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-
+import { getText } from "../../ftexto";
 // A lista de contribuidores permanece a mesma.
 const contribuidores = [
   {
@@ -54,7 +54,7 @@ const contribuidores = [
   },
 ];
 
-function Sobrenos({ desativar }) {
+function Sobrenos(props) {
   const [isShowing, setIsShowing] = useState(false);
 
   useEffect(() => {
@@ -65,7 +65,7 @@ function Sobrenos({ desativar }) {
   // Função para fechar o modal com animação
   const handleClose = () => {
     setIsShowing(false);
-    setTimeout(() => desativar(0), 300);
+    setTimeout(() => props.desativar(0), 300);
   };
 
   return (
@@ -83,7 +83,6 @@ function Sobrenos({ desativar }) {
           isShowing ? "translate-y-0 opacity-100" : "-translate-y-10 opacity-0"
         }`}
       >
-
         <div
           className="place-self-end w-8 flex justify-end px-4 py-1 cursor-pointer"
           onClick={handleClose}
@@ -91,15 +90,21 @@ function Sobrenos({ desativar }) {
           <p>❌</p>
         </div>
 
-        <h2 className="text-2xl font-bold mb-4">Sobre nós</h2>
+        <h2 className="text-2xl font-bold mb-4">
+          {getText({
+            lang: props.lang,
+            endereco: "Botaomenu.sobreNos",
+          })}
+        </h2>
 
         <div className="bg-gray-300 w-full h-1 mb-3 "></div>
 
         <p className="mb-4 text-gray-600">
-          Veja abaixo os contribuidores deste projeto:
+          {getText({
+            lang: props.lang,
+            endereco: "Sobrenos.vejaAbaixoOsContribuidores",
+          })}
         </p>
-
-        
 
         {/* Tabela para Desktop */}
         <div className="hidden md:block">
@@ -107,13 +112,22 @@ function Sobrenos({ desativar }) {
             <thead>
               <tr className="bg-gray-100">
                 <th className="border border-gray-300 px-3 py-2 text-left">
-                  Nome
+                  {getText({
+                    lang: props.lang,
+                    endereco: "Sobrenos.nome",
+                  })}
                 </th>
                 <th className="border border-gray-300 px-3 py-2 text-left">
-                  País
+                  {getText({
+                    lang: props.lang,
+                    endereco: "Sobrenos.pais",
+                  })}
                 </th>
                 <th className="border border-gray-300 px-3 py-2 text-left">
-                  Contribuição
+                  {getText({
+                    lang: props.lang,
+                    endereco: "Sobrenos.contribuicao",
+                  })}
                 </th>
               </tr>
             </thead>

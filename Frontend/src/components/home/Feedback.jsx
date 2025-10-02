@@ -1,13 +1,28 @@
 import { useEffect, useState } from "react";
 import Linha from "./LinhaHorizontal";
-
+import { getText } from "../../ftexto";
 function Feedback(props) {
   // State para controlar a visibilidade e acionar a animação
   const [isShowing, setIsShowing] = useState(false);
   const [page, setPage] = useState(0);
-  const [text1, setText1] = useState("Insira seu e-mail");
-  const [text2, setText2] = useState("Insira o código da pergunta");
-  const [text3, setText3] = useState("Insira seu comentário aqui");
+  const [text1, setText1] = useState(
+    getText({
+      lang: props.lang,
+      endereco: "Feedback.insiraSeuEmail",
+    })
+  );
+  const [text2, setText2] = useState(
+    getText({
+      lang: props.lang,
+      endereco: "Feedback.insiraCodigo",
+    })
+  );
+  const [text3, setText3] = useState(
+    getText({
+      lang: props.lang,
+      endereco: "Feedback.insiracomentario",
+    })
+  );
   // useEffect para a animação de entrada
   useEffect(() => {
     const timer = setTimeout(() => {
@@ -55,32 +70,28 @@ function Feedback(props) {
           {/* Conteúdo da Página 1 */}
           {page === 0 && (
             <div>
-              <p className="my-4 text-xl font-bold">Feedback</p>
+              <p className="my-4 text-xl font-bold">
+                {" "}
+                {getText({
+                  lang: props.lang,
+                  endereco: "Feedback.feedback",
+                })}
+              </p>
               <div className="bg-gray-300 w-full h-1 mb-6 "></div>
               <p className="my-3 text-gray-700">
-                Dear Welding Enthusiast, You are welcome to assess your welding
-                knowledge by answering this quiz! The quiz structure is based on
-                the IIW-IAB welding personnel qualification system consisting of
-                four modules: Welding Processes, Materials, Welding Design and
-                Fabrication. You can choose one of four modules or any
-                combination of them. The quiz is composed by multiple-choice
-                questions grouped in 20 difficulty levels. There are 3000
-                questions in this quiz. Each question has only one correct
-                answer. In order to confirm the correct answer choice, you have
-                to click on “Enter”. You can choose the “Timer” option (60 s to
-                answer the question) or “No Timer” option. In this first version
-                of the quiz, there are only two languages available: English and
-                Portuguese (Brazil). The functions “Last week winner” and “Your
-                victories” are not activated yet. The quiz was developed in the
-                Federal University of Uberlandia (https://ufu.br), Faculty of
-                Mechanical Engineering, Welding Group (Laprosolda). Your
-                comments and suggestions are very welcome: ...@...
+                {getText({
+                  lang: props.lang,
+                  endereco: "Feedback.dearWeldingEnthusiast",
+                })}
               </p>
               <button
                 onClick={() => setPage(1)}
                 className="!bg-blue-500 text-white font-bold py-2 px-4 rounded my-10"
               >
-                Próxima Página
+                {getText({
+                  lang: props.lang,
+                  endereco: "Feedback.proximaPagina",
+                })}
               </button>
             </div>
           )}
@@ -88,16 +99,33 @@ function Feedback(props) {
           {/* Conteúdo da Página 2 */}
           {page === 1 && (
             <div>
-              <p className="my-4 text-xl font-bold">Feedback</p>
+              <p className="my-4 text-xl font-bold">
+                {" "}
+                {getText({
+                  lang: props.lang,
+                  endereco: "Feedback.feedback",
+                })}
+              </p>
               <div className="bg-gray-300 w-full h-1 mb-6 "></div>
-              <p className="text-gray-700">Insira seu e-mail</p>
+              <p className="text-gray-700">
+                {getText({
+                  lang: props.lang,
+                  endereco: "Feedback.insiraSeuEmail",
+                })}
+              </p>
 
               <input
                 className="border w-full mb-5"
                 type="text"
                 value={text1}
                 onFocus={() => {
-                  if (text1 === "Insira seu e-mail") {
+                  if (
+                    text1 ===
+                    getText({
+                      lang: props.lang,
+                      endereco: "Feedback.insiraSeuEmail",
+                    })
+                  ) {
                     setText1("");
                   }
                 }}
@@ -112,7 +140,13 @@ function Feedback(props) {
                 type="text"
                 value={text2}
                 onFocus={() => {
-                  if (text2 === "Insira o código da pergunta") {
+                  if (
+                    text2 ===
+                    getText({
+                      lang: props.lang,
+                      endereco: "Feedback.insiraCodigo",
+                    })
+                  ) {
                     setText2("");
                   }
                 }}
@@ -128,7 +162,13 @@ function Feedback(props) {
                 type="text"
                 value={text3}
                 onFocus={() => {
-                  if (text3 === "Insira seu comentário aqui") {
+                  if (
+                    text3 ===
+                    getText({
+                      lang: props.lang,
+                      endereco: "Feedback.insiracomentario",
+                    })
+                  ) {
                     setText3("");
                   }
                 }}

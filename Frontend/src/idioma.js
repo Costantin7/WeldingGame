@@ -461,7 +461,7 @@ export default {
       en: "Feedback",
     },
     dearWeldingEnthusiast: {
-      pt: "Dear Welding Enthusiast, You are welcome to assess your welding knowledge by answering this quiz! The quiz structure is based on the IIW-IAB welding personnel qualification system consisting of four modules: Welding Processes, Materials, Welding Design and Fabrication. You can choose one of four modules or any combination of them. The quiz is composed by multiple-choice questions grouped in 20 difficulty levels. There are 3000 questions in this quiz. Each question has only one correct answer. In order to confirm the correct answer choice, you have to click on “Enter”. You can choose the “Timer” option (60 s to answer the question) or “No Timer” option. In this first version of the quiz, there are only two languages available: English and Portuguese (Brazil). The functions “Last week winner” and “Your victories” are not activated yet. The quiz was developed in the Federal University of Uberlandia (https://ufu.br), Faculty of Mechanical Engineering, Welding Group (Laprosolda). Your comments and suggestions are very welcome: ...@...",
+      pt: "Prezado(a) Entusiasta da Soldagem,Seja bem-vindo(a) para avaliar seu conhecimento em soldagem respondendo a este questionário! A estrutura do questionário baseia-se no sistema de qualificação de pessoal em soldagem do IIW-IAB, consistindo em quatro módulos: Processos de Soldagem, Materiais, Projeto de Soldagem e Fabricação. Você pode escolher um dos quatro módulos ou qualquer combinação deles.O questionário é composto por questões de múltipla escolha agrupadas em 20 níveis de dificuldade. Há 3000 perguntas neste questionário. Cada pergunta tem apenas uma resposta correta. Para confirmar a escolha da resposta correta, você deve clicar em “Enter”. Você pode escolher a opção com “Cronômetro” (60 s para responder à pergunta) ou a opção “Sem Cronômetro”.Nesta primeira versão do questionário, há apenas dois idiomas disponíveis: Inglês e Português (Brasil). As funções “Vencedor da última semana” e “Suas vitórias” ainda não estão ativadas.O questionário foi desenvolvido na Universidade Federal de Uberlândia (https://ufu.br), Faculdade de Engenharia Mecânica, Grupo de Soldagem (Laprosolda).Seus comentários e sugestões são muito bem-vindos: ...@...",
       en: "Dear Welding Enthusiast, You are welcome to assess your welding knowledge by answering this quiz! The quiz structure is based on the IIW-IAB welding personnel qualification system consisting of four modules: Welding Processes, Materials, Welding Design and Fabrication. You can choose one of four modules or any combination of them. The quiz is composed by multiple-choice questions grouped in 20 difficulty levels. There are 3000 questions in this quiz. Each question has only one correct answer. In order to confirm the correct answer choice, you have to click on “Enter”. You can choose the “Timer” option (60 s to answer the question) or “No Timer” option. In this first version of the quiz, there are only two languages available: English and Portuguese (Brazil). The functions “Last week winner” and “Your victories” are not activated yet. The quiz was developed in the Federal University of Uberlandia (https://ufu.br), Faculty of Mechanical Engineering, Welding Group (Laprosolda). Your comments and suggestions are very welcome: ...@...",
     },
     proximaPagina: {
@@ -471,6 +471,14 @@ export default {
     insiraSeuEmail: {
       pt: "Insira seu e-mail",
       en: "Enter your email",
+    },
+    insiraCodigo: {
+      pt: "Insira o código da pergunta",
+      en: "Enter the question code",
+    },
+    insiracomentario: {
+      pt: "Insira o seu comentário",
+      en: "Enter your comment",
     },
     codigoDaPergunta: {
       pt: "Código da pergunta",
