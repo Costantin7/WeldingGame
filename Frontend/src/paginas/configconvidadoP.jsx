@@ -38,6 +38,7 @@ function Convidado_P(props) {
 
       <div className="flex justify-center gap-2 py-2 margin-6">
         <Configjogo
+          lang={props.idiomaprop}
           func1={props.funcao1}
           func2={props.funcao2}
           func3={props.funcao3}

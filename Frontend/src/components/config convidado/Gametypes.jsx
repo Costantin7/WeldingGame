@@ -2,7 +2,7 @@ function Gametype(props) {
   return (
     <button
       className={`
-        border w-[198px] h-[50px] rounded-md shadow-md flex items-center justify-start px-3 gap-3 transition-all duration-200
+        border w-[205px] h-[50px] rounded-md shadow-md flex items-center justify-start px-3 gap-3 transition-all duration-200
         ${
           props.ativo
             ? "border-blue-500 !bg-white" // Estilo ATIVO

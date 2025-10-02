@@ -3,6 +3,7 @@ import { BrowserRouter, Routes, Route, Link } from "react-router-dom";
 import Gametype from "./Gametypes";
 import Gamemodes from "./Gamemodes";
 import BotaoDeslizante from "./botão deslizante";
+import { getText } from "../../ftexto";
 
 function Configjogo(props) {
   const [timer, setTimer] = useState(true);
@@ -15,15 +16,27 @@ function Configjogo(props) {
     <div className="w-[900px] h-[350px] bg-white-500 rounded-xl shadow-lg border space-y-3 !">
       <div className=" gap-4 margin-3">
         <p className="font-serif font bold text-xl text-left ml-5 mt-3">
-          Configurações do jogo
+          {getText({
+            lang: props.lang,
+            endereco: "Configjogologado.configuracoesDoJogo",
+          })}
         </p>
 
         <div className="flex mt-5">
           <p className="text-5xl  ml-3">📚</p>
           <div>
-            <p className="font-serif text-left">Escolha um ou mais módulos</p>
+            <p className="font-serif text-left">
+              {" "}
+              {getText({
+                lang: props.lang,
+                endereco: "Configjogologado.escolhaUmOuMaisModulos",
+              })}
+            </p>
             <p className=" font-serif text-gray-400">
-              (Responda perguntas sobre diferentes aspectos de soldagem)
+              {getText({
+                lang: props.lang,
+                endereco: "Configjogologado.respondaPerguntas",
+              })}
             </p>
           </div>
         </div>
@@ -32,22 +45,34 @@ function Configjogo(props) {
       <div className="flex items-center flex-col space-y-3">
         <div className="flex gap-4 mx-auto my-3">
           <Gametype
-            texto={" 1 - Processos 👨‍🏭"}
+            texto={getText({
+              lang: props.lang,
+              endereco: "Configjogologado.processos",
+            })}
             define={props.func1}
             ativo={props.modulo1}
           />
           <Gametype
-            texto={" 2 - Materiais 🔩"}
+            texto={getText({
+              lang: props.lang,
+              endereco: "Configjogologado.projeto",
+            })}
             define={props.func2}
             ativo={props.modulo2}
           />
           <Gametype
-            texto={" 3 - Projeto ‍📝"}
+            texto={getText({
+              lang: props.lang,
+              endereco: "Configjogologado.fabricacao",
+            })}
             define={props.func3}
             ativo={props.modulo3}
           />
           <Gametype
-            texto={" 4 - Fabricação 🏭"}
+            texto={getText({
+              lang: props.lang,
+              endereco: "Configjogologado.processos",
+            })}
             define={props.func4}
             ativo={props.modulo4}
           />
@@ -57,7 +82,13 @@ function Configjogo(props) {
             <div className="flex flex-col items-center">
               <div className="w-[250px] h-[90px] flex gap-3 ">
                 <p className="text-2xl"> ⌛ </p>
-                <p>Temporizador (60 s)</p>
+                <p>
+                  {getText({
+                    lang: props.lang,
+                    endereco: "Configjogologado.temporizador",
+                  })}{" "}
+                  (60 s)
+                </p>
               </div>
               <BotaoDeslizante
                 timer={timer}
@@ -71,16 +102,28 @@ function Configjogo(props) {
             timer={timer}
             setTimer={setTimer}
             parameter={timer}
-            texto={" Modo cronometrado"}
-            legenda={"Responda cada pergunta em até 60 segundos"}
+            texto={getText({
+              lang: props.lang,
+              endereco: "Configjogologado.modoCronometrado",
+            })}
+            legenda={getText({
+              lang: props.lang,
+              endereco: "Configjogologado.respondaCadaPergunta",
+            })}
           />
 
           <Gamemodes
             timer={timer}
             setTimer={setTimer}
             parameter={!timer}
-            texto={" Modo livre"}
-            legenda={"Sem tempo limite para jogar"}
+            texto={getText({
+              lang: props.lang,
+              endereco: "Configjogologado.modoLivre",
+            })}
+            legenda={getText({
+              lang: props.lang,
+              endereco: "Configjogologado.semTempoLimite",
+            })}
           />
         </div>
       </div>
