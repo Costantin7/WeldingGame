@@ -4,7 +4,6 @@ import Home_P from "./paginas/homeP";
 import Convidado_P from "./paginas/configconvidadoP";
 import Logado_P from "./paginas/configlogadoP";
 import Game_convidado_P from "./paginas/gameconvidadoP";
-import Game_logado_P from "./paginas/gamelogadoP";
 import { useState } from "react";
 
 //testando git :)
@@ -215,14 +214,6 @@ function App() {
                 timer={timer}
                 setNivel={setNivel}
               />
-            }
-          />
-
-          <Route
-            path="/welding_game"
-            element={
-              //ROTA PAGINA JOGO PARA LOGADOS
-              <Game_logado_P />
             }
           />
         </Routes>

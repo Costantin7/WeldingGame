@@ -18,12 +18,12 @@ function Convidado_P(props) {
   return (
     <div>
       <header>
-        <Tittle />
-        <Subtitulo />
+        <Tittle lang={props.idiomaprop} />
+        <Subtitulo lang={props.idiomaprop} />
       </header>
 
       <div className="flex justify-start gap-2 px-4">
-        <Voltarhome username={" "} />
+        <Voltarhome username={" "} lang={props.idiomaprop} />
       </div>
 
       <div className="flex justify-end gap-2 px-4">
