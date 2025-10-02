@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
-
+import { getText } from "../../ftexto";
 // --- FUNÇÕES AUXILIARES ---
 // Função para formatar o tempo de segundos para MM:SS
 const formatarTempo = (segundos) => {
@@ -10,7 +10,7 @@ const formatarTempo = (segundos) => {
   return `${String(min).padStart(2, "0")}:${String(seg).padStart(2, "0")}`;
 };
 
-function MenuHistorico({ desativar }) {
+function MenuHistorico(props) {
   // --- ESTADOS DO COMPONENTE ---
   const [isShowing, setIsShowing] = useState(false);
   const [historico, setHistorico] = useState([]);
@@ -76,7 +76,7 @@ function MenuHistorico({ desativar }) {
   // Função para fechar o modal com animação de saída
   const handleClose = () => {
     setIsShowing(false);
-    setTimeout(() => desativar(false), 300);
+    setTimeout(() => props.desativar(false), 300);
   };
 
   // --- CONFIGURAÇÃO DA TABELA ---

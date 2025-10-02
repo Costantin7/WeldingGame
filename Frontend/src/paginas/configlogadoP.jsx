@@ -69,7 +69,7 @@ function Logado_P(props) {
         <div className="mt-8">
           <BotaoJogar lang={props.idiomaprop} />
         </div>
-        <Historico />
+        <Historico lang={props.idiomaprop} />
       </div>
 
       <div className="mt-16">
