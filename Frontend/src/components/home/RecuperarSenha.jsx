@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-
+import { getText } from "../../ftexto";
 function RecuperarSenha(props) {
   const [emailText, setEmailText] = useState("Insira seu email");
   const [senha1, setSenha1] = useState("Insira a senha nova");
@@ -29,7 +29,12 @@ function RecuperarSenha(props) {
       ></div>
       {tela == 0 && (
         <div className="flex flex-col justify-center items-center fixed top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 z-50 bg-white border border-black rounded-xl shadow-lg p-5 w-100 h-60 font-serif">
-          <p className="font-bold mb-2">Recuperar senha</p>
+          <p className="font-bold mb-2">
+            {getText({
+              lang: props.lang,
+              endereco: "LoginUsuario.recuperarSenha",
+            })}
+          </p>
           <div className="bg-gray-300 w-full h-1 mb-3 "></div>
           <p className="mb-3"> Insira seu e-mail cadastrado</p>
           <input

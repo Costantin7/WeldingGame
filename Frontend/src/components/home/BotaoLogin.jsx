@@ -9,7 +9,7 @@ function BotaoLogin(props) {
 
   return (
     <div className="text-right">
-      <div className=" absolute top-[15.5%] right-[2.9%] flex-col items-center z-40">
+      <div className=" absolute top-[15.5%] right-[2.9%] flex-col items-center z-60">
         <button
           onClick={() => setAtivo(1)}
           className="!bg-blue-600 !text-white  !px-[5%] sm:!px-[10%] md:!px-[25%] lg:!px-[30%]  !py-[4%] !rounded-md"

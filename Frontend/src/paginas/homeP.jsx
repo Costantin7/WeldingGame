@@ -16,12 +16,12 @@ function Home_P(props) {
 
   return (
     <div className="relative w-full max-w-[1372px] mx-auto aspect-[1372/858]">
-      <header className="absolute top-[0%] right-[36%] flex-col items-center gap-[0.6vw] z-500">
+      <header className="absolute top-[0%] right-[36%] flex-col items-center gap-[0.6vw] z-20">
         <Tittle lang={props.idiomaprop} />
         <Subtitulo lang={props.idiomaprop} />
       </header>
 
-      <div className="absolute top-[5.5%] right-[2.9%] flex items-center gap-[0.6vw] z-500">
+      <div className="absolute top-[5.5%] right-[2.9%] flex items-center gap-[0.6vw] z-48">
         <BotaoIdioma
           langprops={props.idiomaprop}
           setlangUpprops={props.setIdiomaUpprop}
@@ -30,9 +30,9 @@ function Home_P(props) {
         />
         <Botaomenu lang={props.idiomaprop} />
       </div>
-
-      <BotaoLogin setUsername={props.setUsername} lang={props.idiomaprop} />
-
+      <div className="z-49">
+        <BotaoLogin setUsername={props.setUsername} lang={props.idiomaprop} />
+      </div>
       <div className="relative h-[80%] justify-center items-center">
         <ImagemCentral
           link="./src/img/escada_transparente.jpg"
