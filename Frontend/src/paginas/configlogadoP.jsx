@@ -16,7 +16,7 @@ import Rank from "../components/config login/rank";
 import Historico from "../components/config login/historico";
 import { useEffect } from "react";
 import MenuConfigJogoLogado from "../components/config login/Configjogologado";
-
+import { getText } from "../ftexto";
 function Logado_P(props) {
   useEffect(() => {
     props.resetmoduleprop();
@@ -31,8 +31,8 @@ function Logado_P(props) {
       <div className="flex gap-3 !bg-gray-300"></div>
 
       <header>
-        <Tittle />
-        <Subtitulo />
+        <Tittle lang={props.idiomaprop} />
+        <Subtitulo lang={props.idiomaprop} />
       </header>
 
       <div className="flex justify-start gap-2 px-4">
@@ -46,11 +46,12 @@ function Logado_P(props) {
           setlangDownprops={props.setIdiomaDownprop}
           setIdioma={props.setIdioma}
         />
-        <Botaomenu />
+        <Botaomenu lang={props.idiomaprop} />
       </div>
 
       <div className="flex justify-center gap-2 py-2 margin-6">
         <MenuConfigJogoLogado
+          lang={props.idiomaprop}
           setTimer={props.setTimer}
           func1={props.funcao1}
           func2={props.funcao2}

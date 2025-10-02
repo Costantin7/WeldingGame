@@ -4,6 +4,7 @@ import Gametype from "../config convidado/Gametypes";
 import Gamemodes from "../config convidado/Gamemodes";
 import BotaoDeslizante from "../config convidado/botão deslizante";
 import AparecerNoRanking from "./AparecerNoRanking";
+import { getText } from "../../ftexto";
 function MenuConfigJogoLogado(props) {
   const [timer, setTimer] = useState(true);
 
@@ -34,7 +35,10 @@ function MenuConfigJogoLogado(props) {
       <div className=" gap-4 margin-3">
         <div className="flex">
           <p className="font-serif font bold text-xl text-left ml-5 mt-3">
-            Configurações do jogo
+            {getText({
+              lang: props.lang,
+              endereco: "Configjogologado.configuracoesDoJogo",
+            })}
           </p>
         </div>
 
@@ -42,9 +46,18 @@ function MenuConfigJogoLogado(props) {
           <div className="flex mt-5">
             <p className="text-5xl  ml-3">📚</p>
             <div>
-              <p className="font-serif text-left">Escolha um ou mais módulos</p>
+              <p className="font-serif text-left">
+                {" "}
+                {getText({
+                  lang: props.lang,
+                  endereco: "Configjogologado.escolhaUmOuMaisModulos",
+                })}
+              </p>
               <p className=" font-serif text-gray-400">
-                (Responda perguntas sobre diferentes aspectos de soldagem)
+                {getText({
+                  lang: props.lang,
+                  endereco: "Configjogologado.respondaPerguntas",
+                })}
               </p>
             </div>
             <div>
@@ -63,7 +76,10 @@ function MenuConfigJogoLogado(props) {
                     : " bottom-1 left-30 !bg-gray-300 mx-20 shadow-lg line-through "
                 }
               >
-                ◎ Aparecer no Ranking
+                {getText({
+                  lang: props.lang,
+                  endereco: "Configjogologado.aparecerNoRanking",
+                })}
               </button>
               {/* ============================================================ APARECER NO RANKING */}
             </div>
@@ -74,22 +90,34 @@ function MenuConfigJogoLogado(props) {
       <div className="flex items-center flex-col space-y-3">
         <div className="flex gap-4 mx-auto my-3">
           <Gametype
-            texto={" 1 - Processos ⚙️"}
+            texto={getText({
+              lang: props.lang,
+              endereco: "Configjogologado.processos",
+            })}
             define={props.func1}
             ativo={props.modulo1}
           />
           <Gametype
-            texto={" 2 - Materiais 🧱"}
+            texto={getText({
+              lang: props.lang,
+              endereco: "Configjogologado.materiais",
+            })}
             define={props.func2}
             ativo={props.modulo2}
           />
           <Gametype
-            texto={" 3 - Projeto ‍🏭"}
+            texto={getText({
+              lang: props.lang,
+              endereco: "Configjogologado.projeto",
+            })}
             define={props.func3}
             ativo={props.modulo3}
           />
           <Gametype
-            texto={" 4 - Fabricação 📐"}
+            texto={getText({
+              lang: props.lang,
+              endereco: "Configjogologado.fabricacao",
+            })}
             define={props.func4}
             ativo={props.modulo4}
           />
@@ -99,7 +127,14 @@ function MenuConfigJogoLogado(props) {
             <div className="flex flex-col items-center">
               <div className="w-[250px] h-[90px] flex gap-3 ">
                 <p className="text-2xl"> ⌛ </p>
-                <p>Temporizador</p>
+                <p>
+                  {" "}
+                  {getText({
+                    lang: props.lang,
+                    endereco: "Configjogologado.temporizador",
+                  })}{" "}
+                  (60 s)
+                </p>
               </div>
               <BotaoDeslizante
                 timer={timer}
@@ -112,16 +147,28 @@ function MenuConfigJogoLogado(props) {
             timer={timer}
             setTimer={setTimer}
             parameter={timer}
-            texto={" Modo cronometrado"}
-            legenda={"Responda cada pergunta em até 60 segundos"}
+            texto={getText({
+              lang: props.lang,
+              endereco: "Configjogologado.modoCronometrado",
+            })}
+            legenda={getText({
+              lang: props.lang,
+              endereco: "Configjogologado.respondaCadaPergunta",
+            })}
           />
 
           <Gamemodes
             timer={timer}
             setTimer={setTimer}
             parameter={!timer}
-            texto={" Modo livre"}
-            legenda={"Sem tempo limite para jogar"}
+            texto={getText({
+              lang: props.lang,
+              endereco: "Configjogologado.modoLivre",
+            })}
+            legenda={getText({
+              lang: props.lang,
+              endereco: "Configjogologado.semTempoLimite",
+            })}
           />
         </div>
       </div>
