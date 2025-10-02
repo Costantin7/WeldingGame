@@ -33,7 +33,7 @@ function Convidado_P(props) {
           setlangDownprops={props.setIdiomaDownprop}
           setIdioma={props.setIdioma}
         />
-        <Botaomenu />
+        <Botaomenu lang={props.idiomaprop} />
       </div>
 
       <div className="flex justify-center gap-2 py-2 margin-6">

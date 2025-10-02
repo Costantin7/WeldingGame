@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-
+import { getText } from "../../ftexto";
 function Ajuda(props) {
   // State para controlar a visibilidade e acionar a animação
   const [isShowing, setIsShowing] = useState(false);
@@ -32,7 +32,11 @@ function Ajuda(props) {
       <div
         onClick={(e) => e.stopPropagation()}
         className={`relative z-50 w-11/12 max-w-2xl h-auto max-h-[85vh] overflow-y-auto bg-white border border-black rounded-xl shadow-lg p-6 space-y-3 font-serif transition-all duration-300
-          ${isShowing ? "opacity-100 translate-y-0" : "opacity-0 -translate-y-10"}
+          ${
+            isShowing
+              ? "opacity-100 translate-y-0"
+              : "opacity-0 -translate-y-10"
+          }
         `}
       >
         {/* Usando o 'X' no mesmo estilo do componente anterior */}
@@ -44,26 +48,55 @@ function Ajuda(props) {
         </div>
 
         {/* Conteúdo original do componente Ajuda */}
-        <p className="underline my-2 text-xl font-bold">Ajuda</p>
+        <p className="underline my-2 text-xl font-bold">
+          {" "}
+          {getText({
+            lang: props.lang,
+            endereco: "Ajuda.ajuda",
+          })}
+        </p>
         <div className="bg-gray-300 w-full h-1 mb-6 "></div>
-        <p className=" my-4 text-l font-bold">Menu</p>
-        <p>
-          Ao selecionar o menu, você conta com as opções de: Ajuda, Feedback e
-          Sobre nós.{" "}
+        <p className=" my-4 text-l font-bold">
+          {" "}
+          {getText({
+            lang: props.lang,
+            endereco: "Ajuda.Menu",
+          })}
         </p>
         <p>
-          Na seção Feedback, você pode nos escrever caso encontre algum erro no
-          jogo, queira sugerir uma pergunta, ou não tenha entendido algo da
-          jogabilidade.
+          {getText({
+            lang: props.lang,
+            endereco: "Ajuda.aoSelecionarOMenu",
+          })}
         </p>
-        <p>Na seção Ajuda, você encontra este tutorial do jogo.</p>
         <p>
-          Na seção Sobre nós, você pode ler sobre quem desenvolveu o jogo, assim
-          como seus patrocinadores.
+          {getText({
+            lang: props.lang,
+            endereco: "Ajuda.naSecaoFeedback",
+          })}
+        </p>
+        <p>
+          {" "}
+          {getText({
+            lang: props.lang,
+            endereco: "Ajuda.naSecaoAjuda",
+          })}
+        </p>
+        <p>
+          {getText({
+            lang: props.lang,
+            endereco: "Ajuda.naSecaoSobreNos",
+          })}
         </p>
 
         <button className="!bg-blue-400">
-          <p>Próxima Tela</p>
+          <p>
+            {" "}
+            {getText({
+              lang: props.lang,
+              endereco: "Ajuda.proximaTela",
+            })}
+          </p>
         </button>
       </div>
     </div>

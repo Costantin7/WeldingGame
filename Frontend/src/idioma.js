@@ -409,7 +409,7 @@ export default {
       en: "In the About Us section, you can read about who developed the game, as well as its sponsors.",
     },
     proximaTela: {
-      pt: "Próxima Tela",
+      pt: "Próxima Tela (em desenvolvimento)",
       en: "Next Screen",
     },
   },
