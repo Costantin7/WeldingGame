@@ -55,7 +55,7 @@ function Configjogo(props) {
           <Gametype
             texto={getText({
               lang: props.lang,
-              endereco: "Configjogologado.projeto",
+              endereco: "Configjogologado.materiais",
             })}
             define={props.func2}
             ativo={props.modulo2}
@@ -63,7 +63,7 @@ function Configjogo(props) {
           <Gametype
             texto={getText({
               lang: props.lang,
-              endereco: "Configjogologado.fabricacao",
+              endereco: "Configjogologado.projeto",
             })}
             define={props.func3}
             ativo={props.modulo3}
@@ -71,7 +71,7 @@ function Configjogo(props) {
           <Gametype
             texto={getText({
               lang: props.lang,
-              endereco: "Configjogologado.processos",
+              endereco: "Configjogologado.fabricacao",
             })}
             define={props.func4}
             ativo={props.modulo4}
