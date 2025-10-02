@@ -37,7 +37,7 @@ function Botaomenu(props) {
       {ativo === 1 && (
         <div>
           <div
-            className="fixed inset-0 backdrop-blur-sm bg-black/40 z-40"
+            className="fixed inset-0 backdrop-blur-sm bg-black/40 z-10"
             onClick={() => {
               if (close) {
                 setAtivo(0);
@@ -45,7 +45,7 @@ function Botaomenu(props) {
             }}
           ></div>
 
-          <div className="fixed top-20 right-10 z-50 bg-white border border-black rounded-xl shadow-lg p-6 space-y-3 w-64 font-serif">
+          <div className="fixed top-20 right-10 z-20 bg-white border border-black rounded-xl shadow-lg p-6 space-y-3 w-64 font-serif">
             <button
               onClick={() => setAtivo(0)}
               className="!border !border-black shadow shadow-[3px_3px_1px_rgba(0,0,0,0.1)] !bg-white w-full py-2 px-4 text-left hover:bg-gray-100 rounded transition-all"

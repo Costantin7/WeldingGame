@@ -77,7 +77,7 @@ function LoginUsuario(props) {
             props.desativar(0);
           }
         }}
-        className="fixed inset-0 backdrop-blur-sm z-40 bg-black/40"
+        className="fixed inset-0 backdrop-blur-sm z-50 bg-black/40"
       ></div>
 
       <form

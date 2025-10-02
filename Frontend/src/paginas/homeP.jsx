@@ -30,7 +30,7 @@ function Home_P(props) {
         />
         <Botaomenu lang={props.idiomaprop} />
       </div>
-      <div className="z-49">
+      <div className="z-1">
         <BotaoLogin setUsername={props.setUsername} lang={props.idiomaprop} />
       </div>
       <div className="relative h-[80%] justify-center items-center">
@@ -43,7 +43,7 @@ function Home_P(props) {
         <ImagemCentral
           link="./src/img/Medinhos.png"
           nome="Escada de niveis"
-          class="absolute top-[5%] left-[25%] h-[90%] z-20 object-contain mx-auto"
+          class="absolute top-[5%] left-[25%] h-[90%] z-10 object-contain mx-auto"
         />
       </div>
 
