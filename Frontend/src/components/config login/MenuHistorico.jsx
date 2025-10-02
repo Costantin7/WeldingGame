@@ -28,7 +28,10 @@ function MenuHistorico(props) {
         const authToken = localStorage.getItem("authToken");
         if (!authToken) {
           setError(
-            "Utilizador não autenticado. Por favor, faça login novamente."
+            getText({
+              lang: props.lang,
+              endereco: "MenuHistorico.utilizadorNaoAutenticado",
+            })
           );
           setLoading(false);
           return;
@@ -56,7 +59,10 @@ function MenuHistorico(props) {
         setHistorico(historicoFormatado);
       } catch (err) {
         setError(
-          "Não foi possível carregar o histórico. Tente novamente mais tarde."
+          getText({
+            lang: props.lang,
+            endereco: "MenuHistorico.naoFoiPossivelCarregarOHistorico",
+          })
         );
         console.error(err);
       } finally {
@@ -111,7 +117,10 @@ function MenuHistorico(props) {
         </p>
 
         <h2 className="text-2xl font-bold mb-4 text-center sm:text-left">
-          Seu Histórico de Jogos
+          {getText({
+            lang: props.lang,
+            endereco: "MenuHistorico.seuHistoricoDeJogos",
+          })}
         </h2>
         <div className="bg-gray-300 w-full h-px mb-4"></div>
 
@@ -121,7 +130,10 @@ function MenuHistorico(props) {
             htmlFor="data-filtro"
             className="block text-sm font-medium text-gray-700"
           >
-            Filtrar por data:
+            {getText({
+              lang: props.lang,
+              endereco: "MenuHistorico.filtrarPorData",
+            })}
           </label>
           <input
             type="date"
@@ -134,12 +146,23 @@ function MenuHistorico(props) {
             onClick={() => setDataFiltro("")}
             className="text-sm !bg-blue-500 text-white hover:underline"
           >
-            Limpar filtro
+            {getText({
+              lang: props.lang,
+              endereco: "MenuHistorico.limparFiltro",
+            })}
           </button>
         </div>
 
         {/* Indicadores de Estado */}
-        {loading && <p className="text-center">A carregar histórico...</p>}
+        {loading && (
+          <p className="text-center">
+            {" "}
+            {getText({
+              lang: props.lang,
+              endereco: "MenuHistorico.aCarregarHistorico",
+            })}
+          </p>
+        )}
         {error && <p className="text-center text-red-500">{error}</p>}
 
         {!loading && !error && historico.length > 0 && (
@@ -201,7 +224,10 @@ function MenuHistorico(props) {
         {/* Mensagem para quando não há resultados */}
         {!loading && !error && historico.length === 0 && (
           <p className="text-center text-gray-500 mt-4">
-            Nenhum resultado encontrado para os filtros selecionados.
+            {getText({
+              lang: props.lang,
+              endereco: "MenuHistorico.nenhumResultadoEncontrado",
+            })}
           </p>
         )}
       </div>
