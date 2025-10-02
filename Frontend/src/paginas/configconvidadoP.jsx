@@ -52,8 +52,7 @@ function Convidado_P(props) {
       </div>
 
       <div className="mt-8">
-        {" "}
-        <BotaoJogar />
+        <BotaoJogar lang={props.idiomaprop} />
       </div>
 
       <div className="mt-16">
