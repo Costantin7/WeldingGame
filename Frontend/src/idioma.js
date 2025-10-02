@@ -223,7 +223,7 @@ export default {
   },
   Rank: {
     ranking: {
-      pt: "Ranking",
+      pt: "Classificação",
       en: "Ranking",
     },
   },

@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
-
+import { getText } from "../../ftexto";
 // Função para formatar o tempo de segundos para MM:SS
 const formatarTempo = (segundos) => {
   if (typeof segundos !== "number" || segundos < 0) return "00:00";
@@ -9,7 +9,7 @@ const formatarTempo = (segundos) => {
   return `${String(min).padStart(2, "0")}:${String(seg).padStart(2, "0")}`;
 };
 
-function MenuRanking({ desativar }) {
+function MenuRanking(props) {
   const [isShowing, setIsShowing] = useState(false);
   const [top10, setTop10] = useState([]);
   const [posicaoUsuario, setPosicaoUsuario] = useState(null);
@@ -62,7 +62,7 @@ function MenuRanking({ desativar }) {
 
   const handleClose = () => {
     setIsShowing(false);
-    setTimeout(() => desativar(false), 300); // Alterado para desativar(false)
+    setTimeout(() => props.desativar(false), 300); // Alterado para desativar(false)
   };
 
   const headers = [

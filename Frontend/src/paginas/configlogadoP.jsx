@@ -65,7 +65,7 @@ function Logado_P(props) {
       </div>
 
       <div className="flex mx-auto gap-100">
-        <Rank />
+        <Rank lang={props.idiomaprop} />
         <div className="mt-8">
           <BotaoJogar lang={props.idiomaprop} />
         </div>
