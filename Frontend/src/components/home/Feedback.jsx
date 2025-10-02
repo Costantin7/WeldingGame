@@ -133,7 +133,12 @@ function Feedback(props) {
                   setText1(e.target.value);
                 }}
               />
-              <p className="text-gray-700">Código da pergunta</p>
+              <p className="text-gray-700">
+                {getText({
+                  lang: props.lang,
+                  endereco: "Feedback.insiraCodigo",
+                })}
+              </p>
 
               <input
                 className="border w-full mb-5"
@@ -155,7 +160,13 @@ function Feedback(props) {
                 }}
               />
 
-              <p className="text-gray-700">Comentário</p>
+              <p className="text-gray-700">
+                {" "}
+                {getText({
+                  lang: props.lang,
+                  endereco: "Feedback.insiracomentario",
+                })}
+              </p>
 
               <input
                 className="border w-full mb-5"
@@ -177,14 +188,20 @@ function Feedback(props) {
                 }}
               />
               <button className="!bg-green-500 text-white font-bold py-2 px-4 rounded my-10 mx-5">
-                Enviar
+                {getText({
+                  lang: props.lang,
+                  endereco: "Feedback.enviar",
+                })}
               </button>
 
               <button
                 onClick={() => setPage(0)}
                 className="!bg-blue-500 text-white font-bold py-2 px-4 rounded my-10"
               >
-                Voltar
+                {getText({
+                  lang: props.lang,
+                  endereco: "Feedback.voltar",
+                })}
               </button>
             </div>
           )}
