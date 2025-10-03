@@ -122,12 +122,9 @@ function Game_convidado_P(props) {
   useEffect(() => {
     const enviarResultadoFinal = async (vitoria) => {
       if (resultadoEnviado) return;
-      const modulosSelecionados = [
-        "Processos",
-        "Materiais",
-        "Projeto",
-        "Fabricação",
-      ].filter((_, i) => props[`modulo${i + 1}`]);
+      const modulosSelecionados = ["1", "2", "3", "4"].filter(
+        (_, i) => props[`modulo${i + 1}`]
+      );
       const dadosDaPartida = {
         nickname: username || "Convidado",
         pais: "BR",
