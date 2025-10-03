@@ -87,10 +87,34 @@ function MenuHistorico(props) {
 
   // --- CONFIGURAÇÃO DA TABELA ---
   const headers = [
-    { key: "data", label: "Data" },
-    { key: "nivel_max", label: "Nível Máx." },
-    { key: "tempo", label: "Tempo Total" },
-    { key: "modulos", label: "Módulos" },
+    {
+      key: "data",
+      label: getText({
+        lang: props.lang,
+        endereco: "MenuHistorico.data",
+      }),
+    },
+    {
+      key: "nivel_max",
+      label: getText({
+        lang: props.lang,
+        endereco: "MenuHistorico.nivelMax",
+      }),
+    },
+    {
+      key: "tempo",
+      label: getText({
+        lang: props.lang,
+        endereco: "MenuHistorico.tempoTotal",
+      }),
+    },
+    {
+      key: "modulos",
+      label: getText({
+        lang: props.lang,
+        endereco: "MenuHistorico.modulos",
+      }),
+    },
   ];
 
   return (

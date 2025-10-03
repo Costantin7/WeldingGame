@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
 import { getText } from "../../ftexto";
+
 // Função para formatar o tempo de segundos para MM:SS
 const formatarTempo = (segundos) => {
   if (typeof segundos !== "number" || segundos < 0) return "00:00";
@@ -66,12 +67,48 @@ function MenuRanking(props) {
   };
 
   const headers = [
-    { key: "posicao", label: "Posição" },
-    { key: "nickname", label: "Nome/Apelido" },
-    { key: "pais", label: "País" },
-    { key: "tempo", label: "Tempo" },
-    { key: "nivel_max", label: "Nível Máx." },
-    { key: "modulos", label: "Módulos" },
+    {
+      key: "posicao",
+      label: getText({
+        lang: props.lang,
+        endereco: "MenuRanking.posicao",
+      }),
+    },
+    {
+      key: "nickname",
+      label: getText({
+        lang: props.lang,
+        endereco: "MenuRanking.nomeApelido",
+      }),
+    },
+    {
+      key: "pais",
+      label: getText({
+        lang: props.lang,
+        endereco: "MenuRanking.pais",
+      }),
+    },
+    {
+      key: "tempo",
+      label: getText({
+        lang: props.lang,
+        endereco: "MenuRanking.tempo",
+      }),
+    },
+    {
+      key: "nivel_max",
+      label: getText({
+        lang: props.lang,
+        endereco: "MenuRanking.nivelMax",
+      }),
+    },
+    {
+      key: "modulos",
+      label: getText({
+        lang: props.lang,
+        endereco: "MenuRanking.modulos",
+      }),
+    },
   ];
 
   return (
@@ -94,11 +131,22 @@ function MenuRanking(props) {
           ❌
         </p>
         <h2 className="text-2xl font-bold mb-4 text-center sm:text-left">
-          Ranking do Dia
+          {getText({
+            lang: props.lang,
+            endereco: "MenuRanking.rankingDoDia",
+          })}
         </h2>
         <div className="bg-gray-300 w-full h-px mb-4"></div>
 
-        {loading && <p className="text-center">A carregar ranking...</p>}
+        {loading && (
+          <p className="text-center">
+            {" "}
+            {getText({
+              lang: props.lang,
+              endereco: "MenuRanking.aCarregarRanking",
+            })}
+          </p>
+        )}
         {error && <p className="text-center text-red-500">{error}</p>}
 
         {!loading && !error && (
@@ -170,7 +218,10 @@ function MenuRanking(props) {
               {posicaoUsuario && (
                 <div className="border-2 border-blue-400 rounded-lg p-4 bg-blue-100 shadow-lg mt-4">
                   <h3 className="font-bold text-blue-800 mb-2">
-                    A sua melhor pontuação de hoje
+                    {getText({
+                      lang: props.lang,
+                      endereco: "MenuRanking.suaMelhorPontuacaoDeHoje",
+                    })}
                   </h3>
                   {headers.map((header) => (
                     <p key={header.key} className="text-sm text-blue-700">

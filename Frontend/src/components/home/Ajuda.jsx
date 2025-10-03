@@ -60,7 +60,7 @@ function Ajuda(props) {
           {" "}
           {getText({
             lang: props.lang,
-            endereco: "Ajuda.Menu",
+            endereco: "Ajuda.menu",
           })}
         </p>
         <p>
